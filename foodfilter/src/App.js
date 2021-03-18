@@ -5,7 +5,7 @@ import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 
 const defaultSrc =
-  "https://www.ydp.go.kr/images/story/2019/06/menu_01.png";
+  "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
 function App () {
   const [source, setSource] = useState(null);
@@ -106,14 +106,17 @@ function App () {
 
   return (
     <div>
-      <br />
+
       <div style={{ width: "100%" }}>
+        <label for="capture">Capture</label>
         <input
+          id="capture"
+          style={{ margin: "10px" }}
           accept="image/*"
           type="file"
           capture="environment"
           onChange={onChange} />
-        <button>Use default img</button>
+
         <br />
         <br />
         <Cropper
