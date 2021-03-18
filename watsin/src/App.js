@@ -7,7 +7,7 @@ import "cropperjs/dist/cropper.css";
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
-function App() {
+function App () {
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
 
@@ -15,7 +15,7 @@ function App() {
   const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState();
 
-  function dataURItoBlob(dataURI) {
+  function dataURItoBlob (dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
     var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -27,9 +27,9 @@ function App() {
     return new Blob([ab], { type: mimeString });
   }
 
-  function getThumbFile(image, file) {
+  function getThumbFile (image, file) {
     var canvas = document.createElement("canvas");
-    var base_size = 2048000; //2MB
+    var base_size = 102400; //1MB
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
     var width = image.width;
     var height = image.height;
@@ -43,6 +43,7 @@ function App() {
       canvas.height = height;
       canvas.getContext("2d").drawImage(image, 0, 0, width, height);
       var tmpThumbFile = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
+      console.log(tmpThumbFile);
       return tmpThumbFile;
     } else return file;
   }
@@ -74,18 +75,21 @@ function App() {
     } else if (e.target) {
       files = e.target.files;
     }
-
+    console.log(files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
       setImage(reader.result);
+
     };
   };
 
   const getCropData = () => {
     setCropData(cropper.getCroppedCanvas().toDataURL("image/png"));
-
+    console.log(dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png")));
     let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
+
+
     let img = new Image();
 
     img.src = cropper.getCroppedCanvas().toDataURL("image/png");
@@ -94,6 +98,7 @@ function App() {
       console.log(thumbFile);
       setSource(thumbFile);
     };
+
   };
 
   return (
