@@ -8,6 +8,7 @@ const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
 function App() {
+  console.log("test");
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
   const [image, setImage] = useState(defaultSrc);
