@@ -10,9 +10,8 @@ const defaultSrc =
 function App() {
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
-
   const [image, setImage] = useState(defaultSrc);
-  const [cropData, setCropData] = useState("#");
+  const [cropData, setCropData] = useState(null);
   const [cropper, setCropper] = useState();
 
   function dataURItoBlob(dataURI) {
@@ -29,22 +28,19 @@ function App() {
 
   function getThumbFile(image, file) {
     var canvas = document.createElement("canvas");
-    var base_size = 2048000; //2MB
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
     var width = image.width;
     var height = image.height;
     var size = file.size;
 
-    if (size > base_size) {
-      var ratio = Math.ceil(Math.sqrt(size / comp_size, 2));
-      width = image.width / ratio;
-      height = image.height / ratio;
-      canvas.width = width;
-      canvas.height = height;
-      canvas.getContext("2d").drawImage(image, 0, 0, width, height);
-      var tmpThumbFile = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
-      return tmpThumbFile;
-    } else return file;
+    var ratio = Math.ceil(Math.sqrt(size / comp_size, 2));
+    width = image.width / ratio;
+    height = image.height / ratio;
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+    var tmpThumbFile = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
+    return tmpThumbFile;
   }
 
   const kakaoOCR = () => {
@@ -86,31 +82,28 @@ function App() {
     setCropData(cropper.getCroppedCanvas().toDataURL("image/png"));
 
     let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
-    let img = new Image();
 
+    let img = new Image();
     img.src = cropper.getCroppedCanvas().toDataURL("image/png");
     img.onload = function () {
       let thumbFile = getThumbFile(img, file);
-      console.log(thumbFile);
       setSource(thumbFile);
     };
   };
 
   return (
     <div>
-      <div style={{ width: "100%" }}>
-        <label for="capture">Capture</label>
-        <input
-          id="capture"
-          style={{ margin: "10px" }}
-          accept="image/*"
-          type="file"
-          capture="environment"
-          onChange={onChange}
-        />
+      <label for="capture">Capture</label>
+      <input
+        id="capture"
+        style={{ margin: "10px" }}
+        accept="image/*"
+        type="file"
+        capture="environment"
+        onChange={onChange}
+      />
 
-        <br />
-        <br />
+      <div style={{ width: "80%", marginTop: "1rem" }}>
         <Cropper
           style={{ height: "100%", width: "100%" }}
           zoomTo={2}
@@ -135,19 +128,18 @@ function App() {
           <h1>
             <span>Crop</span>
 
-            <button style={{ float: "right" }} onClick={getCropData}>
+            <button style={{ marginLeft: "1rem" }} onClick={getCropData}>
               Crop Image
             </button>
             {source && (
-              <button
-                style={{ float: "right", marginRight: "10px" }}
-                onClick={kakaoOCR}
-              >
+              <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
                 Detect
               </button>
             )}
           </h1>
-          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
+          {cropData && (
+            <img style={{ width: "100%" }} src={cropData} alt="cropped" />
+          )}
         </div>
         <div>{result}</div>
       </div>
