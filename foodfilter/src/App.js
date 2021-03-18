@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./App.css";
-import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
-function App () {
+function App() {
+  console.log("test!");
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
 
@@ -15,8 +16,7 @@ function App () {
   const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState();
 
-
-  function dataURItoBlob (dataURI) {
+  function dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
     var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -28,9 +28,9 @@ function App () {
     return new Blob([ab], { type: mimeString });
   }
 
-  function getThumbFile (image, file) {
+  function getThumbFile(image, file) {
     var canvas = document.createElement("canvas");
-    var base_size = 2048000; //2MB 
+    var base_size = 2048000; //2MB
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
     var width = image.width;
     var height = image.height;
@@ -46,7 +46,6 @@ function App () {
       var tmpThumbFile = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
       return tmpThumbFile;
     } else return file;
-
   }
 
   const kakaoOCR = () => {
@@ -75,8 +74,6 @@ function App () {
       files = e.dataTransfer.files;
     } else if (e.target) {
       files = e.target.files;
-
-
     }
 
     const reader = new FileReader();
@@ -84,7 +81,6 @@ function App () {
     reader.onload = () => {
       setImage(reader.result);
     };
-
   };
 
   const getCropData = () => {
@@ -99,14 +95,10 @@ function App () {
       console.log(thumbFile);
       setSource(thumbFile);
     };
-
-
   };
-
 
   return (
     <div>
-
       <div style={{ width: "100%" }}>
         <label for="capture">Capture</label>
         <input
@@ -115,7 +107,8 @@ function App () {
           accept="image/*"
           type="file"
           capture="environment"
-          onChange={onChange} />
+          onChange={onChange}
+        />
 
         <br />
         <br />
@@ -123,7 +116,6 @@ function App () {
           style={{ height: "100%", width: "100%" }}
           zoomTo={2}
           initialAspectRatio={1}
-
           src={image}
           viewMode={1}
           guides={true}
@@ -140,28 +132,27 @@ function App () {
         />
       </div>
       <div>
-
-        <div
-          className="box"
-          style={{ width: "100%", height: "300px" }}
-        >
+        <div className="box" style={{ width: "100%", height: "300px" }}>
           <h1>
             <span>Crop</span>
 
             <button style={{ float: "right" }} onClick={getCropData}>
               Crop Image
             </button>
-            {source && <button style={{ float: "right", marginRight: "10px" }} onClick={kakaoOCR}>Detect</button>}
+            {source && (
+              <button
+                style={{ float: "right", marginRight: "10px" }}
+                onClick={kakaoOCR}
+              >
+                Detect
+              </button>
+            )}
           </h1>
           <img style={{ width: "100%" }} src={cropData} alt="cropped" />
         </div>
         <div>{result}</div>
       </div>
       <br style={{ clear: "both" }} />
-
-
-
-
     </div>
   );
 }
