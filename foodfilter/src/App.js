@@ -5,11 +5,10 @@ import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 
 const defaultSrc =
-  "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
+  "https://www.ydp.go.kr/images/story/2019/06/menu_01.png";
 
 function App () {
   const [source, setSource] = useState(null);
-  const [img, setImg] = useState(null);
   const [result, setResult] = useState(null);
 
   const [image, setImage] = useState(defaultSrc);
@@ -31,7 +30,7 @@ function App () {
 
   function getThumbFile (image, file) {
     var canvas = document.createElement("canvas");
-    var base_size = 1024000; //1MB (썸네일 작업 유무 기준 사이즈)
+    var base_size = 2048000; //2MB 
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
     var width = image.width;
     var height = image.height;
@@ -46,33 +45,9 @@ function App () {
       canvas.getContext("2d").drawImage(image, 0, 0, width, height);
       var tmpThumbFile = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
       return tmpThumbFile;
-    }
+    } else return file;
+
   }
-  const handleCapture = (target) => {
-    if (target.files) {
-      if (target.files.length !== 0) {
-        const file = target.files[0];
-
-        if (file.size > 2000000) {//2MB
-          let fReader = new FileReader();
-          fReader.readAsDataURL(file);
-          fReader.onload = (e) => {
-            let img = new Image();
-            img.src = fReader.result;
-            img.onload = function () {
-              let thumbFile = getThumbFile(img, file);
-              setSource(thumbFile);
-            };
-          };
-        } else {
-          setSource(file);
-        }
-
-        const newURL = URL.createObjectURL(file);
-        setImg(newURL);
-      }
-    }
-  };
 
   const kakaoOCR = () => {
     let form = new FormData();
@@ -85,18 +60,13 @@ function App () {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => {
-        setResult(res.data.result[0].recognition_words[0]);
+      .then((response) => {
+        setResult(JSON.stringify(response.data.result));
       })
       .catch((err) => {
         setResult(err.response.statusText);
       });
   };
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////react-cropper/////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
   const onChange = (e) => {
     e.preventDefault();
@@ -105,58 +75,61 @@ function App () {
       files = e.dataTransfer.files;
     } else if (e.target) {
       files = e.target.files;
+
+
     }
 
     const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
     reader.onload = () => {
       setImage(reader.result);
     };
-    reader.readAsDataURL(files[0]);
+
   };
 
-
   const getCropData = () => {
+    setCropData(cropper.getCroppedCanvas().toDataURL("image/png"));
 
-    setCropData(cropper.getCroppedCanvas().toDataURL());
+    let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
+    let img = new Image();
+
+    img.src = cropper.getCroppedCanvas().toDataURL("image/png");
+    img.onload = function () {
+      let thumbFile = getThumbFile(img, file);
+      console.log(thumbFile);
+      setSource(thumbFile);
+    };
+
 
   };
 
 
   return (
     <div>
-      {source && (
-        <div className="imageContainer">
-          <img src={img} alt={"snap"} style={{ width: "100%" }}></img>
-        </div>
-      )}
-      {source && <button onClick={kakaoOCR}>Detect</button>}
-      <input
-        accept="image/*"
-        type="file"
-        capture="environment"
-        onChange={(e) => handleCapture(e.target)}
-      />
-      <div>{result}</div>
-      <br></br>
-
+      <br />
       <div style={{ width: "100%" }}>
-        <input type="file" onChange={onChange} />
+        <input
+          accept="image/*"
+          type="file"
+          capture="environment"
+          onChange={onChange} />
         <button>Use default img</button>
         <br />
         <br />
         <Cropper
-          style={{ height: 400, width: "100%" }}
+          style={{ height: "100%", width: "100%" }}
           zoomTo={2}
           initialAspectRatio={1}
-          preview=".img-preview"
+
           src={image}
           viewMode={1}
           guides={true}
           minCropBoxHeight={10}
           minCropBoxWidth={10}
-          background={false}
+          background={true}
           responsive={true}
           autoCropArea={1}
+          zoomable={false}
           checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
           onInitialized={(instance) => {
             setCropper(instance);
@@ -164,25 +137,22 @@ function App () {
         />
       </div>
       <div>
-        <div className="box" style={{ width: "50%", float: "right" }}>
-          <h1>Preview</h1>
-          <div
-            className="img-preview"
-            style={{ width: "100%", float: "left", height: "300px" }}
-          />
-        </div>
+
         <div
           className="box"
-          style={{ width: "50%", float: "right", height: "300px" }}
+          style={{ width: "100%", height: "300px" }}
         >
           <h1>
             <span>Crop</span>
+
             <button style={{ float: "right" }} onClick={getCropData}>
               Crop Image
             </button>
+            {source && <button style={{ float: "right", marginRight: "10px" }} onClick={kakaoOCR}>Detect</button>}
           </h1>
           <img style={{ width: "100%" }} src={cropData} alt="cropped" />
         </div>
+        <div>{result}</div>
       </div>
       <br style={{ clear: "both" }} />
 
