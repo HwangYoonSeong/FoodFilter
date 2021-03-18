@@ -71,7 +71,6 @@ function App() {
     } else if (e.target) {
       files = e.target.files;
     }
-    console.log(files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
