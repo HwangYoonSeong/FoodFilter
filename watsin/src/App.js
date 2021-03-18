@@ -9,6 +9,7 @@ const defaultSrc =
 
 function App() {
   console.log("test");
+  console.log("test");
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
   const [image, setImage] = useState(defaultSrc);
