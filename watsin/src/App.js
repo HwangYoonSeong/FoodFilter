@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import "./App.css";
 import Cropper from "react-cropper";
@@ -8,11 +8,8 @@ const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
 function App() {
-  const axios = require("axios");
-  const qs = require("querystring");
-
   const [source, setSource] = useState(null);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState([]);
   const [image, setImage] = useState(defaultSrc);
   const [cropData, setCropData] = useState(null);
   const [cropper, setCropper] = useState();
@@ -59,55 +56,22 @@ function App() {
         },
       })
       .then((response) => {
-        setResult(JSON.stringify(response.data.result));
+        setResult([response.data.result.map((el) => el.recognition_words[0])]);
       })
       .catch((err) => {
-        setResult(err.response.statusText);
+        console.log(err.response);
       });
   };
 
-  const papago = async () => {
-    const url = "https://openapi.naver.com/v1/papago/n2mt";
-
-    const params = qs.stringify({
-      source: "ko",
-      target: "en",
-      text: "만나서 반갑습니다.",
-    });
-
-    const config = {
-      baseURL: "https://openapi.naver.com/v1/",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "X-Naver-Client-Id": "5bEorb5s8e9aegf228eq",
-        "X-Naver-Client-Secret": "Ub_lBWUQZW",
-      },
-    };
-
-    const response = await axios.post(url, params, config);
-    console.log(response);
-
-    // const source = "ko";
-    // const target = "en";
-    // const text = "만나서 반갑습니다.";
-
-    // axios
-    //   .post(
-    //     `https://openapi.naver.com/v1/papago/n2mt?source=${source}&target=${target}&text=${text}`,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    //         "X-Naver-Client-Id": "5bEorb5s8e9aegf228eq",
-    //         "X-Naver-Client-Secret": "Ub_lBWUQZW",
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  const papago = () => {
+    axios
+      .get(`http://192.168.35.238:3001/translate`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onChange = (e) => {
