@@ -3,19 +3,20 @@ import React, { useState } from "react";
 import "./App.css";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import Translator from 'papago';
 
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
-function App() {
-  console.log("test1");
+function App () {
+
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
   const [image, setImage] = useState(defaultSrc);
   const [cropData, setCropData] = useState(null);
   const [cropper, setCropper] = useState();
 
-  function dataURItoBlob(dataURI) {
+  function dataURItoBlob (dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
     var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -27,7 +28,7 @@ function App() {
     return new Blob([ab], { type: mimeString });
   }
 
-  function getThumbFile(image, file) {
+  function getThumbFile (image, file) {
     var canvas = document.createElement("canvas");
 
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
@@ -64,6 +65,35 @@ function App() {
       });
   };
 
+  const papago = () => {
+
+    let form = new FormData();
+
+    form.append("source", 'ko');
+    form.append("target", 'en');
+    form.append("text", '안녕하세요');
+
+
+    axios
+      .post("https://openapi.naver.com/v1/papago/n2mt", form, {
+
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "X-Naver-Client-Id": "omCYkh439Kfoa56Tpjjm",
+          "X-Naver-Client-Secret": "TIXxlALgvd",
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
+
   const onChange = (e) => {
     e.preventDefault();
     let files;
@@ -96,7 +126,7 @@ function App() {
 
   return (
     <div>
-      <label for="capture">Capture</label>
+      <label htmlFor="capture">Capture</label>
       <input
         id="capture"
         style={{ margin: "10px" }}
@@ -134,6 +164,10 @@ function App() {
             <button style={{ marginLeft: "1rem" }} onClick={getCropData}>
               Crop Image
             </button>
+            <button style={{ marginLeft: "1rem" }} onClick={papago}>
+              Translate
+            </button>
+
             {source && (
               <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
                 Detect
