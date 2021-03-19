@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
 import "./App.css";
 import Cropper from "react-cropper";
@@ -8,6 +8,9 @@ const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
 function App() {
+  const axios = require("axios");
+  const qs = require("querystring");
+
   const [source, setSource] = useState(null);
   const [result, setResult] = useState(null);
   const [image, setImage] = useState(defaultSrc);
@@ -63,27 +66,48 @@ function App() {
       });
   };
 
-  const papago = () => {
-    let form = new FormData();
+  const papago = async () => {
+    const url = "https://openapi.naver.com/v1/papago/n2mt";
 
-    form.append("source", "ko");
-    form.append("target", "en");
-    form.append("text", "안녕하세요");
+    const params = qs.stringify({
+      source: "ko",
+      target: "en",
+      text: "만나서 반갑습니다.",
+    });
 
-    axios
-      .post("https://openapi.naver.com/v1/papago/n2mt", form, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "X-Naver-Client-Id": "omCYkh439Kfoa56Tpjjm",
-          "X-Naver-Client-Secret": "TIXxlALgvd",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const config = {
+      baseURL: "https://openapi.naver.com/v1/",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Naver-Client-Id": "5bEorb5s8e9aegf228eq",
+        "X-Naver-Client-Secret": "Ub_lBWUQZW",
+      },
+    };
+
+    const response = await axios.post(url, params, config);
+    console.log(response);
+
+    // const source = "ko";
+    // const target = "en";
+    // const text = "만나서 반갑습니다.";
+
+    // axios
+    //   .post(
+    //     `https://openapi.naver.com/v1/papago/n2mt?source=${source}&target=${target}&text=${text}`,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    //         "X-Naver-Client-Id": "5bEorb5s8e9aegf228eq",
+    //         "X-Naver-Client-Secret": "Ub_lBWUQZW",
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const onChange = (e) => {
