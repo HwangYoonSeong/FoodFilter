@@ -9,7 +9,8 @@ const defaultSrc =
 
 function App() {
   const [source, setSource] = useState(null);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState("");
+  const [trresult, setTrresult] = useState("");
   const [image, setImage] = useState(defaultSrc);
   const [cropData, setCropData] = useState(null);
   const [cropper, setCropper] = useState();
@@ -56,7 +57,10 @@ function App() {
         },
       })
       .then((response) => {
-        setResult([response.data.result.map((el) => el.recognition_words[0])]);
+        const menu = response.data.result
+          .map((el) => el.recognition_words[0])
+          .join(" ");
+        setResult(menu);
       })
       .catch((err) => {
         console.log(err.response);
@@ -65,9 +69,9 @@ function App() {
 
   const papago = () => {
     axios
-      .get(`http://192.168.35.238:3001/translate`)
+      .get(`http://192.168.35.39:3001/translate/${result}`)
       .then((res) => {
-        console.log(res);
+        setTrresult(res.data.message.result.translatedText);
       })
       .catch((err) => {
         console.log(err);
@@ -106,17 +110,18 @@ function App() {
 
   return (
     <div>
-      <label htmlFor="capture">Capture</label>
+      <label htmlFor="capture" style={{ margin: "1rem 0 0 1rem" }}>
+        Capture
+      </label>
       <input
         id="capture"
-        style={{ margin: "10px" }}
         accept="image/*"
         type="file"
         capture="environment"
         onChange={onChange}
       />
 
-      <div style={{ width: "80%", marginTop: "1rem" }}>
+      <div className="imageContainer" style={{ width: "80%", margin: "1rem" }}>
         <Cropper
           style={{ height: "100%", width: "100%" }}
           zoomTo={2}
@@ -136,32 +141,33 @@ function App() {
           }}
         />
       </div>
-      <div>
-        <div className="box" style={{ width: "100%", height: "300px" }}>
-          <h1>
-            <span>Crop</span>
 
-            <button style={{ marginLeft: "1rem" }} onClick={getCropData}>
-              Crop Image
-            </button>
+      <h1 style={{ marginLeft: "1rem" }}>Crop</h1>
 
-            <button style={{ marginLeft: "1rem" }} onClick={papago}>
-              Translate
-            </button>
+      <div style={{ margin: "0 0 1rem 1rem" }} className="buttonContainer">
+        <button onClick={getCropData}>Crop Image</button>
 
-            {source && (
-              <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
-                Detect
-              </button>
-            )}
-          </h1>
-          {cropData && (
-            <img style={{ width: "100%" }} src={cropData} alt="cropped" />
-          )}
-        </div>
-        <div>{result}</div>
+        {source && (
+          <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
+            Detect
+          </button>
+        )}
+
+        {result && (
+          <button style={{ marginLeft: "1rem" }} onClick={papago}>
+            Translate
+          </button>
+        )}
       </div>
-      <br style={{ clear: "both" }} />
+
+      {cropData && (
+        <div style={{ margin: "0 1rem 0 1rem" }} className="croppedContainer">
+          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
+        </div>
+      )}
+
+      <h1 style={{ margin: "1rem 0 0 1rem" }}>탐지 결과 : {result}</h1>
+      <h1 style={{ margin: "1rem 0 0 1rem" }}>번역 결과 : {trresult}</h1>
     </div>
   );
 }
