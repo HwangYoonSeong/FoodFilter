@@ -81,11 +81,29 @@ function App () {
 
   const getRecipe = () => {
     axios
-      .get(`http://openapi.foodsafetykorea.go.kr/api/b60c26fc88694a7c9bf3/COOKRCP01/json/1/5/`)
+      .get(`http://openapi.foodsafetykorea.go.kr/api/b60c26fc88694a7c9bf3/COOKRCP01/json/1001/1308/`)
       .then((res) => {
-        console.log(res);
-        console.log(res.data.COOKRCP01.row[0].RCP_NM);
-        console.log(res.data.COOKRCP01.row[0].RCP_PARTS_DTLS);
+
+
+
+        for (var i = 0; i < 308; i++) {
+          axios
+            .post(`${ipObj.ip}/inputIngredient/`,
+              {
+                rcp: res.data.COOKRCP01.row[i].RCP_NM,
+                ingredients: res.data.COOKRCP01.row[i].RCP_PARTS_DTLS
+              }, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
 
 
       })
@@ -93,26 +111,6 @@ function App () {
         console.log(err);
       });
   };
-
-
-  const inputIngredient = () => {
-    let data = new FormData();
-    data.append("rcp", "된장찌개");
-    data.append("ingredients", "된장");
-
-    axios
-      .post(`${ipObj.ip}/inputIngredient/`, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   const onChange = (e) => {
     e.preventDefault();
@@ -183,7 +181,7 @@ function App () {
       <div style={{ margin: "0 0 1rem 1rem" }} className="buttonContainer">
         <button onClick={getCropData}>Crop Image</button>
         <button style={{ marginLeft: "1rem" }} onClick={getRecipe}>get Recipe</button>
-        <button style={{ marginLeft: "1rem" }} onClick={inputIngredient}>input Ingredient</button>
+        {/* <button style={{ marginLeft: "1rem" }} onClick={inputIngredient}>input Ingredient</button> */}
         {source && (
           <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
             Detect
