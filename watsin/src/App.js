@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import "./App.css";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import ipObj from "./key";
 
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
-function App() {
+function App () {
   const [source, setSource] = useState(null);
   const [result, setResult] = useState("");
   const [trresult, setTrresult] = useState("");
@@ -15,7 +16,7 @@ function App() {
   const [cropData, setCropData] = useState(null);
   const [cropper, setCropper] = useState();
 
-  function dataURItoBlob(dataURI) {
+  function dataURItoBlob (dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
     var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -27,7 +28,7 @@ function App() {
     return new Blob([ab], { type: mimeString });
   }
 
-  function getThumbFile(image, file) {
+  function getThumbFile (image, file) {
     var canvas = document.createElement("canvas");
 
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
@@ -69,7 +70,7 @@ function App() {
 
   const papago = () => {
     axios
-      .get(`http://192.168.35.39:3001/translate/${result}`)
+      .get(`${ipObj.ip}/translate/${result}`)
       .then((res) => {
         setTrresult(res.data.message.result.translatedText);
       })
@@ -77,6 +78,41 @@ function App() {
         console.log(err);
       });
   };
+
+  const getRecipe = () => {
+    axios
+      .get(`http://openapi.foodsafetykorea.go.kr/api/b60c26fc88694a7c9bf3/COOKRCP01/json/1/5/`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data.COOKRCP01.row[0].RCP_NM);
+        console.log(res.data.COOKRCP01.row[0].RCP_PARTS_DTLS);
+
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  const inputIngredient = () => {
+    let data = new FormData();
+    data.append("rcp", "된장찌개");
+    data.append("ingredients", "된장");
+
+    axios
+      .post(`${ipObj.ip}/inputIngredient/`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const onChange = (e) => {
     e.preventDefault();
@@ -146,7 +182,8 @@ function App() {
 
       <div style={{ margin: "0 0 1rem 1rem" }} className="buttonContainer">
         <button onClick={getCropData}>Crop Image</button>
-
+        <button style={{ marginLeft: "1rem" }} onClick={getRecipe}>get Recipe</button>
+        <button style={{ marginLeft: "1rem" }} onClick={inputIngredient}>input Ingredient</button>
         {source && (
           <button style={{ marginLeft: "1rem" }} onClick={kakaoOCR}>
             Detect
