@@ -1,4 +1,4 @@
-# watsIn
+# You can do EAT
 2021 4-1 창의설계프로젝트
 
 * react
