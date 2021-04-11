@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
+import { Link, Route, Switch } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
+import Main from "./components/Main/MainContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
-    /* background:tomato; */
   }
 `;
 
@@ -21,9 +22,11 @@ function App() {
     <>
       <GlobalStyle />
       <NavBar />
-      <Container>
 
-        
+      <Container>
+        <Route path="/" exact>
+          <Main />
+        </Route>
       </Container>
     </>
   );

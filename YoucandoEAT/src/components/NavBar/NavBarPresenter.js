@@ -24,6 +24,7 @@ const HamburgerBtn = styled.button`
   cursor: pointer;
   background: white;
   border-radius: 8px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &:active {
     filter: brightness(85%);
