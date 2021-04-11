@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-const Test = styled.h1`
-  font-size: 125px;
+const Container = styled.div`
+  text-align: center;
+  margin-top: 60px;
 `;
 
-function CapturePresenter() {
+const ImageContainer = styled.img`
+  width: 400px;
+`;
+
+function CapturePresenter({ image }) {
   return (
     <>
-      <Test>캡쳐 페이지에요!</Test>
+      <Container>
+        <ImageContainer src={image} />
+      </Container>
     </>
   );
 }

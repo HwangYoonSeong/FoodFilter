@@ -32,7 +32,6 @@ function App() {
 
       <Container>
         <Route exact path="/" component={Main} />
-        <Route exact path="/capture" component={Capture} />
       </Container>
     </>
   );
