@@ -1,15 +1,19 @@
 import React from "react";
 import "./App.css";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
-    max-width:500px;
-    background:tomato;
+    /* background:tomato; */
   }
+`;
+
+const Container = styled.div`
+  max-width: 767px;
+  margin: 0 auto;
 `;
 
 function App() {
@@ -17,6 +21,10 @@ function App() {
     <>
       <GlobalStyle />
       <NavBar />
+      <Container>
+
+        
+      </Container>
     </>
   );
 }
