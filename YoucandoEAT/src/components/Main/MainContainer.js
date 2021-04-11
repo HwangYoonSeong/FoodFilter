@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import MainPresenter from "./MainPresenter";
+import Capture from "./Capture/CaptureContainer";
 
-function MainContainer() {
+function MainContainer({ history }) {
   let [image, setImage] = useState(null);
 
   // onChange 이벤트 발생 시
@@ -20,7 +21,11 @@ function MainContainer() {
 
   return (
     <>
-      <MainPresenter onChange={onChange} />
+      {image ? (
+        <Capture image={image} />
+      ) : (
+        <MainPresenter onChange={onChange} />
+      )}
     </>
   );
 }
