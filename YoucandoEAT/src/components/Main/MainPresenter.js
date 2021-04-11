@@ -7,7 +7,7 @@ const Container = styled.div`
   margin-top: 80px;
 `;
 
-const CircleBtn = styled.div`
+const CircleBtn = styled.label`
   background: black;
   border-radius: 50%;
   width: 180px;
@@ -31,7 +31,16 @@ function MainPresenter() {
       <Container>
         <CircleBtn>Select Your Allergy</CircleBtn>
 
-        <CircleBtn>Capture</CircleBtn>
+        <CircleBtn htmlFor="capture">
+          Capture
+          <input
+            id="capture"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            style={{ display: "none" }}
+          />
+        </CircleBtn>
 
         <CircleBtn>Community</CircleBtn>
       </Container>
