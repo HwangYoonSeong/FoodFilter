@@ -25,7 +25,7 @@ const CircleBtn = styled.label`
   }
 `;
 
-function MainPresenter() {
+function MainPresenter({ onChange }) {
   return (
     <>
       <Container>
@@ -39,6 +39,7 @@ function MainPresenter() {
             accept="image/*"
             capture="environment"
             style={{ display: "none" }}
+            onChange={onChange}
           />
         </CircleBtn>
 
