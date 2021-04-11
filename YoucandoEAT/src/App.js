@@ -9,6 +9,12 @@ import Main from "./components/Main/MainContainer";
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
+
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 `;
 
