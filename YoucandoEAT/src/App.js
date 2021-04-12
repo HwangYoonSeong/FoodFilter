@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
-import Capture from "./components/Main/Capture/CaptureContainer"
+import Capture from "./components/Capture/CaptureContainer"
 
 const GlobalStyle = createGlobalStyle`
   body{

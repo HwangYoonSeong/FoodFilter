@@ -3,8 +3,6 @@ import MainPresenter from "./MainPresenter";
 
 function MainContainer({ history }) {
 
-  let image = null
-
   // onChange 이벤트 발생 시
   // 사용자에게 이미지를 출력하기 위하여 이미지 데이터 가공
   const onChange = (e) => {
@@ -15,8 +13,7 @@ function MainContainer({ history }) {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
-
-      image = reader.result
+      const image = reader.result
 
       history.push({
         pathname: '/capture',

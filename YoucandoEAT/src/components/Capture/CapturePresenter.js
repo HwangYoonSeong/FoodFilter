@@ -30,7 +30,7 @@ const Button = styled.button`
 
 
 
-function CapturePresenter({ image, setCropper, getData, goBack }) {
+function CapturePresenter({ image, setCropper, getData }) {
   return (
     <>
       <Container>
