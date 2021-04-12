@@ -135,7 +135,7 @@ function FunctionalCode() {
           responsive={true}
           autoCropArea={1}
           zoomable={false}
-          checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+          checkOrientation={false} 
           onInitialized={(instance) => {
             setCropper(instance);
           }}
