@@ -5,7 +5,6 @@ import { Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
-import Capture from "./components/Main/Capture/CaptureContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{

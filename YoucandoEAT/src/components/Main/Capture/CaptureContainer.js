@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import CapturePresenter from "./CapturePresenter";
 
-function CaptureContainer({ image }) {
+function CaptureContainer({ image, setImage }) {
 
   const [cropper, setCropper] = useState(null);
-  const [cropped, setCropped] = useState(null);
   const [newImage, setNewImage] = useState(null);
+
+  const goBack = () => {
+    setImage("null")
+  }
 
   function dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
@@ -37,22 +40,26 @@ function CaptureContainer({ image }) {
     return tmpResizeImage;
   }
 
-  const getCropData = () => {
-    
-    setCropped(cropper.getCroppedCanvas().toDataURL("image/png"));
-    let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
+  const getData = () => {
+    if (window.confirm("Are you sure you want to select the menu?")) {
+      // Croppping
+      let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
+      let img = new Image();
+      img.src = cropper.getCroppedCanvas().toDataURL("image/png");
 
-    let img = new Image();
-    img.src = cropper.getCroppedCanvas().toDataURL("image/png");
-    img.onload = function () {
-      let resizeImage = getResizeFile(img, file);
-      setNewImage(resizeImage);
-    };
+      // Resizing
+      img.onload = function () {
+        let resizeImage = getResizeFile(img, file);
+        setNewImage(resizeImage);
+        setImage(null);
+      };
+    }
+    else return;
   }
 
   return (
     <>
-      <CapturePresenter image={image} setCropper={setCropper} getCropData={getCropData}/>
+      <CapturePresenter image={image} setCropper={setCropper} getData={getData} goBack={goBack}/>
     </>
   );
 }

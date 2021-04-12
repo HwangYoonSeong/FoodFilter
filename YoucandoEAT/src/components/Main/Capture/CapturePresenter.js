@@ -14,7 +14,12 @@ const ImageContainer = styled.div`
   width: 65%;
 `;
 
-const CroppingBtn = styled.button`
+const BtnContainer = styled.div`
+display:flex;
+justify-content:space-around;
+`
+
+const Button = styled.button`
   background:black;
   border:none;
   color:white;
@@ -24,11 +29,12 @@ const CroppingBtn = styled.button`
   outline:none;
   border-radius:8px;
   margin-top:2rem;
+
 `;
 
 
 
-function CapturePresenter({ image, setCropper, getCropData }) {
+function CapturePresenter({ image, setCropper, getData, goBack }) {
   return (
     <>
       <Container>
@@ -53,7 +59,11 @@ function CapturePresenter({ image, setCropper, getCropData }) {
             }}
           />
         </ImageContainer>
-        <CroppingBtn onClick={getCropData}>SELECT!!</CroppingBtn>
+        <BtnContainer>
+          <Button onClick={getData}>SELECT!!</Button>
+          <Button onClick={goBack}>Go back</Button>
+        </BtnContainer>
+
       </Container>
     </>
   );

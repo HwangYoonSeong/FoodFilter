@@ -22,7 +22,7 @@ function MainContainer({ history }) {
   return (
     <>
       {image ? (
-        <Capture image={image} />
+        <Capture image={image} setImage={setImage}/>
       ) : (
         <MainPresenter onChange={onChange} />
       )}
