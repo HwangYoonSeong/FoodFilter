@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import CapturePresenter from "./CapturePresenter";
 
-function CaptureContainer({ image, setImage }) {
-
+function CaptureContainer({ location }) {
+  console.log(location)
+  const image = location.state.image;
   const [cropper, setCropper] = useState(null);
   const [newImage, setNewImage] = useState(null);
 
   const goBack = () => {
-    setImage("null")
+    console.log("goBack!")
   }
 
   function dataURItoBlob(dataURI) {
@@ -51,7 +52,6 @@ function CaptureContainer({ image, setImage }) {
       img.onload = function () {
         let resizeImage = getResizeFile(img, file);
         setNewImage(resizeImage);
-        setImage(null);
       };
     }
     else return;
@@ -59,7 +59,7 @@ function CaptureContainer({ image, setImage }) {
 
   return (
     <>
-      <CapturePresenter image={image} setCropper={setCropper} getData={getData} goBack={goBack}/>
+      <CapturePresenter image={image} setCropper={setCropper} getData={getData} goBack={goBack} />
     </>
   );
 }

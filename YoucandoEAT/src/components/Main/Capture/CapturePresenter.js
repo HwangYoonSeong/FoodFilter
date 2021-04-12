@@ -14,10 +14,6 @@ const ImageContainer = styled.div`
   width: 65%;
 `;
 
-const BtnContainer = styled.div`
-display:flex;
-justify-content:space-around;
-`
 
 const Button = styled.button`
   background:black;
@@ -59,10 +55,8 @@ function CapturePresenter({ image, setCropper, getData, goBack }) {
             }}
           />
         </ImageContainer>
-        <BtnContainer>
-          <Button onClick={getData}>SELECT!!</Button>
-          <Button onClick={goBack}>Go back</Button>
-        </BtnContainer>
+
+        <Button onClick={getData}>SELECT!!</Button>
 
       </Container>
     </>

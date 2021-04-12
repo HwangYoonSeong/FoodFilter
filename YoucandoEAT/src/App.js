@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
+import Capture from "./components/Main/Capture/CaptureContainer"
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -24,6 +25,8 @@ const Container = styled.div`
 `;
 
 function App() {
+
+
   return (
     <>
       <GlobalStyle />
@@ -31,6 +34,7 @@ function App() {
 
       <Container>
         <Route exact path="/" component={Main} />
+        <Route exact path="/capture" component={Capture} />
       </Container>
     </>
   );

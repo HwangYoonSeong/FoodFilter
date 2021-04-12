@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import MainPresenter from "./MainPresenter";
-import Capture from "./Capture/CaptureContainer";
 
 function MainContainer({ history }) {
-  let [image, setImage] = useState(null);
+
+  let image = null
 
   // onChange 이벤트 발생 시
   // 사용자에게 이미지를 출력하기 위하여 이미지 데이터 가공
@@ -15,17 +15,21 @@ function MainContainer({ history }) {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
-      setImage(reader.result);
+
+      image = reader.result
+
+      history.push({
+        pathname: '/capture',
+        state: { image }
+      })
     };
+
+
   };
 
   return (
     <>
-      {image ? (
-        <Capture image={image} setImage={setImage}/>
-      ) : (
-        <MainPresenter onChange={onChange} />
-      )}
+      <MainPresenter onChange={onChange} />
     </>
   );
 }
