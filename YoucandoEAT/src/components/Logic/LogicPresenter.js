@@ -25,7 +25,11 @@ function LogicPresenter({ croppedImage, result }) {
     <>
       <Container>
         <DetectedImgContainer>
-          <img src={croppedImage} alt="image" style={{ width: "100%" }} />
+          <img
+            src={croppedImage}
+            alt="croppedImage"
+            style={{ width: "100%" }}
+          />
         </DetectedImgContainer>
         <Title>Detected</Title>
         <p style={{ fontSize: "24px" }}>{result}</p>
