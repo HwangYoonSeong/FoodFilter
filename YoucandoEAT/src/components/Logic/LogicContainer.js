@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
@@ -31,9 +31,25 @@ function LogicContainer({ location }) {
       });
   };
 
+  const papago = () => {
+    axios
+      .get(`http://192.168.35.39:3001/translate/${result}`)
+      .then((res) => {
+        setTrresult(res.data.message.result.translatedText);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    console.log("in!");
+    kakaoOCR();
+  }, [kakaoOCR]);
+
   return (
     <>
-      <LogicPresenter croppedImage={croppedImage} />
+      <LogicPresenter croppedImage={croppedImage} result={result} />
     </>
   );
 }

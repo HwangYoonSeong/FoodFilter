@@ -20,7 +20,7 @@ const DetectedImgContainer = styled.div`
   width: 85%;
 `;
 
-function LogicPresenter({ croppedImage }) {
+function LogicPresenter({ croppedImage, result }) {
   return (
     <>
       <Container>
@@ -28,6 +28,7 @@ function LogicPresenter({ croppedImage }) {
           <img src={croppedImage} alt="image" style={{ width: "100%" }} />
         </DetectedImgContainer>
         <Title>Detected</Title>
+        <p style={{ fontSize: "24px" }}>{result}</p>
 
         <Title>Translated</Title>
 
