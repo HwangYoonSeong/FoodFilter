@@ -5,7 +5,7 @@ function CaptureContainer({ history, location }) {
   const image = location.state.image;
   const [cropper, setCropper] = useState(null);
 
-  function dataURItoBlob(dataURI) {
+  const dataURItoBlob = (dataURI) => {
     var byteString = atob(dataURI.split(",")[1]);
     var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
     var ab = new ArrayBuffer(byteString.length);
@@ -15,9 +15,9 @@ function CaptureContainer({ history, location }) {
     }
 
     return new Blob([ab], { type: mimeString });
-  }
+  };
 
-  function getResizeFile(image, file) {
+  const getResizeFile = (image, file) => {
     var canvas = document.createElement("canvas");
 
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
@@ -33,7 +33,7 @@ function CaptureContainer({ history, location }) {
     canvas.getContext("2d").drawImage(image, 0, 0, width, height);
     var tmpResizeImage = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
     return tmpResizeImage;
-  }
+  };
 
   const getData = () => {
     if (window.confirm("Are you sure you want to select the menu?")) {

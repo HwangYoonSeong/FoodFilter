@@ -31,21 +31,14 @@ function LogicContainer({ location }) {
       });
   };
 
-  const papago = () => {
-    axios
-      .get(`http://192.168.35.39:3001/translate/${result}`)
-      .then((res) => {
-        setTrresult(res.data.message.result.translatedText);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getData = () => {
+    console.log("서버와 연결!");
   };
 
   useEffect(() => {
-    console.log("in!");
     kakaoOCR();
-  }, [kakaoOCR]);
+    getData();
+  });
 
   return (
     <>
