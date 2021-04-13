@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import Cropper from "react-cropper"
+import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
 const Container = styled.div`
   text-align: center;
-  margin-top:60px;
+  margin-top: 60px;
 `;
 
 const ImageContainer = styled.div`
@@ -14,21 +14,17 @@ const ImageContainer = styled.div`
   width: 65%;
 `;
 
-
 const Button = styled.button`
-  background:black;
-  border:none;
-  color:white;
-  width:150px;
-  height:45px;
-  font-size:1rem;
-  outline:none;
-  border-radius:8px;
-  margin-top:2rem;
-
+  background: black;
+  border: none;
+  color: white;
+  width: 150px;
+  height: 45px;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 8px;
+  margin-top: 2rem;
 `;
-
-
 
 function CapturePresenter({ image, setCropper, getData }) {
   return (
@@ -57,7 +53,6 @@ function CapturePresenter({ image, setCropper, getData }) {
         </ImageContainer>
 
         <Button onClick={getData}>SELECT!!</Button>
-
       </Container>
     </>
   );

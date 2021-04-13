@@ -5,7 +5,8 @@ import { Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
-import Capture from "./components/Capture/CaptureContainer"
+import Capture from "./components/Capture/CaptureContainer";
+import Logic from "./components/Logic/LogicContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -25,8 +26,6 @@ const Container = styled.div`
 `;
 
 function App() {
-
-
   return (
     <>
       <GlobalStyle />
@@ -35,6 +34,7 @@ function App() {
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/capture" component={Capture} />
+        <Route exact path="/logic" component={Logic} />
       </Container>
     </>
   );

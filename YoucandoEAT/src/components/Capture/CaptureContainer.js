@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import CapturePresenter from "./CapturePresenter";
 
-function CaptureContainer({ location }) {
+function CaptureContainer({ history, location }) {
   const image = location.state.image;
   const [cropper, setCropper] = useState(null);
-  const [newImage, setNewImage] = useState(null);
-
 
   function dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
@@ -40,22 +38,33 @@ function CaptureContainer({ location }) {
   const getData = () => {
     if (window.confirm("Are you sure you want to select the menu?")) {
       // Croppping
-      let file = dataURItoBlob(cropper.getCroppedCanvas().toDataURL("image/png"));
+      let file = dataURItoBlob(
+        cropper.getCroppedCanvas().toDataURL("image/png")
+      );
+
       let img = new Image();
       img.src = cropper.getCroppedCanvas().toDataURL("image/png");
 
       // Resizing
       img.onload = function () {
-        let resizeImage = getResizeFile(img, file);
-        setNewImage(resizeImage);
+        history.push({
+          pathname: "/logic",
+          state: {
+            resizeImage: getResizeFile(img, file),
+            croppedImage: img.src,
+          },
+        });
       };
-    }
-    else return;
-  }
+    } else return;
+  };
 
   return (
     <>
-      <CapturePresenter image={image} setCropper={setCropper} getData={getData} />
+      <CapturePresenter
+        image={image}
+        setCropper={setCropper}
+        getData={getData}
+      />
     </>
   );
 }
