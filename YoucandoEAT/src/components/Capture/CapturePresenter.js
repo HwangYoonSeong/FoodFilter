@@ -49,10 +49,22 @@ const DarkBackground = styled.div`
   animation-fill-mode: forwards;
 `;
 
+const ModalBox = styled.div`
+  position:fixed;
+  width: 300px;
+  height: 175px;
+  background: tomato;
+  z-index:10;
+  left: 50%;
+  bottom:50%;
+  transform: translate(-50%, -50%);
+`
+
 function CapturePresenter({ image, setCropper, getData }) {
   return (
     <>
       {/* <DarkBackground /> */}
+      {/* <ModalBox /> */}
       <Container>
         <p>Select the menu you want to know</p>
         <ImageContainer>
