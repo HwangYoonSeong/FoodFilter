@@ -52,7 +52,7 @@ const DarkBackground = styled.div`
 function CapturePresenter({ image, setCropper, getData }) {
   return (
     <>
-      <DarkBackground />
+      {/* <DarkBackground /> */}
       <Container>
         <p>Select the menu you want to know</p>
         <ImageContainer>
