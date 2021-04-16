@@ -10,7 +10,6 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 24px;
   text-align: left;
-  margin-left: 1rem;
   margin: 1rem 1rem 0 1rem;
   border-bottom: 1px solid black;
 `;
@@ -18,6 +17,11 @@ const Title = styled.h1`
 const DetectedImgContainer = styled.div`
   margin: 0 auto;
   width: 85%;
+`;
+
+const IngredientsContainer = styled.div`
+  text-align: left;
+  margin-left: 1rem;
 `;
 
 function LogicPresenter({ croppedImage, result }) {
@@ -35,8 +39,14 @@ function LogicPresenter({ croppedImage, result }) {
         <p style={{ fontSize: "24px" }}>{result}</p>
 
         <Title>Translated</Title>
+        <p style={{ fontSize: "24px" }}>Dummy</p>
 
         <Title>Ingredients</Title>
+        <IngredientsContainer>
+          <p style={{ fontSize: "17px" }}>dummy1</p>
+          <p style={{ fontSize: "17px" }}>dummy2</p>
+          <p style={{ fontSize: "17px" }}>dummy3</p>
+        </IngredientsContainer>
       </Container>
     </>
   );
