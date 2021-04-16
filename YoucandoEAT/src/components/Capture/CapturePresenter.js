@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
@@ -36,6 +36,15 @@ const fadeIn = keyframes`
 `;
 
 const DarkBackground = styled.div`
+  ${(props) =>
+    props.modal
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `};
+
   position: fixed;
   left: 0;
   top: 0;
@@ -49,9 +58,27 @@ const DarkBackground = styled.div`
   animation-fill-mode: forwards;
 `;
 
+const slideUp = keyframes`
+  from{
+    transform: translate(-50%, 0%);
+  }
+  to{
+    transform: translate(-50%, -50%);
+  }
+`;
+
 const ModalBox = styled.div`
+  ${(props) =>
+    props.modal
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `};
+
   position: fixed;
-  width: 300px;
+  width: 325px;
   height: 175px;
   background: white;
   border-radius: 0.5rem;
@@ -59,6 +86,11 @@ const ModalBox = styled.div`
   left: 50%;
   bottom: 50%;
   transform: translate(-50%, -50%);
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${slideUp};
+  animation-fill-mode: forwards;
 `;
 
 const ModalBody = styled.div`
@@ -88,23 +120,24 @@ const ModalBtn = styled.button`
   border-radius: 0.25rem;
 `;
 
-function CapturePresenter({ image, setCropper, getData }) {
+function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
   return (
     <>
-      <DarkBackground />
-      <ModalBox>
+      <DarkBackground modal={modal} />
+      <ModalBox modal={modal}>
         <ModalBody>
           <ModalContents>
             Are you sure you want to select the menu?
           </ModalContents>
         </ModalBody>
         <ModalFooter>
-          <ModalBtn>Yes</ModalBtn>
-          <ModalBtn>No</ModalBtn>
+          <ModalBtn onClick={getData}>Yes</ModalBtn>
+          <ModalBtn onClick={() => setModal(false)}>No</ModalBtn>
         </ModalFooter>
       </ModalBox>
+
       <Container>
-        <p>Select the menu you want to know</p>
+        <p style={{ fontSize: "1.1rem" }}>Select the menu you want to know</p>
         <ImageContainer>
           <Cropper
             style={{ width: "100%" }}
@@ -126,7 +159,7 @@ function CapturePresenter({ image, setCropper, getData }) {
           />
         </ImageContainer>
 
-        <Button onClick={getData}>SELECT!!</Button>
+        <Button onClick={() => setModal(true)}>SELECT!!</Button>
       </Container>
     </>
   );
