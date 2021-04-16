@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import Login from "../login";
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -31,12 +31,12 @@ const HamburgerBtn = styled.button`
   }
 `;
 
-function NavBarPresenter() {
+function NavBarPresenter () {
   return (
     <>
       <Container>
         <Title>You can do EAT</Title>
-
+        <Login />
         <HamburgerBtn>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>
