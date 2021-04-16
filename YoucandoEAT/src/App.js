@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar/NavBarContainer";
+import SideBar from "./components/SideBar/SideBarContainer";
 import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
@@ -30,6 +31,7 @@ function App() {
     <>
       <GlobalStyle />
       <NavBar />
+      <SideBar />
 
       <Container>
         <Route exact path="/" component={Main} />

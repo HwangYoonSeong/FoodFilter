@@ -18,18 +18,24 @@ const Title = styled.h1`
 `;
 
 const HamburgerBtn = styled.button`
-  margin-right: 1rem;
   border: none;
   outline: none;
   cursor: pointer;
   background: white;
   border-radius: 8px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin: 5px 1rem 5px 0;
 
   &:active {
     filter: brightness(85%);
   }
 `;
+
+// const SidebarBlock = styled.div`
+//   height: 100%;
+//   width: 70%;
+//   background: white;
+// `;
 
 function NavBarPresenter() {
   return (
