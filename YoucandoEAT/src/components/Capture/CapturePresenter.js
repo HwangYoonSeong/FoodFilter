@@ -33,15 +33,15 @@ const fadeIn = keyframes`
   to{
     opacity:1;
   }
-`
+`;
 
 const DarkBackground = styled.div`
-  position:fixed;
+  position: fixed;
   left: 0;
-  top:0;
+  top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
@@ -50,21 +50,59 @@ const DarkBackground = styled.div`
 `;
 
 const ModalBox = styled.div`
-  position:fixed;
+  position: fixed;
   width: 300px;
   height: 175px;
-  background: tomato;
-  z-index:10;
+  background: white;
+  border-radius: 0.5rem;
+  z-index: 10;
   left: 50%;
-  bottom:50%;
+  bottom: 50%;
   transform: translate(-50%, -50%);
-`
+`;
+
+const ModalBody = styled.div`
+  border-bottom: 1px dashed black;
+  height: 70%;
+`;
+
+const ModalContents = styled.div`
+  padding: 1rem;
+  font-size: 18px;
+`;
+
+const ModalFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 30%;
+`;
+
+const ModalBtn = styled.button`
+  outline: none;
+  border: none;
+  background: black;
+  color: white;
+  margin-right: 1rem;
+  font-size: 20px;
+  border-radius: 0.25rem;
+`;
 
 function CapturePresenter({ image, setCropper, getData }) {
   return (
     <>
-      {/* <DarkBackground /> */}
-      {/* <ModalBox /> */}
+      <DarkBackground />
+      <ModalBox>
+        <ModalBody>
+          <ModalContents>
+            Are you sure you want to select the menu?
+          </ModalContents>
+        </ModalBody>
+        <ModalFooter>
+          <ModalBtn>Yes</ModalBtn>
+          <ModalBtn>No</ModalBtn>
+        </ModalFooter>
+      </ModalBox>
       <Container>
         <p>Select the menu you want to know</p>
         <ImageContainer>
