@@ -40,8 +40,8 @@ function NavBarContainer(props) {
   const GoogleSignIn = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        setUserEmail(user.email)
         console.log(user.email);
-        console.log(user.uid);
       } else {
         console.log("not login!")
       }
