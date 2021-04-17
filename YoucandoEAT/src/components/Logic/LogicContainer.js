@@ -3,7 +3,7 @@ import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
 
-function LogicContainer ({ location, uid }) {
+function LogicContainer({ location, uid }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 

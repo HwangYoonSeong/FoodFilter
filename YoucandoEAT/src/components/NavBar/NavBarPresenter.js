@@ -78,24 +78,30 @@ const CloseBtn = styled.button`
 
 
 const SideBarList = styled.ul`
-     margin-top:50px;
+     margin-top:65px;
      list-style:none;
      padding-left:0px;
-
+    text-align: -webkit-center;
 `;
 
 
 const Item = styled.li`
-padding-top:10px;
-color:#000;
-display:block;
-width: 100%;
 font-size:30px;
-text-align:center;
- 
+width:85%;
+border-radius:8px;
+background:white;
+border: 2px dashed black;
+padding:5px 0 5px 0;
+
+  &:active {
+    filter: brightness(85%);
+  }
+&+&{
+  margin-top:2rem;
+}
 `;
 
-function NavBarPresenter ({ sidebar, setSidebar, logIn, logOut }) {
+function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
   return (
     <>
 
@@ -110,7 +116,9 @@ function NavBarPresenter ({ sidebar, setSidebar, logIn, logOut }) {
           <Item onClick={logIn} >
             LogIn
           </Item>
-
+          <Item >
+            Doc
+          </Item>
         </SideBarList>
 
       </SideBarBlock>

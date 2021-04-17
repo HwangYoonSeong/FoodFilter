@@ -3,12 +3,10 @@ import NavBarPresenter from "./NavBarPresenter";
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-// import { signInWithGoogle } from '../../firebase_config';
-// import { auth } from '../../firebase_config';
-
-function NavBarContainer (props) {
+function NavBarContainer(props) {
   const [sidebar, setSidebar] = useState(false);
 
+  // 나중에 사용할 코드!
   // const GoogleSignIn = () => {
   //     auth.onAuthStateChanged(user => {
   //         if (user) {
@@ -33,27 +31,13 @@ function NavBarContainer (props) {
 
   const logIn = (e) => {
     firebase.auth().signInWithPopup(provider).then(function (result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      //var token = result.credential.accessToken;
-      // The signed-in user info.
       var user = result.user;
-      // ...
-      //console.log(user.uid);
       props.setUid(user.uid);
       console.log("Login Success")
       setSidebar(false)
-
-      // _this.$router.push("/profile");
     })
       .catch(function (error) {
-        // Handle Errors here.
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // The email of the user's account used.
-        //var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        //var credential = error.credential;
-        // ...
+        console.error(error)
       });
   };
 
@@ -62,7 +46,7 @@ function NavBarContainer (props) {
       alert("로그아웃 되셨습니다.")
 
     }).catch(function (error) {
-      alert("ERROR")
+      alert(`ERROR : ${error}`)
     });
   };
 
