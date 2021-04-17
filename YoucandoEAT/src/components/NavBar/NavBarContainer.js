@@ -6,7 +6,7 @@ import 'firebase/auth'
 // import { signInWithGoogle } from '../../firebase_config';
 // import { auth } from '../../firebase_config';
 
-function NavBarContainer ({ history }) {
+function NavBarContainer (props) {
   const [sidebar, setSidebar] = useState(false);
 
   // const GoogleSignIn = () => {
@@ -38,7 +38,8 @@ function NavBarContainer ({ history }) {
       // The signed-in user info.
       var user = result.user;
       // ...
-      console.log(user.uid);
+      //console.log(user.uid);
+      props.setUid(user.uid);
       console.log("Login Success")
       setSidebar(false)
 

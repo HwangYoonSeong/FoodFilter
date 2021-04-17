@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
@@ -25,16 +25,17 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
+function App () {
+  let [uid, setUid] = useState('');
   return (
     <>
       <GlobalStyle />
-      <NavBar />
+      <NavBar setUid={setUid} />
 
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/capture" component={Capture} />
-        <Route exact path="/logic" component={Logic} />
+        <Route exact path="/logic" render={(props) => <Logic {...props} uid={uid} />} />
       </Container>
     </>
   );

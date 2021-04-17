@@ -3,7 +3,7 @@ import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
 
-function LogicContainer({ location }) {
+function LogicContainer ({ location, uid }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -25,6 +25,7 @@ function LogicContainer({ location }) {
           .map((el) => el.recognition_words[0])
           .join(" ");
         setResult(menu);
+        console.log(uid);
       })
       .catch((err) => {
         console.error(err.response);
