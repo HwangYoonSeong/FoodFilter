@@ -77,7 +77,7 @@ const CloseBtn = styled.button`
 
 
 
-const SideBarList = styled.ul`
+const MenuList = styled.ul`
      margin-top:65px;
      list-style:none;
      padding-left:0px;
@@ -85,7 +85,7 @@ const SideBarList = styled.ul`
 `;
 
 
-const Item = styled.li`
+const MenuItem = styled.li`
 font-size:30px;
 width:85%;
 border-radius:8px;
@@ -111,15 +111,14 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
           <GrClose size="24" />
         </CloseBtn>
 
-
-        <SideBarList>
-          <Item onClick={logIn} >
+        <MenuList>
+          <MenuItem onClick={logIn} >
             LogIn
-          </Item>
-          <Item >
+          </MenuItem>
+          <MenuItem >
             Doc
-          </Item>
-        </SideBarList>
+          </MenuItem>
+        </MenuList>
 
       </SideBarBlock>
 

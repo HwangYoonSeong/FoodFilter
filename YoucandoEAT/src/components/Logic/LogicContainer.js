@@ -39,7 +39,7 @@ function LogicContainer({ location, uid }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-  });
+  },[]);
 
   return (
     <>
