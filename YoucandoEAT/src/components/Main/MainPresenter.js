@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   text-align: -webkit-center;
-
   margin-top: 80px;
 `;
 

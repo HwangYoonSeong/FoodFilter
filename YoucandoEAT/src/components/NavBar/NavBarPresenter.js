@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   margin-left: 1rem;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 const HamburgerBtn = styled.button`
@@ -34,27 +34,32 @@ const HamburgerBtn = styled.button`
 
 
 const DarkBackground = styled.div`
-
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  z-index:10;
+
+  z-index: ${(props) => (props.sidebar ? '1' : '-1')};
+  opacity: ${(props) => (props.sidebar ? '1' : '0')};
+  transition: opacity 0.25s ease-out;
 `;
 
 
 
 const SideBarBlock = styled.div`
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 0%;
   text-align: right;
   height: 100%;
   width: 65%;
   background: white;
-  z-index: 11;
+  z-index: 1;
+
+  right: ${(props) => (props.sidebar ? '0%' : '-65%')};
+
+  transition: right 0.25s ease-out;
 `;
 
 const CloseBtn = styled.button`
@@ -73,15 +78,13 @@ const CloseBtn = styled.button`
 function NavBarPresenter({ sidebar, setSidebar }) {
   return (
     <>
-      {sidebar &&
-        <>
-          <DarkBackground />
-          <SideBarBlock >
-            <CloseBtn onClick={() => setSidebar(false)}>
-              <GrClose size="24" />
-            </CloseBtn>
-          </SideBarBlock>
-        </>}
+
+      <DarkBackground sidebar={sidebar} />
+      <SideBarBlock sidebar={sidebar}>
+        <CloseBtn onClick={() => setSidebar(false)}>
+          <GrClose size="24" />
+        </CloseBtn>
+      </SideBarBlock>
 
       <Container>
         <Title>You can do EAT</Title>
