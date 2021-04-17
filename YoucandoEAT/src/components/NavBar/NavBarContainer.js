@@ -5,9 +5,8 @@ import 'firebase/auth'
 
 function NavBarContainer(props) {
   const [sidebar, setSidebar] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [loginState, setLoginState] = useState(false);
-  
+  const [userEmail, setUserEmail] = useState(null);
+
   const provider = new firebase.auth.GoogleAuthProvider();
 
   // GoogleAuthProvider를 사용할 때마다 구글 팝업 
@@ -21,7 +20,6 @@ function NavBarContainer(props) {
       var user = result.user;
       props.setUid(user.uid);
       setUserEmail(user.email)
-      setLoginState(true)
       setSidebar(false)
     })
       .catch(function (error) {
@@ -31,23 +29,21 @@ function NavBarContainer(props) {
 
   const logOut = (e) => {
     firebase.auth().signOut().then(function () {
-      alert("로그아웃 되셨습니다.")
-      setUserEmail("");
-      setLoginState(false)
+      setUserEmail(null);
       setSidebar(false)
     }).catch(function (error) {
       alert(`ERROR : ${error}`)
     });
   };
 
-    // 로그인 상태인지 확인
+  // 로그인 상태인지 확인
   const GoogleSignIn = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log(user.email);
         console.log(user.uid);
       } else {
-        console.log("Login Error!")
+        console.log("not login!")
       }
     });
   }
@@ -58,7 +54,7 @@ function NavBarContainer(props) {
 
   return (
     <>
-      <NavBarPresenter sidebar={sidebar} setSidebar={setSidebar} logIn={logIn} logOut={logOut} />
+      <NavBarPresenter sidebar={sidebar} setSidebar={setSidebar} logIn={logIn} logOut={logOut} userEmail={userEmail} />
     </>
   );
 }

@@ -101,7 +101,7 @@ padding:5px 0 5px 0;
 }
 `;
 
-function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
+function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail }) {
   return (
     <>
 
@@ -112,9 +112,10 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
         </CloseBtn>
 
         <MenuList>
-          <MenuItem onClick={logIn} >
-            LogIn
-          </MenuItem>
+          {
+            !userEmail ? (<MenuItem onClick={logIn}>LogIn</MenuItem>) : (<MenuItem onClick={logOut}>LogOut</MenuItem>)
+          }
+
           <MenuItem >
             Doc
           </MenuItem>
