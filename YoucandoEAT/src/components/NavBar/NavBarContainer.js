@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-function NavBarContainer(props) {
+function NavBarContainer({ setUid }) {
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
 
@@ -18,7 +18,7 @@ function NavBarContainer(props) {
   const logIn = (e) => {
     firebase.auth().signInWithPopup(provider).then(function (result) {
       var user = result.user;
-      props.setUid(user.uid);
+      setUid(user.uid);
       setUserEmail(user.email)
       setSidebar(false)
     })
@@ -37,20 +37,22 @@ function NavBarContainer(props) {
   };
 
   // 로그인 상태인지 확인
-  const GoogleSignIn = () => {
+  // 새로고침시 또는 최초의 유저 저오 할당
+  const GoogleSignIn = useCallback(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setUserEmail(user.email)
+        setUid(user.uid)
         console.log(user.email);
       } else {
         console.log("not login!")
       }
     });
-  }
+  }, [setUid])
 
   useEffect(() => {
     GoogleSignIn();
-  }, [])
+  }, [GoogleSignIn])
 
   return (
     <>

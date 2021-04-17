@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
@@ -9,7 +9,7 @@ function LogicContainer({ location, uid }) {
 
   let [result, setResult] = useState(null);
 
-  const kakaoOCR = () => {
+  const kakaoOCR = useCallback(() => {
     let form = new FormData();
     form.append("image", resizeImage);
 
@@ -25,21 +25,21 @@ function LogicContainer({ location, uid }) {
           .map((el) => el.recognition_words[0])
           .join(" ");
         setResult(menu);
-        console.log(uid);
       })
       .catch((err) => {
         console.error(err.response);
       });
-  };
+  }, [resizeImage]);
 
   const getData = () => {
     console.log("서버와 연결!");
   };
 
   useEffect(() => {
+    console.log(uid);
     kakaoOCR();
     getData();
-  });
+  }, [kakaoOCR, uid]);
 
   return (
     <>
