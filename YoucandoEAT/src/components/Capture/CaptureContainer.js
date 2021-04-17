@@ -70,4 +70,4 @@ function CaptureContainer({ history, location }) {
   );
 }
 
-export default CaptureContainer;
+export default React.memo(CaptureContainer);

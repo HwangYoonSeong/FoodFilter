@@ -61,4 +61,4 @@ function NavBarContainer({ setUid }) {
   );
 }
 
-export default NavBarContainer;
+export default React.memo(NavBarContainer);

@@ -26,4 +26,4 @@ function MainContainer({ history }) {
   );
 }
 
-export default MainContainer;
+export default React.memo(MainContainer);

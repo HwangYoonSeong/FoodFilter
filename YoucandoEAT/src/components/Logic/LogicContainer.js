@@ -48,4 +48,4 @@ function LogicContainer({ location, uid }) {
   );
 }
 
-export default LogicContainer;
+export default React.memo(LogicContainer);
