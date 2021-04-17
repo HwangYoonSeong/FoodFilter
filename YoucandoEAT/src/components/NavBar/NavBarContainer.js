@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 
 function NavBarContainer() {
   const [sidebar, setSidebar] = useState(false);
+
 
   return (
     <>

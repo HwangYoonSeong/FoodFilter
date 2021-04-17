@@ -4,7 +4,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
-import Login from "../login";
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -52,14 +51,6 @@ const fadeOut = keyframes`
 `;
 
 const DarkBackground = styled.div`
-  ${(props) =>
-    props.sidebar
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `};
 
   position: fixed;
   left: 0;
@@ -67,13 +58,17 @@ const DarkBackground = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
+  z-index:10;
 
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
 
-  z-index: 10;
+  ${(props) => props.disappear && css`
+    animation-name: ${fadeOut};
+  `}
+
 `;
 
 const slideLeft = keyframes`
@@ -85,15 +80,16 @@ const slideLeft = keyframes`
   }
 `;
 
+const slideRight = keyframes`
+  from{
+    transform: translateX(0%);
+  }
+  to{
+    transform: translateX(100%);
+  }
+`
+
 const SideBarBlock = styled.div`
-  ${(props) =>
-    props.sidebar
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `};
 
   position: fixed;
   top: 0;
@@ -108,6 +104,10 @@ const SideBarBlock = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${slideLeft};
   animation-fill-mode: forwards;
+
+  ${(props) => props.disappear && css`
+    animation-name: ${slideRight}
+  `}
 `;
 
 const CloseBtn = styled.button`
@@ -126,16 +126,18 @@ const CloseBtn = styled.button`
 function NavBarPresenter({ sidebar, setSidebar }) {
   return (
     <>
-      <DarkBackground sidebar={sidebar} />
-      <SideBarBlock sidebar={sidebar}>
-        <CloseBtn onClick={() => setSidebar(false)}>
-          <GrClose size="24" />
-        </CloseBtn>
-      </SideBarBlock>
+      {sidebar &&
+        <>
+          <DarkBackground disappear={!sidebar} />
+          <SideBarBlock disappear={!sidebar}>
+            <CloseBtn onClick={() => setSidebar(false)}>
+              <GrClose size="24" />
+            </CloseBtn>
+          </SideBarBlock>
+        </>}
+
       <Container>
         <Title>You can do EAT</Title>
-
-        <Login />
         <HamburgerBtn onClick={() => setSidebar(true)}>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>
