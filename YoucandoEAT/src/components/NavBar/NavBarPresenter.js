@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
+import Login from "../login";
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -134,6 +135,7 @@ function NavBarPresenter({ sidebar, setSidebar }) {
       <Container>
         <Title>You can do EAT</Title>
 
+        <Login />
         <HamburgerBtn onClick={() => setSidebar(true)}>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>
