@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
@@ -32,23 +32,6 @@ const HamburgerBtn = styled.button`
   }
 `;
 
-const fadeIn = keyframes`
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
-`;
-
-const fadeOut = keyframes`
-  from{
-    opacity: 1;
-  }
-  to{
-    opacity: 0;
-  }
-`;
 
 const DarkBackground = styled.div`
 
@@ -59,38 +42,11 @@ const DarkBackground = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   z-index:10;
-
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${fadeIn};
-  animation-fill-mode: forwards;
-
-  ${(props) => props.disappear && css`
-    animation-name: ${fadeOut};
-  `}
-
 `;
 
-const slideLeft = keyframes`
-  from{
-    transform: translateX(100%);
-  }
-  to{
-    transform: translateX(0%);
-  }
-`;
 
-const slideRight = keyframes`
-  from{
-    transform: translateX(0%);
-  }
-  to{
-    transform: translateX(100%);
-  }
-`
 
 const SideBarBlock = styled.div`
-
   position: fixed;
   top: 0;
   right: 0;
@@ -99,15 +55,6 @@ const SideBarBlock = styled.div`
   width: 65%;
   background: white;
   z-index: 11;
-
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${slideLeft};
-  animation-fill-mode: forwards;
-
-  ${(props) => props.disappear && css`
-    animation-name: ${slideRight}
-  `}
 `;
 
 const CloseBtn = styled.button`
@@ -128,8 +75,8 @@ function NavBarPresenter({ sidebar, setSidebar }) {
     <>
       {sidebar &&
         <>
-          <DarkBackground disappear={!sidebar} />
-          <SideBarBlock disappear={!sidebar}>
+          <DarkBackground />
+          <SideBarBlock >
             <CloseBtn onClick={() => setSidebar(false)}>
               <GrClose size="24" />
             </CloseBtn>
