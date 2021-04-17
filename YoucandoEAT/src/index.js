@@ -7,6 +7,23 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 import { BrowserRouter } from "react-router-dom";
 
+
+
+import firebase from 'firebase/app'
+import 'firebase/auth'
+const firebaseConfig = {
+  apiKey: "AIzaSyDbRWC7N0QVQZiUERqu4s3bRxf2G7X4whA",
+  authDomain: "watsin-3b4e3.firebaseapp.com",
+  projectId: "watsin-3b4e3",
+  storageBucket: "watsin-3b4e3.appspot.com",
+  messagingSenderId: "335744177629",
+  appId: "1:335744177629:web:84b912a4c514eb00f55234"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -75,7 +75,27 @@ const CloseBtn = styled.button`
   }
 `;
 
-function NavBarPresenter({ sidebar, setSidebar }) {
+
+
+const SideBarList = styled.ul`
+     margin-top:50px;
+     list-style:none;
+     padding-left:0px;
+
+`;
+
+
+const Item = styled.li`
+padding-top:10px;
+color:#000;
+display:block;
+width: 100%;
+font-size:30px;
+text-align:center;
+ 
+`;
+
+function NavBarPresenter ({ sidebar, setSidebar, logIn, logOut }) {
   return (
     <>
 
@@ -84,6 +104,15 @@ function NavBarPresenter({ sidebar, setSidebar }) {
         <CloseBtn onClick={() => setSidebar(false)}>
           <GrClose size="24" />
         </CloseBtn>
+
+
+        <SideBarList>
+          <Item onClick={logIn} >
+            LogIn
+          </Item>
+
+        </SideBarList>
+
       </SideBarBlock>
 
       <Container>
