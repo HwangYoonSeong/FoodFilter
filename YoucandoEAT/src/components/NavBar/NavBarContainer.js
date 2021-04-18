@@ -6,6 +6,7 @@ import 'firebase/auth'
 function NavBarContainer({ setUid }) {
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
+  const [userPhoto, setUserPhoto] = useState(null);
 
   const provider = new firebase.auth.GoogleAuthProvider();
 

@@ -4,6 +4,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
+import 권은비 from "../../assets/권은비.jpg"
+
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -75,7 +77,17 @@ const CloseBtn = styled.button`
   }
 `;
 
+const UserBlock = styled.div`
+  margin-bottom: 2rem;
+  font-size:17px;
+`
 
+const Portrait = styled.img`
+  object-fit:cover;
+  border-radius:50%;
+  width: 200px;
+  margin-bottom:0.5rem;
+`
 
 const MenuList = styled.ul`
      margin-top:65px;
@@ -113,7 +125,15 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail }) {
 
         <MenuList>
           {
-            !userEmail ? (<MenuItem onClick={logIn}>LogIn</MenuItem>) : (<MenuItem onClick={logOut}>LogOut</MenuItem>)
+            !userEmail ? (<MenuItem onClick={logIn}>LogIn</MenuItem>) : (
+              <>
+                <UserBlock>
+                  <Portrait src={권은비} />
+                  <p style={{ margin: '0' }}>{userEmail}</p>
+                </UserBlock>
+                <MenuItem onClick={logOut}>LogOut</MenuItem>
+              </>
+            )
           }
 
           <MenuItem >
