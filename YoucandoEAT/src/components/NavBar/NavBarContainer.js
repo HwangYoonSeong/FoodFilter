@@ -17,16 +17,19 @@ function NavBarContainer({ setUid }) {
   });
 
   const logIn = (e) => {
-    firebase.auth().signInWithPopup(provider).then(function (result) {
-      var user = result.user;
-      setUid(user.uid);
-      setUserEmail(user.email)
-      setUserPhoto(user.photoURL)
-      setSidebar(false)
-    })
-      .catch(function (error) {
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          var user = result.user;
+          setUid(user.uid);
+          setUserEmail(user.email)
+          setUserPhoto(user.photoURL)
+          setSidebar(false)
+        })
+      })
+      .catch((error) => {
         console.error(`ERROR : ${error}`)
-      });
+      })
   };
 
   const logOut = (e) => {
