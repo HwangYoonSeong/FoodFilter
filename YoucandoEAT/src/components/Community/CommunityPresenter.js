@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Dummy from "../../assets/권은비2.jpg";
 
 const PostContainer = styled.ul`
   list-style: none;
@@ -38,36 +37,22 @@ const ThumbNail = styled.img`
   border-radius: 0.5rem;
 `;
 
-function CommunityPresenter() {
+function CommunityPresenter({ posts }) {
   return (
     <>
       <PostContainer>
-        <Post>
-          <div>
-            <Title>Dummy Title</Title>
-            <Content>dummy content</Content>
-            <SmallFont>Date | Writer</SmallFont>
-          </div>
-          <ThumbNail src={Dummy} />
-        </Post>
-
-        <Post>
-          <div>
-            <Title>Dummy Title</Title>
-            <Content>dummy content</Content>
-            <SmallFont>Date | Writer</SmallFont>
-          </div>
-          <ThumbNail src={Dummy} />
-        </Post>
-
-        <Post>
-          <div>
-            <Title>Dummy Title</Title>
-            <Content>dummy content</Content>
-            <SmallFont>Date | Writer</SmallFont>
-          </div>
-          <ThumbNail src={Dummy} />
-        </Post>
+        {posts.map((post, index) => (
+          <Post key={index}>
+            <div>
+              <Title>{post.title}</Title>
+              <Content>{post.content}</Content>
+              <SmallFont>
+                {post.date} | {post.writer}
+              </SmallFont>
+            </div>
+            <ThumbNail src={post.thumbnail} />
+          </Post>
+        ))}
       </PostContainer>
     </>
   );
