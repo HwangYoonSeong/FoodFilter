@@ -105,6 +105,7 @@ padding:5px 0 5px 0;
 
   &:active {
     filter: brightness(85%);
+    border: 2px solid black;
   }
 &+&{
   margin-top:2rem;
@@ -123,15 +124,16 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPh
 
         <MenuList>
           {
-            !userEmail ? (<MenuItem onClick={logIn}>LogIn</MenuItem>) : (
-              <>
-                <UserBlock>
-                  <Portrait src={userPhoto} />
-                  <p style={{ margin: '0' }}>{userEmail}</p>
-                </UserBlock>
-                <MenuItem onClick={logOut}>LogOut</MenuItem>
-              </>
-            )
+            !userEmail ? <MenuItem onClick={logIn}>LogIn</MenuItem> :
+              (
+                <>
+                  <UserBlock>
+                    <Portrait src={userPhoto} />
+                    <p style={{ margin: '0' }}>{userEmail}</p>
+                  </UserBlock>
+                  <MenuItem onClick={logOut}>LogOut</MenuItem>
+                </>
+              )
           }
 
           <MenuItem >
