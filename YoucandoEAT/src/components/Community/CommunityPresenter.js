@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { FaPen } from "react-icons/fa";
 
 const PostContainer = styled.ul`
   list-style: none;
@@ -37,6 +38,20 @@ const ThumbNail = styled.img`
   border-radius: 0.5rem;
 `;
 
+const WriteBtn = styled.button`
+  position: fixed;
+  outline: none;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  padding: 0.5rem;
+`;
+
 function CommunityPresenter({ posts }) {
   return (
     <>
@@ -53,6 +68,11 @@ function CommunityPresenter({ posts }) {
             <ThumbNail src={post.thumbnail} />
           </Post>
         ))}
+
+        <WriteBtn>
+          <FaPen style={{ marginRight: "5px" }} />
+          Writing
+        </WriteBtn>
       </PostContainer>
     </>
   );
