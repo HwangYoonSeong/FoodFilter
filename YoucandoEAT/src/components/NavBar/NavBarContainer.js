@@ -21,6 +21,7 @@ function NavBarContainer({ setUid }) {
       var user = result.user;
       setUid(user.uid);
       setUserEmail(user.email)
+      setUserPhoto(user.photoURL)
       setSidebar(false)
     })
       .catch(function (error) {
@@ -42,11 +43,12 @@ function NavBarContainer({ setUid }) {
   const GoogleSignIn = useCallback(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        console.log("login")
         setUserEmail(user.email)
         setUid(user.uid)
-        console.log(user.photoURL);
+        setUserPhoto(user.photoURL)
       } else {
-        console.log("not login!")
+        console.log("!login")
       }
     });
   }, [setUid])
@@ -57,7 +59,7 @@ function NavBarContainer({ setUid }) {
 
   return (
     <>
-      <NavBarPresenter sidebar={sidebar} setSidebar={setSidebar} logIn={logIn} logOut={logOut} userEmail={userEmail} />
+      <NavBarPresenter sidebar={sidebar} setSidebar={setSidebar} logIn={logIn} logOut={logOut} userEmail={userEmail} userPhoto={userPhoto} />
     </>
   );
 }

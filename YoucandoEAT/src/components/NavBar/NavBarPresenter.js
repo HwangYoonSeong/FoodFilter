@@ -4,8 +4,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
-import 권은비 from "../../assets/권은비.jpg"
-
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -85,7 +83,7 @@ const UserBlock = styled.div`
 const Portrait = styled.img`
   object-fit:cover;
   border-radius:50%;
-  width: 200px;
+  width: 150px;
   margin-bottom:0.5rem;
 `
 
@@ -113,7 +111,7 @@ padding:5px 0 5px 0;
 }
 `;
 
-function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail }) {
+function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPhoto }) {
   return (
     <>
 
@@ -128,7 +126,7 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail }) {
             !userEmail ? (<MenuItem onClick={logIn}>LogIn</MenuItem>) : (
               <>
                 <UserBlock>
-                  <Portrait src={권은비} />
+                  <Portrait src={userPhoto} />
                   <p style={{ margin: '0' }}>{userEmail}</p>
                 </UserBlock>
                 <MenuItem onClick={logOut}>LogOut</MenuItem>
