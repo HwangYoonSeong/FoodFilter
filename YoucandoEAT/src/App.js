@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
+import Community from "./components/Community/CommunityContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -25,8 +26,8 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App () {
-  let [uid, setUid] = useState('');
+function App() {
+  let [uid, setUid] = useState("");
   return (
     <>
       <GlobalStyle />
@@ -35,7 +36,12 @@ function App () {
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/capture" component={Capture} />
-        <Route exact path="/logic" render={(props) => <Logic {...props} uid={uid} />} />
+        <Route
+          exact
+          path="/logic"
+          render={(props) => <Logic {...props} uid={uid} />}
+        />
+        <Route exact path="/community" component={Community} />
       </Container>
     </>
   );

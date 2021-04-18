@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: fixed;
@@ -34,7 +34,6 @@ const HamburgerBtn = styled.button`
   }
 `;
 
-
 const DarkBackground = styled.div`
   position: fixed;
   left: 0;
@@ -43,12 +42,10 @@ const DarkBackground = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
 
-  z-index: ${(props) => (props.sidebar ? '1' : '-1')};
-  opacity: ${(props) => (props.sidebar ? '1' : '0')};
+  z-index: ${(props) => (props.sidebar ? "1" : "-1")};
+  opacity: ${(props) => (props.sidebar ? "1" : "0")};
   transition: opacity 0.25s ease-out;
 `;
-
-
 
 const SideBarBlock = styled.div`
   position: fixed;
@@ -59,7 +56,7 @@ const SideBarBlock = styled.div`
   background: white;
   z-index: 1;
 
-  right: ${(props) => (props.sidebar ? '0%' : '-65%')};
+  right: ${(props) => (props.sidebar ? "0%" : "-65%")};
 
   transition: right 0.25s ease-out;
 `;
@@ -79,47 +76,53 @@ const CloseBtn = styled.button`
 
 const UserBlock = styled.div`
   margin-bottom: 2rem;
-  font-size:17px;
-`
-
-const Portrait = styled.img`
-  object-fit:cover;
-  border-radius:50%;
-  width: 150px;
-  margin-bottom:0.5rem;
-`
-
-const MenuList = styled.ul`
-     margin-top:65px;
-     list-style:none;
-     padding-left:0px;
-    text-align: -webkit-center;
+  font-size: 17px;
 `;
 
+const Portrait = styled.img`
+  object-fit: cover;
+  border-radius: 50%;
+  width: 150px;
+  margin-bottom: 0.5rem;
+`;
+
+const MenuList = styled.ul`
+  margin-top: 65px;
+  list-style: none;
+  padding-left: 0px;
+  text-align: -webkit-center;
+`;
 
 const MenuItem = styled.li`
-font-size:30px;
-width:85%;
-border-radius:8px;
-background:white;
-border: 2px dashed black;
-padding:5px 0 5px 0;
+  font-size: 30px;
+  width: 85%;
+  border-radius: 8px;
+  background: white;
+  border: 2px dashed black;
+  padding: 5px 0 5px 0;
 
   &:active {
     filter: brightness(85%);
     border: 2px solid black;
   }
-&+&{
-  margin-top:2rem;
-}
+  & + & {
+    margin-top: 2rem;
+  }
 `;
 
-function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPhoto }) {
+function NavBarPresenter({
+  sidebar,
+  setSidebar,
+  logIn,
+  logOut,
+  userEmail,
+  userPhoto,
+}) {
   const LinkStyle = {
-    color: 'black',
-    textDecorationLine: 'none',
-    WebkitTapHighlightColor: 'rgba(0,0,0,0)'
-  }
+    color: "black",
+    textDecorationLine: "none",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+  };
 
   return (
     <>
@@ -130,28 +133,28 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPh
         </CloseBtn>
 
         <MenuList>
-          {
-            !userEmail ? <MenuItem onClick={logIn}>LogIn</MenuItem> :
-              (
-                <>
-                  <UserBlock>
-                    <Portrait src={userPhoto} />
-                    <p style={{ margin: '0' }}>{userEmail}</p>
-                  </UserBlock>
-                  <MenuItem onClick={logOut}>LogOut</MenuItem>
-                </>
-              )
-          }
+          {!userEmail ? (
+            <MenuItem onClick={logIn}>LogIn</MenuItem>
+          ) : (
+            <>
+              <UserBlock>
+                <Portrait src={userPhoto} />
+                <p style={{ margin: "0" }}>{userEmail}</p>
+              </UserBlock>
+              <MenuItem onClick={logOut}>LogOut</MenuItem>
+            </>
+          )}
 
-          <MenuItem >
-            Doc
-          </MenuItem>
+          <MenuItem>Doc</MenuItem>
         </MenuList>
-
       </SideBarBlock>
 
       <Container>
-        <Title><Link to="/" style={LinkStyle}>You can do EAT</Link></Title>
+        <Title>
+          <Link to="/" style={LinkStyle}>
+            You can do EAT
+          </Link>
+        </Title>
         <HamburgerBtn onClick={() => setSidebar(true)}>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>

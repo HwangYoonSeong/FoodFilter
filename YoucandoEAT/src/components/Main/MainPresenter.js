@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   text-align: -webkit-center;
@@ -25,6 +26,11 @@ const CircleBtn = styled.label`
 `;
 
 function MainPresenter({ onChange }) {
+  const LinkStyle = {
+    color: "white",
+    textDecorationLine: "none",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+  };
   return (
     <>
       <Container>
@@ -42,7 +48,11 @@ function MainPresenter({ onChange }) {
           />
         </CircleBtn>
 
-        <CircleBtn>Community</CircleBtn>
+        <CircleBtn>
+          <Link to="/community" style={LinkStyle}>
+            Community
+          </Link>
+        </CircleBtn>
       </Container>
     </>
   );
