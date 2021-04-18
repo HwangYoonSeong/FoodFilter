@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FaPen } from "react-icons/fa";
-import { GiMagnifyingGlass } from "react-icons/gi";
 import MagIcon from "mdi-react/MagnifyIcon";
 
 const PostContainer = styled.ul`

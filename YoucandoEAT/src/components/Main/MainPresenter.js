@@ -20,9 +20,7 @@ const CircleBtn = styled.label`
   font-size: 24px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  & + & {
-    margin-top: 3rem;
-  }
+  margin-top: 3rem;
 `;
 
 function MainPresenter({ onChange }) {
@@ -48,11 +46,9 @@ function MainPresenter({ onChange }) {
           />
         </CircleBtn>
 
-        <CircleBtn>
-          <Link to="/community" style={LinkStyle}>
-            Community
-          </Link>
-        </CircleBtn>
+        <Link to="/community" style={LinkStyle}>
+          <CircleBtn>Community</CircleBtn>
+        </Link>
       </Container>
     </>
   );
