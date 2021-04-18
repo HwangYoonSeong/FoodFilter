@@ -118,7 +118,7 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPh
   const LinkStyle = {
     color: 'black',
     textDecorationLine: 'none',
-    webkitTapHighlightColor: 'rgba(0,0,0,0)'
+    WebkitTapHighlightColor: 'rgba(0,0,0,0)'
   }
 
   return (
