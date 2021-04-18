@@ -4,6 +4,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { GrClose } from "react-icons/gr";
 
+import { Link } from "react-router-dom"
+
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -113,9 +115,14 @@ padding:5px 0 5px 0;
 `;
 
 function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPhoto }) {
+  const LinkStyle = {
+    color: 'black',
+    textDecorationLine: 'none',
+    webkitTapHighlightColor: 'rgba(0,0,0,0)'
+  }
+
   return (
     <>
-
       <DarkBackground sidebar={sidebar} />
       <SideBarBlock sidebar={sidebar}>
         <CloseBtn onClick={() => setSidebar(false)}>
@@ -144,7 +151,7 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut, userEmail, userPh
       </SideBarBlock>
 
       <Container>
-        <Title>You can do EAT</Title>
+        <Title><Link to="/" style={LinkStyle}>You can do EAT</Link></Title>
         <HamburgerBtn onClick={() => setSidebar(true)}>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>
