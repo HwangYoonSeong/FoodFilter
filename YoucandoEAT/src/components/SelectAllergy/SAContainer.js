@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import SAPresenter from "./SAPresenter";
+import axios from "axios";
 
+//Food image
 import abaloneImg from "./FoodImg/abaloneImg.png"
 import beefImg from "./FoodImg/beefImg.png"
 import buckwheatImg from "./FoodImg/buckwheatImg.png"
@@ -25,101 +27,162 @@ import wheatImg from "./FoodImg/wheatImg.png"
 
 
 function SAContainer () {
+    let filterZero = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    const [filter, setFilter] = useState(filterZero);
+    const [isClick, setIsClick] = useState(false);
     let AllergyList = [
         {
             name: "abalone",
-            image: abaloneImg
+            image: abaloneImg,
+            checked: false
         },
         {
             name: "beef",
-            image: beefImg
+            image: beefImg,
+            checked: false
         },
         {
             name: "buckwheat",
-            image: buckwheatImg
+            image: buckwheatImg,
+            checked: false
         },
         {
             name: "chicken",
-            image: chickenImg
+            image: chickenImg,
+            checked: false
         },
         {
             name: "crab",
-            image: crabImg
+            image: crabImg,
+            checked: false
         },
         {
             name: "egg",
-            image: eggImg
+            image: eggImg,
+            checked: false
         },
         {
             name: "fork",
-            image: forkImg
+            image: forkImg,
+            checked: false
         },
         {
             name: "mackerel",
-            image: mackerelImg
+            image: mackerelImg,
+            checked: false
         },
         {
             name: "milk",
-            image: milkImg
+            image: milkImg,
+            checked: false
         },
         {
             name: "mussel",
-            image: musselImg
+            image: musselImg,
+            checked: false
         },
         {
             name: "oyster",
-            image: oysterImg
+            image: oysterImg,
+            checked: false
         },
         {
             name: "peach",
-            image: peachImg
+            image: peachImg,
+            checked: false
         },
         {
             name: "peanut",
-            image: peanutImg
+            image: peanutImg,
+            checked: false
         },
         {
             name: "shellfish",
-            image: shellfishImg
+            image: shellfishImg,
+            checked: false
         },
         {
             name: "shrimp",
-            image: shrimpImg
+            image: shrimpImg,
+            checked: false
         },
         {
             name: "soybean",
-            image: soybeanImg
+            image: soybeanImg,
+            checked: false
         },
         {
             name: "squid",
-            image: squidImg
+            image: squidImg,
+            checked: false
         },
         {
             name: "fork",
-            image: forkImg
+            image: forkImg,
+            checked: false
         },
         {
             name: "sulfurousacid",
-            image: sulfurousacidImg
+            image: sulfurousacidImg,
+            checked: false
         },
         {
             name: "tomato",
-            image: tomatoImg
+            image: tomatoImg,
+            checked: false
         },
         {
             name: "walnut",
-            image: walnutImg
+            image: walnutImg,
+            checked: false
         },
         {
             name: "wheat",
-            image: wheatImg
+            image: wheatImg,
+            checked: false
         },
 
     ]
+    const [AL, setAL] = useState(AllergyList);
 
+    const itemClick = (idx) => {
+        const selectedFood = AL[idx];
+        const nextAL = [...AL];
+
+        nextAL[idx] = {
+            ...selectedFood,
+            checked: !selectedFood.checked
+        };
+
+        setAL(nextAL);
+        setIsClick(!isClick);
+
+        const nextFilter = [...filter];
+        nextFilter[idx] = (nextFilter[idx] + 1) % 2;
+        setFilter(nextFilter);
+
+    }
+
+    const save = () => {
+
+        axios
+            .post("http://192.168.35.168:3001/savefilter", { filter: parseInt(filter.join(''), 2) }, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error(err.response);
+            });
+
+
+    }
     return (
         <>
-            <SAPresenter AllergyList={AllergyList} />
+            <SAPresenter AllergyList={AL} itemClick={itemClick} save={save} />
         </>
     );
 }
