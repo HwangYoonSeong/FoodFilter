@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { NavLink } from 'react-router-dom';
 import { GrClose } from "react-icons/gr";
 
 const Container = styled.div`
@@ -18,7 +18,11 @@ const Title = styled.h1`
   margin-left: 1rem;
   font-size: 18px;
 `;
-
+const Link = styled(NavLink)`
+text-decoration: none;
+color:black;
+ 
+`
 const HamburgerBtn = styled.button`
   border: none;
   outline: none;
@@ -90,7 +94,6 @@ font-size:30px;
 width:85%;
 border-radius:8px;
 background:white;
-border: 2px dashed black;
 padding:5px 0 5px 0;
 
   &:active {
@@ -101,7 +104,7 @@ padding:5px 0 5px 0;
 }
 `;
 
-function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
+function NavBarPresenter ({ sidebar, setSidebar, logIn, logOut }) {
   return (
     <>
 
@@ -117,14 +120,17 @@ function NavBarPresenter({ sidebar, setSidebar, logIn, logOut }) {
             LogIn
           </Item>
           <Item >
-            Doc
+            Document
+          </Item>
+          <Item >
+            About
           </Item>
         </SideBarList>
 
       </SideBarBlock>
 
       <Container>
-        <Title>You can do EAT</Title>
+        <Title><Link exact to='/'>You can do EAT</Link></Title>
         <HamburgerBtn onClick={() => setSidebar(true)}>
           <GiHamburgerMenu size="24" />
         </HamburgerBtn>

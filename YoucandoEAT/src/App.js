@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
+import SelectAllergy from "./components/SelectAllergy/SAContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -36,6 +37,7 @@ function App () {
         <Route exact path="/" component={Main} />
         <Route exact path="/capture" component={Capture} />
         <Route exact path="/logic" render={(props) => <Logic {...props} uid={uid} />} />
+        <Route exact path="/selectAllergy" component={SelectAllergy} />
       </Container>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { NavLink } from 'react-router-dom';
 const Container = styled.div`
   text-align: -webkit-center;
   margin-top: 80px;
@@ -12,7 +12,7 @@ const CircleBtn = styled.label`
   width: 180px;
   height: 180px;
   color: white;
-  cursor: pointer;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,12 +23,15 @@ const CircleBtn = styled.label`
     margin-top: 3rem;
   }
 `;
-
-function MainPresenter({ onChange }) {
+const Link = styled(NavLink)`
+text-decoration: none;
+color: white;
+`
+function MainPresenter ({ onChange }) {
   return (
     <>
       <Container>
-        <CircleBtn>Select Your Allergy</CircleBtn>
+        <CircleBtn><Link exact to='/selectAllergy'>Select Your Allergy</Link></CircleBtn>
 
         <CircleBtn htmlFor="capture">
           Capture
