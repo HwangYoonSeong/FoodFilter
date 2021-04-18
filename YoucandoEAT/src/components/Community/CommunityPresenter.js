@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaPen } from "react-icons/fa";
+import { GiMagnifyingGlass } from "react-icons/gi";
+import MagIcon from "mdi-react/MagnifyIcon";
 
 const PostContainer = styled.ul`
   list-style: none;
@@ -42,14 +44,34 @@ const WriteBtn = styled.button`
   position: fixed;
   outline: none;
   border: none;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   border-radius: 8px;
-  bottom: 4%;
+  bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1rem;
   padding: 0.5rem;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
+  &:active {
+    filter: brightness(85%);
+  }
+`;
+
+const MagBtn = styled.button`
+  position: fixed;
+  outline: none;
+  border: none;
+  background: white;
+  color: black;
+  border-radius: 50%;
+  bottom: 2%;
+  right: 2%;
+  padding: 0.7rem;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
+  &:active {
+    filter: brightness(85%);
+  }
 `;
 
 function CommunityPresenter({ posts }) {
@@ -73,6 +95,10 @@ function CommunityPresenter({ posts }) {
           <FaPen style={{ marginRight: "5px" }} />
           Writing
         </WriteBtn>
+
+        <MagBtn>
+          <MagIcon size="1.8rem" />
+        </MagBtn>
       </PostContainer>
     </>
   );
