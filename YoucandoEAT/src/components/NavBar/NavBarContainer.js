@@ -8,17 +8,16 @@ function NavBarContainer({ setUid }) {
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  // GoogleAuthProvider를 사용할 때마다 구글 팝업 
-  provider.setCustomParameters({
-    login_hint: "user@example.com",
-    prompt: 'select_account'
-  });
-
   const logIn = (e) => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .then(() => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        // GoogleAuthProvider를 사용할 때마다 구글 팝업 
+        provider.setCustomParameters({
+          login_hint: "user@example.com",
+          prompt: 'select_account'
+        });
+
         firebase.auth().signInWithPopup(provider).then((result) => {
           var user = result.user;
           setUid(user.uid);
