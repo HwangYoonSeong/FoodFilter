@@ -43,7 +43,7 @@ function NavBarContainer({ setUid }) {
       if (user) {
         setUserEmail(user.email)
         setUid(user.uid)
-        console.log(user.email);
+        console.log(user.photoURL);
       } else {
         console.log("not login!")
       }
