@@ -41,7 +41,11 @@ function App() {
           path="/logic"
           render={(props) => <Logic {...props} uid={uid} />}
         />
-        <Route exact path="/community" component={Community} />
+        <Route
+          exact
+          path="/community"
+          render={(props) => <Community {...props} uid={uid} />}
+        />
       </Container>
     </>
   );

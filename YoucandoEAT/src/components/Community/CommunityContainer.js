@@ -77,8 +77,6 @@ function CommunityContainer() {
     },
   ]);
 
-  console.log(posts);
-
   return (
     <>
       <CommunityPresenter posts={posts} />
