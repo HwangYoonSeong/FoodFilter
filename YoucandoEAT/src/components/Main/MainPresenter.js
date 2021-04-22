@@ -13,7 +13,7 @@ const CircleBtn = styled.label`
   width: 180px;
   height: 180px;
   color: white;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,9 @@ function MainPresenter({ onChange }) {
   return (
     <>
       <Container>
-        <CircleBtn><Link exact to='/selectAllergy'>Select Your Allergy</Link></CircleBtn>
+        <Link to="/selectAllergy" style={LinkStyle}>
+          <CircleBtn>Select Your Allergy</CircleBtn>
+        </Link>
 
         <CircleBtn htmlFor="capture">
           Capture
