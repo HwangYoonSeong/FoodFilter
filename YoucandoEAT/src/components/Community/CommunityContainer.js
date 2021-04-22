@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
-import Dummy from "../../assets/권은비2.jpg";
+import Dummy from "../../assets/Lenna.png";
 
 function CommunityContainer() {
   const [posts, setPosts] = useState([]);
