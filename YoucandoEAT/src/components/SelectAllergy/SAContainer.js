@@ -30,18 +30,14 @@ function SAContainer() {
 
   const save = () => {
     console.log("서버에 저장");
-    // axios
-    //     .post("http://192.168.35.168:3001/savefilter", { filter: parseInt(filter.join(''), 2) }, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then((res) => {
-    //         console.log(res);
-    //     })
-    //     .catch((err) => {
-    //         console.error(err.response);
-    //     });
+  };
+
+  const onToggle = (id) => {
+    setAllergyList(
+      allergyList.map((allergy) =>
+        allergy.id === id ? { ...allergy, checked: !allergy.checked } : allergy
+      )
+    );
   };
 
   useEffect(() => {
@@ -183,7 +179,7 @@ function SAContainer() {
 
   return (
     <>
-      <SAPresenter allergyList={allergyList} save={save} />
+      <SAPresenter allergyList={allergyList} save={save} onToggle={onToggle} />
     </>
   );
 }

@@ -27,7 +27,7 @@ const Ingrd = styled.li`
   display: flex;
   align-items: center;
 
-  background: ${(props) => (props.isclick ? "#ced4da" : "white")};
+  background: ${(props) => (props.isClick ? "#ced4da" : "white")};
 `;
 const IngrdImg = styled.img`
   width: 100px;
@@ -51,7 +51,7 @@ const SaveBtn = styled.button`
   }
 `;
 
-function SAPresenter({ allergyList, save }) {
+function SAPresenter({ allergyList, save, onToggle }) {
   return (
     <>
       <Title>
@@ -65,9 +65,9 @@ function SAPresenter({ allergyList, save }) {
         {allergyList.map((el) => {
           return (
             <Ingrd
-              isclick={el.checked}
+              isClick={el.checked}
               key={el.id}
-              onClick={() => console.log(el.id)}
+              onClick={() => onToggle(el.id)}
             >
               <IngrdImg src={el.image} alt="FoodImg" />
               <IngrdName>{el.name}</IngrdName>
