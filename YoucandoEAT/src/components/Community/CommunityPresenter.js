@@ -52,6 +52,7 @@ const WriteBtn = styled.button`
   font-size: 1rem;
   padding: 0.5rem;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
+  font-family: "NanumSquare";
   &:active {
     filter: brightness(85%);
   }

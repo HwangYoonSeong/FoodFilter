@@ -46,6 +46,7 @@ const SaveBtn = styled.button`
   width: 50px;
   height: 50px;
   border: none;
+  font-family: "NanumSquare";
   &:active {
     filter: brightness(85%);
   }
