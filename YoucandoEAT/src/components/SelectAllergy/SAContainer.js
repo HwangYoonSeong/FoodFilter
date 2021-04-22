@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SAPresenter from "./SAPresenter";
 // import axios from "axios";
 
@@ -26,161 +26,7 @@ import walnutImg from "./FoodImg/walnutImg.png";
 import wheatImg from "./FoodImg/wheatImg.png";
 
 function SAContainer() {
-  let filterZero = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-  ];
-  const [filter, setFilter] = useState(filterZero);
-  const [isClick, setIsClick] = useState(false);
-  let AllergyList = [
-    {
-      name: "abalone",
-      image: abaloneImg,
-      checked: false,
-    },
-    {
-      name: "beef",
-      image: beefImg,
-      checked: false,
-    },
-    {
-      name: "buckwheat",
-      image: buckwheatImg,
-      checked: false,
-    },
-    {
-      name: "chicken",
-      image: chickenImg,
-      checked: false,
-    },
-    {
-      name: "crab",
-      image: crabImg,
-      checked: false,
-    },
-    {
-      name: "egg",
-      image: eggImg,
-      checked: false,
-    },
-    {
-      name: "fork",
-      image: forkImg,
-      checked: false,
-    },
-    {
-      name: "mackerel",
-      image: mackerelImg,
-      checked: false,
-    },
-    {
-      name: "milk",
-      image: milkImg,
-      checked: false,
-    },
-    {
-      name: "mussel",
-      image: musselImg,
-      checked: false,
-    },
-    {
-      name: "oyster",
-      image: oysterImg,
-      checked: false,
-    },
-    {
-      name: "peach",
-      image: peachImg,
-      checked: false,
-    },
-    {
-      name: "peanut",
-      image: peanutImg,
-      checked: false,
-    },
-    {
-      name: "shellfish",
-      image: shellfishImg,
-      checked: false,
-    },
-    {
-      name: "shrimp",
-      image: shrimpImg,
-      checked: false,
-    },
-    {
-      name: "soybean",
-      image: soybeanImg,
-      checked: false,
-    },
-    {
-      name: "squid",
-      image: squidImg,
-      checked: false,
-    },
-    {
-      name: "fork",
-      image: forkImg,
-      checked: false,
-    },
-    {
-      name: "sulfurousacid",
-      image: sulfurousacidImg,
-      checked: false,
-    },
-    {
-      name: "tomato",
-      image: tomatoImg,
-      checked: false,
-    },
-    {
-      name: "walnut",
-      image: walnutImg,
-      checked: false,
-    },
-    {
-      name: "wheat",
-      image: wheatImg,
-      checked: false,
-    },
-  ];
-  const [AL, setAL] = useState(AllergyList);
-
-  const itemClick = (idx) => {
-    const selectedFood = AL[idx];
-    const nextAL = [...AL];
-
-    nextAL[idx] = {
-      ...selectedFood,
-      checked: !selectedFood.checked,
-    };
-
-    setAL(nextAL);
-    setIsClick(!isClick);
-
-    const nextFilter = [...filter];
-    nextFilter[idx] = (nextFilter[idx] + 1) % 2;
-    setFilter(nextFilter);
-  };
+  const [allergyList, setAllergyList] = useState([]);
 
   const save = () => {
     console.log("서버에 저장");
@@ -197,9 +43,147 @@ function SAContainer() {
     //         console.error(err.response);
     //     });
   };
+
+  useEffect(() => {
+    setAllergyList([
+      {
+        name: "abalone",
+        image: abaloneImg,
+        checked: false,
+        id: 0,
+      },
+      {
+        name: "beef",
+        image: beefImg,
+        checked: false,
+        id: 1,
+      },
+      {
+        name: "buckwheat",
+        image: buckwheatImg,
+        checked: false,
+        id: 2,
+      },
+      {
+        name: "chicken",
+        image: chickenImg,
+        checked: false,
+        id: 3,
+      },
+      {
+        name: "crab",
+        image: crabImg,
+        checked: false,
+        id: 4,
+      },
+      {
+        name: "egg",
+        image: eggImg,
+        checked: false,
+        id: 5,
+      },
+      {
+        name: "fork",
+        image: forkImg,
+        checked: false,
+        id: 6,
+      },
+      {
+        name: "mackerel",
+        image: mackerelImg,
+        checked: false,
+        id: 7,
+      },
+      {
+        name: "milk",
+        image: milkImg,
+        checked: false,
+        id: 8,
+      },
+      {
+        name: "mussel",
+        image: musselImg,
+        checked: false,
+        id: 9,
+      },
+      {
+        name: "oyster",
+        image: oysterImg,
+        checked: false,
+        id: 10,
+      },
+      {
+        name: "peach",
+        image: peachImg,
+        checked: false,
+        id: 11,
+      },
+      {
+        name: "peanut",
+        image: peanutImg,
+        checked: false,
+        id: 12,
+      },
+      {
+        name: "shellfish",
+        image: shellfishImg,
+        checked: false,
+        id: 13,
+      },
+      {
+        name: "shrimp",
+        image: shrimpImg,
+        checked: false,
+        id: 14,
+      },
+      {
+        name: "soybean",
+        image: soybeanImg,
+        checked: false,
+        id: 15,
+      },
+      {
+        name: "squid",
+        image: squidImg,
+        checked: false,
+        id: 16,
+      },
+      {
+        name: "fork",
+        image: forkImg,
+        checked: false,
+        id: 17,
+      },
+      {
+        name: "sulfurousacid",
+        image: sulfurousacidImg,
+        checked: false,
+        id: 18,
+      },
+      {
+        name: "tomato",
+        image: tomatoImg,
+        checked: false,
+        id: 19,
+      },
+      {
+        name: "walnut",
+        image: walnutImg,
+        checked: false,
+        id: 20,
+      },
+      {
+        name: "wheat",
+        image: wheatImg,
+        checked: false,
+        id: 21,
+      },
+    ]);
+  }, []);
+
   return (
     <>
-      <SAPresenter AllergyList={AL} itemClick={itemClick} save={save} />
+      <SAPresenter allergyList={allergyList} save={save} />
     </>
   );
 }

@@ -51,7 +51,7 @@ const SaveBtn = styled.button`
   }
 `;
 
-function SAPresenter({ AllergyList, itemClick, save }) {
+function SAPresenter({ allergyList, save }) {
   return (
     <>
       <Title>
@@ -62,12 +62,12 @@ function SAPresenter({ AllergyList, itemClick, save }) {
       </Title>
 
       <IngrdContainer>
-        {AllergyList.map((el, index) => {
+        {allergyList.map((el) => {
           return (
             <Ingrd
               isclick={el.checked}
-              key={index}
-              onClick={() => itemClick(index)}
+              key={el.id}
+              onClick={() => console.log(el.id)}
             >
               <IngrdImg src={el.image} alt="FoodImg" />
               <IngrdName>{el.name}</IngrdName>
