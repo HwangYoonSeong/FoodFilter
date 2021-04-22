@@ -1,0 +1,82 @@
+import React from "react";
+import styled from "styled-components";
+const Container = styled.div`
+`;
+const Title = styled.div`
+    display:flex;
+    position:fixed;
+    width:100%;
+    align-items:center;
+    height:80px;
+    background:black;
+    font-size:20px;
+    color:white;
+    margin-top:45px;
+    justify-content:space-around;
+
+`;
+
+const Allergy = styled.div`
+    position:absolute;
+    vertical-align:center;
+    margin-top:125px;
+    width:100%;
+    z-index:-1;
+`;
+
+const Item = styled.div`
+    padding:10px;
+    display:flex;
+    align-items:center;
+    
+    background:${props => props.isclick ? "#ced4da" : "white"};
+
+`;
+const FoodImg = styled.img`
+    width:100px;
+    height:100px;
+`;
+
+const FoodName = styled.p`
+    margin-left:20px;
+    font-size:20px;
+    font-weight:bold;
+`;
+
+const SaveBtn = styled.button`
+    border-radius: 50%;
+    background: white;
+    width: 50px;
+    height: 50px;
+    border:none;
+    &:active {
+        filter: brightness(85%);
+      }
+`;
+
+function SAPresenter ({ AllergyList, itemClick, save }) {
+    return (
+        <>
+            <Container>
+                <Title>Select from <br></br>21 Food Allergy Trigger
+                <SaveBtn onClick={save}><b>SAVE</b></SaveBtn></Title>
+                <Allergy>
+                    {
+                        AllergyList.map((el, idx) => {
+                            return (
+                                <Item isclick={el.checked} key={idx} onClick={() => itemClick(idx)}>
+                                    <FoodImg src={el.image} alt="FoodImg" />
+                                    <FoodName>{el.name}</FoodName>
+                                </Item>
+                            )
+                        })
+                    }
+
+                </Allergy>
+
+            </Container>
+        </>
+    );
+}
+
+export default SAPresenter;
