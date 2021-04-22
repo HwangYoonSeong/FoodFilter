@@ -144,7 +144,8 @@ function NavBarPresenter({
             </>
           )}
 
-          <MenuItem>Doc</MenuItem>
+          <MenuItem>Document</MenuItem>
+          <MenuItem>About</MenuItem>
         </MenuList>
       </SideBarBlock>
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SAPresenter from "./SAPresenter";
-// import axios from "axios";
 
 //Food image
 import abaloneImg from "./FoodImg/abaloneImg.png";
@@ -27,9 +26,12 @@ import wheatImg from "./FoodImg/wheatImg.png";
 
 function SAContainer() {
   const [allergyList, setAllergyList] = useState([]);
+  const [userALInfo, setUserALInfo] = useState(0);
 
   const save = () => {
-    console.log("서버에 저장");
+    // 서버로 유저의 알러지정보인 userALInfo를
+    // 10진수로 전송
+    console.log(userALInfo);
   };
 
   const onToggle = (id) => {
@@ -41,6 +43,10 @@ function SAContainer() {
   };
 
   useEffect(() => {
+    // 이 컴포넌트 마운트 시
+    // 서버에서 받은 10진수나 2진수를
+    // 가공하여 setAllergyList 함수 호출하여
+    // allergyList 를 초기화
     setAllergyList([
       {
         name: "abalone",
@@ -176,6 +182,15 @@ function SAContainer() {
       },
     ]);
   }, []);
+
+  useEffect(() => {
+    setUserALInfo(
+      parseInt(
+        allergyList.map((allergy) => (allergy.checked ? 1 : 0)).join(""),
+        2
+      )
+    );
+  }, [allergyList]);
 
   return (
     <>
