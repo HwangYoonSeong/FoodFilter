@@ -24,7 +24,7 @@ import tomatoImg from "./FoodImg/tomatoImg.png";
 import walnutImg from "./FoodImg/walnutImg.png";
 import wheatImg from "./FoodImg/wheatImg.png";
 
-function SAContainer() {
+function SAContainer () {
   const [allergyList, setAllergyList] = useState([]);
   const [userALInfo, setUserALInfo] = useState(0);
 
@@ -150,12 +150,7 @@ function SAContainer() {
         checked: false,
         id: 16,
       },
-      {
-        name: "fork",
-        image: forkImg,
-        checked: false,
-        id: 17,
-      },
+
       {
         name: "sulfurousacid",
         image: sulfurousacidImg,

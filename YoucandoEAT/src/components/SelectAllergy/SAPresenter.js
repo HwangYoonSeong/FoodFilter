@@ -52,11 +52,11 @@ const SaveBtn = styled.button`
   }
 `;
 
-function SAPresenter({ allergyList, save, onToggle }) {
+function SAPresenter ({ allergyList, save, onToggle }) {
   return (
     <>
       <Title>
-        Select from <br></br>21 Food Allergy Trigger
+        Select from <br></br>21 Ingredients Check List
         <SaveBtn onClick={save}>
           <b>SAVE</b>
         </SaveBtn>
