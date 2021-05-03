@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
-import "firebase/auth";
+// import "firebase/auth";
 
 function NavBarContainer({ setUid }) {
   const [sidebar, setSidebar] = useState(false);
@@ -50,7 +50,7 @@ function NavBarContainer({ setUid }) {
   };
 
   // 로그인 상태인지 확인
-  // 새로고침시 또는 최초의 유저 저오 할당
+  // 새로고침시 또는 최초의 유저 정보 할당
   const GoogleSignIn = useCallback(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
