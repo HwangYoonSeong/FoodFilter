@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components"
+import { FiCamera } from "react-icons/fi"
+import { AiOutlineCheck } from "react-icons/ai"
 
 const WriteContainer = styled.div`
     margin-top:55px;
-
+    
 `
 
 const InputTitleContainer = styled.div`
@@ -18,6 +20,7 @@ const InputTitle = styled.input`
     width:100%;
     font-size:1.4rem;
     border-bottom:solid 1px #adb5bd;
+    font-family: "NanumSquare";
 
     &:focus{
         outline:none;
@@ -35,11 +38,41 @@ const InputContent = styled.textarea`
     margin:0 1rem 0 1rem;
     width:100%;
     height:100%;
-    font-size:1.05rem;
+    font-size:1rem;
+    font-family: "NanumSquare";
 
     &:focus{
         outline:none;
     }
+`
+
+const CamBtn = styled.button`
+    position:fixed;
+    outline:none;
+    border:none;
+    background:white;
+    border-radius:0.5rem;
+    bottom:2%;
+    left:2%;
+
+    &:active {
+    filter: brightness(85%);
+  }
+`
+
+const CompBtn = styled.button`
+    position:fixed;
+    outline:none;
+    border:none;
+    background:white;
+    color:black;
+    border-radius:0.5rem;
+    bottom:2%;
+    right:2%;
+
+    &:active {
+    filter: brightness(85%);
+  }
 `
 
 function WritePostPresenter() {
@@ -53,6 +86,14 @@ function WritePostPresenter() {
                 <InputContentContainer>
                     <InputContent rows="30" placeholder="Enter the contents."></InputContent>
                 </InputContentContainer>
+
+                <CamBtn>
+                    <FiCamera size="32px" />
+                </CamBtn>
+
+                <CompBtn>
+                    <AiOutlineCheck size="32px" />
+                </CompBtn>
 
             </WriteContainer>
         </>
