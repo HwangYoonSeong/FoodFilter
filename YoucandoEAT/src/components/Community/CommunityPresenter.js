@@ -84,25 +84,26 @@ function CommunityPresenter({ posts, uid }) {
     <>
       <PostContainer>
         {posts.map((post, index) => (
-          <Link key={index} to="/community/write" style={LinkStyle}>
-            <Post index={index}>
-              <div>
-                <Title>{post.title}</Title>
-                <Content>{post.content}</Content>
-                <SmallFont>
-                  {post.date} | {post.writer}
-                </SmallFont>
-              </div>
-              <ThumbNail src={post.thumbnail} />
-            </Post>
-          </Link>
+          <Post key={index} index={index}>
+            <div>
+              <Title>{post.title}</Title>
+              <Content>{post.content}</Content>
+              <SmallFont>
+                {post.date} | {post.writer}
+              </SmallFont>
+            </div>
+            <ThumbNail src={post.thumbnail} />
+          </Post>
+
         ))}
 
         {uid ?
-          <WriteBtn>
-            <FaPen style={{ marginRight: "5px" }} />
+          <Link to="/community/write" style={LinkStyle}>
+            <WriteBtn>
+              <FaPen style={{ marginRight: "5px" }} />
               Writing
-          </WriteBtn> : null
+          </WriteBtn>
+          </Link> : null
         }
 
         <MagBtn>

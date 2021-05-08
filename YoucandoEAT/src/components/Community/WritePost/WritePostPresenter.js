@@ -5,7 +5,6 @@ import { AiOutlineCheck } from "react-icons/ai"
 
 const WriteContainer = styled.div`
     margin-top:55px;
-    
 `
 
 const InputTitleContainer = styled.div`
@@ -54,10 +53,6 @@ const CamBtn = styled.label`
     border-radius:0.5rem;
     bottom:2%;
     left:2%;
-
-    &:active {
-    filter: brightness(85%);
-  }
 `
 
 const CompBtn = styled.button`
@@ -69,34 +64,32 @@ const CompBtn = styled.button`
     border-radius:0.5rem;
     bottom:2%;
     right:2%;
-
-    &:active {
-    filter: brightness(85%);
-  }
 `
 
-function WritePostPresenter() {
+function WritePostPresenter({ onChangeImage, onClick, onChangeInputs, inputs }) {
     return (
         <>
             <WriteContainer>
                 <InputTitleContainer>
-                    <InputTitle placeholder="Title"></InputTitle>
+                    <InputTitle name="title" value={inputs.title} onChange={onChangeInputs} placeholder="Title"></InputTitle>
                 </InputTitleContainer>
 
                 <InputContentContainer>
-                    <InputContent rows="30" placeholder="Enter the contents."></InputContent>
+                    <InputContent name="content" value={inputs.content} onChange={onChangeInputs} rows="30" placeholder="Enter the contents."></InputContent>
                 </InputContentContainer>
 
                 <CamBtn htmlFor="addPhoto">
                     <FiCamera size="32px" />
-                    <input id="addPhoto"
+                    <input
+                        id="addPhoto"
                         type="file"
                         accept="image/*"
                         style={{ display: 'none' }}
+                        onChange={onChangeImage}
                     ></input>
                 </CamBtn>
 
-                <CompBtn >
+                <CompBtn onClick={onClick}>
                     <AiOutlineCheck size="32px" />
                 </CompBtn>
 
