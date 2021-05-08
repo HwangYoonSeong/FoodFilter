@@ -59,6 +59,7 @@ function NavBarContainer({ setUid }) {
         setUid(user.uid);
         setUserPhoto(user.photoURL);
       } else {
+        setUid(null);
         console.log("!login");
       }
     });

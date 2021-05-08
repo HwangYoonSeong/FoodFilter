@@ -3,7 +3,7 @@ import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
 
-function LogicContainer({ location, uid }) {
+function LogicContainer({ location }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -36,10 +36,9 @@ function LogicContainer({ location, uid }) {
   };
 
   useEffect(() => {
-    console.log(uid);
     kakaoOCR();
     getData();
-  }, [kakaoOCR, uid]);
+  }, [kakaoOCR]);
 
   return (
     <>

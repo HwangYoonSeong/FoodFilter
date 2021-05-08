@@ -74,7 +74,7 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter({ posts }) {
+function CommunityPresenter({ posts, uid }) {
   return (
     <>
       <PostContainer>
@@ -91,10 +91,11 @@ function CommunityPresenter({ posts }) {
           </Post>
         ))}
 
-        <WriteBtn>
+        {uid ? <WriteBtn>
           <FaPen style={{ marginRight: "5px" }} />
-          Writing
-        </WriteBtn>
+              Writing
+            </WriteBtn> : null
+        }
 
         <MagBtn>
           <MagIcon size="1.8rem" />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 
-function CommunityContainer() {
+function CommunityContainer({ uid }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function CommunityContainer() {
 
   return (
     <>
-      <CommunityPresenter posts={posts} />
+      <CommunityPresenter posts={posts} uid={uid} />
     </>
   );
 }
