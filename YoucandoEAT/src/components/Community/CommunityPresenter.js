@@ -84,8 +84,8 @@ function CommunityPresenter({ posts, uid }) {
     <>
       <PostContainer>
         {posts.map((post, index) => (
-          <Link to="/community/write" style={LinkStyle}>
-            <Post key={index} index={index}>
+          <Link key={index} to="/community/write" style={LinkStyle}>
+            <Post index={index}>
               <div>
                 <Title>{post.title}</Title>
                 <Content>{post.content}</Content>

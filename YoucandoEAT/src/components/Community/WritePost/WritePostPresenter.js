@@ -46,7 +46,7 @@ const InputContent = styled.textarea`
     }
 `
 
-const CamBtn = styled.button`
+const CamBtn = styled.label`
     position:fixed;
     outline:none;
     border:none;
@@ -87,11 +87,16 @@ function WritePostPresenter() {
                     <InputContent rows="30" placeholder="Enter the contents."></InputContent>
                 </InputContentContainer>
 
-                <CamBtn>
+                <CamBtn htmlFor="addPhoto">
                     <FiCamera size="32px" />
+                    <input id="addPhoto"
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                    ></input>
                 </CamBtn>
 
-                <CompBtn>
+                <CompBtn >
                     <AiOutlineCheck size="32px" />
                 </CompBtn>
 
