@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom"
 import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
 
@@ -15,9 +16,7 @@ const Post = styled.li`
   justify-content: space-between;
   align-items: center;
 
-  &:not(:first-child) {
-    border-top: 1px solid #adb5bd;
-  }
+  ${(props) => (props.index) ? css`  border-top: 1px solid #adb5bd;` : null}
 `;
 
 const Title = styled.h1`
@@ -75,26 +74,35 @@ const MagBtn = styled.button`
 `;
 
 function CommunityPresenter({ posts, uid }) {
+  const LinkStyle = {
+    color: "black",
+    textDecorationLine: "none",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+  };
+
   return (
     <>
       <PostContainer>
         {posts.map((post, index) => (
-          <Post key={index}>
-            <div>
-              <Title>{post.title}</Title>
-              <Content>{post.content}</Content>
-              <SmallFont>
-                {post.date} | {post.writer}
-              </SmallFont>
-            </div>
-            <ThumbNail src={post.thumbnail} />
-          </Post>
+          <Link to="/community/write" style={LinkStyle}>
+            <Post key={index} index={index}>
+              <div>
+                <Title>{post.title}</Title>
+                <Content>{post.content}</Content>
+                <SmallFont>
+                  {post.date} | {post.writer}
+                </SmallFont>
+              </div>
+              <ThumbNail src={post.thumbnail} />
+            </Post>
+          </Link>
         ))}
 
-        {uid ? <WriteBtn>
-          <FaPen style={{ marginRight: "5px" }} />
+        {uid ?
+          <WriteBtn>
+            <FaPen style={{ marginRight: "5px" }} />
               Writing
-            </WriteBtn> : null
+          </WriteBtn> : null
         }
 
         <MagBtn>

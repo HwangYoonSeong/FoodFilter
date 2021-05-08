@@ -9,6 +9,7 @@ import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
 import SelectAllergy from "./components/SelectAllergy/SAContainer";
+import WritePost from "./components/Community/WritePost/WritePostContainer"
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -49,6 +50,8 @@ function App() {
         />
 
         <Route exact path="/selectAllergy" component={SelectAllergy} />
+
+        <Route exact path="/community/write" component={WritePost} />
       </Container>
     </>
   );
