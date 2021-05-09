@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 
-function CommunityContainer({ uid }) {
+function CommunityContainer({ uid, setSearchMode }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -81,9 +81,13 @@ function CommunityContainer({ uid }) {
     ]);
   }, []);
 
+  const openSearch = () => {
+    setSearchMode(true);
+  };
+
   return (
     <>
-      <CommunityPresenter posts={posts} uid={uid} />
+      <CommunityPresenter posts={posts} uid={uid} openSearch={openSearch} />
     </>
   );
 }

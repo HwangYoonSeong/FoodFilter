@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
 
@@ -16,7 +16,12 @@ const Post = styled.li`
   justify-content: space-between;
   align-items: center;
 
-  ${(props) => (props.index) ? css`  border-top: 1px solid #adb5bd;` : null}
+  ${(props) =>
+    props.index
+      ? css`
+          border-top: 1px solid #adb5bd;
+        `
+      : null}
 `;
 
 const Title = styled.h1`
@@ -73,7 +78,7 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter({ posts, uid }) {
+function CommunityPresenter({ posts, uid, openSearch }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -94,19 +99,18 @@ function CommunityPresenter({ posts, uid }) {
             </div>
             <ThumbNail src={post.thumbnail} />
           </Post>
-
         ))}
 
-        {uid ?
+        {uid ? (
           <Link to="/community/write" style={LinkStyle}>
             <WriteBtn>
               <FaPen style={{ marginRight: "5px" }} />
               Writing
-          </WriteBtn>
-          </Link> : null
-        }
+            </WriteBtn>
+          </Link>
+        ) : null}
 
-        <MagBtn>
+        <MagBtn onClick={openSearch}>
           <MagIcon size="1.8rem" />
         </MagBtn>
       </PostContainer>

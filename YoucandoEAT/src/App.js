@@ -9,7 +9,7 @@ import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
 import SelectAllergy from "./components/SelectAllergy/SAContainer";
-import WritePost from "./components/Community/WritePost/WritePostContainer"
+import WritePost from "./components/Community/WritePost/WritePostContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -29,11 +29,12 @@ const Container = styled.div`
 `;
 
 function App() {
-  let [uid, setUid] = useState("");
+  const [uid, setUid] = useState("");
+  const [searchMode, setSearchMode] = useState(false);
   return (
     <>
       <GlobalStyle />
-      <NavBar setUid={setUid} />
+      {searchMode ? null : <NavBar setUid={setUid} />}
 
       <Container>
         <Route exact path="/" component={Main} />
@@ -46,7 +47,9 @@ function App() {
         <Route
           exact
           path="/community"
-          render={(props) => <Community {...props} uid={uid} />}
+          render={(props) => (
+            <Community {...props} uid={uid} setSearchMode={setSearchMode} />
+          )}
         />
 
         <Route exact path="/selectAllergy" component={SelectAllergy} />
