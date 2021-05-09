@@ -48,7 +48,12 @@ function App() {
           exact
           path="/community"
           render={(props) => (
-            <Community {...props} uid={uid} setSearchMode={setSearchMode} />
+            <Community
+              {...props}
+              uid={uid}
+              setSearchMode={setSearchMode}
+              searchMode={searchMode}
+            />
           )}
         />
 

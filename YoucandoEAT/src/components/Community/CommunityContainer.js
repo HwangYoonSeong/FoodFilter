@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 
-function CommunityContainer({ uid, setSearchMode }) {
+function CommunityContainer({ uid, setSearchMode, searchMode }) {
+  const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -85,9 +86,30 @@ function CommunityContainer({ uid, setSearchMode }) {
     setSearchMode(true);
   };
 
+  const closeSearch = () => {
+    setSearchMode(false);
+  };
+
+  const onChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const clearInput = () => {
+    setInput("");
+  };
+
   return (
     <>
-      <CommunityPresenter posts={posts} uid={uid} openSearch={openSearch} />
+      <CommunityPresenter
+        posts={posts}
+        uid={uid}
+        openSearch={openSearch}
+        closeSearch={closeSearch}
+        searchMode={searchMode}
+        input={input}
+        onChange={onChange}
+        clearInput={clearInput}
+      />
     </>
   );
 }
