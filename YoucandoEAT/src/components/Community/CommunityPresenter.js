@@ -149,6 +149,7 @@ function CommunityPresenter({
   input,
   onChange,
   clearInput,
+  clickEnter,
 }) {
   const LinkStyle = {
     color: "black",
@@ -164,13 +165,17 @@ function CommunityPresenter({
             <CloseBtn onClick={closeSearch}>
               <GrPrevious size="24" />
             </CloseBtn>
+
             <Input
               type="search"
               placeholder="Post title, content"
               value={input}
               onChange={onChange}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") clickEnter();
+              }}
             />
-            
+
             {input ? (
               <ClearBtn onClick={clearInput}>
                 <GrClose size="24" />

@@ -98,6 +98,10 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
     setInput("");
   };
 
+  const clickEnter = () => {
+    console.log("서버로 게시글 요청");
+  };
+
   return (
     <>
       <CommunityPresenter
@@ -109,6 +113,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         input={input}
         onChange={onChange}
         clearInput={clearInput}
+        clickEnter={clickEnter}
       />
     </>
   );
