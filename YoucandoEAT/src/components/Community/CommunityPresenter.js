@@ -82,6 +82,7 @@ const MagBtn = styled.button`
 const SearchBar = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   display: flex;
   box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3);
@@ -140,6 +141,15 @@ const ClearBtn = styled.button`
   }
 `;
 
+const InitalBackground = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+`;
+
+const ErrorBackground = styled.div``;
+
 function CommunityPresenter({
   posts,
   uid,
@@ -161,56 +171,59 @@ function CommunityPresenter({
     <>
       <PostContainer>
         {searchMode ? (
-          <SearchBar>
-            <CloseBtn onClick={closeSearch}>
-              <GrPrevious size="24" />
-            </CloseBtn>
+          <>
+            <SearchBar>
+              <CloseBtn onClick={closeSearch}>
+                <GrPrevious size="24" />
+              </CloseBtn>
 
-            <Input
-              type="search"
-              placeholder="Post title, content"
-              value={input}
-              onChange={onChange}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") clickEnter();
-              }}
-            />
+              <Input
+                type="search"
+                placeholder="Post title, content"
+                value={input}
+                onChange={onChange}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") clickEnter();
+                }}
+              />
 
-            {input ? (
-              <ClearBtn onClick={clearInput}>
-                <GrClose size="24" />
-              </ClearBtn>
-            ) : null}
-          </SearchBar>
+              {input ? (
+                <ClearBtn onClick={clearInput}>
+                  <GrClose size="24" />
+                </ClearBtn>
+              ) : null}
+            </SearchBar>
+            <InitalBackground>
+              <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
+            </InitalBackground>
+          </>
         ) : (
-          posts.map((post, index) => (
-            <Post key={index} index={index}>
-              <div>
-                <Title>{post.title}</Title>
-                <Content>{post.content}</Content>
-                <SmallFont>
-                  {post.date} | {post.writer}
-                </SmallFont>
-              </div>
-              <ThumbNail src={post.thumbnail} />
-            </Post>
-          ))
+          <>
+            {posts.map((post, index) => (
+              <Post key={index} index={index}>
+                <div>
+                  <Title>{post.title}</Title>
+                  <Content>{post.content}</Content>
+                  <SmallFont>
+                    {post.date} | {post.writer}
+                  </SmallFont>
+                </div>
+                <ThumbNail src={post.thumbnail} />
+              </Post>
+            ))}
+            <MagBtn onClick={openSearch}>
+              <MagIcon size="1.8rem" />
+            </MagBtn>
+            {uid ? (
+              <Link to="/community/write" style={LinkStyle}>
+                <WriteBtn>
+                  <FaPen style={{ marginRight: "5px" }} />
+                  Writing
+                </WriteBtn>
+              </Link>
+            ) : null}
+          </>
         )}
-
-        {searchMode ? null : (
-          <MagBtn onClick={openSearch}>
-            <MagIcon size="1.8rem" />
-          </MagBtn>
-        )}
-
-        {searchMode ? null : uid ? (
-          <Link to="/community/write" style={LinkStyle}>
-            <WriteBtn>
-              <FaPen style={{ marginRight: "5px" }} />
-              Writing
-            </WriteBtn>
-          </Link>
-        ) : null}
       </PostContainer>
     </>
   );

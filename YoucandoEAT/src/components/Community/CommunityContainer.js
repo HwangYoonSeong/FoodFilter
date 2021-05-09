@@ -88,6 +88,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
 
   const closeSearch = () => {
     setSearchMode(false);
+    setInput("");
   };
 
   const onChange = (e) => {
