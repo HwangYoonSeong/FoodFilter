@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
 import { GrPrevious, GrClose } from "react-icons/gr";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 const PostContainer = styled.ul`
   list-style: none;
@@ -145,10 +146,19 @@ const InitalBackground = styled.div`
   position: fixed;
   left: 50%;
   top: 20%;
+  width: 100%;
   transform: translateX(-50%);
+  text-align: center;
 `;
 
-const ErrorBackground = styled.div``;
+const ErrorBackground = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+`;
 
 function CommunityPresenter({
   posts,
@@ -193,9 +203,19 @@ function CommunityPresenter({
                 </ClearBtn>
               ) : null}
             </SearchBar>
+            {/* 최초 출력 화면 */}
             <InitalBackground>
               <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
+              <p style={{ color: "#adb5bd" }}>
+                You should search for your writing.
+              </p>
+
+              {/* 검색 결과가 없을 경우 출력 화면 */}
             </InitalBackground>
+            {/* <ErrorBackground>
+              <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
+              <p style={{ color: "#adb5bd" }}>No search results.</p>
+            </ErrorBackground> */}
           </>
         ) : (
           <>
