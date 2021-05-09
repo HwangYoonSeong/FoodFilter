@@ -4,10 +4,11 @@ import Dummy from "../../assets/Lenna.png";
 
 function CommunityContainer({ uid, setSearchMode, searchMode }) {
   const [input, setInput] = useState("");
+  const [dummyposts, setDummyPosts] = useState([]);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setPosts([
+    setDummyPosts([
       {
         title: "Dummy Title1",
         content: "dummy content",
@@ -100,13 +101,16 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
   };
 
   const clickEnter = () => {
+    // 서버로 게시판 데이터를 요청하여
+    // setPosts를 통해 데이터 갱신
+    setPosts([]);
     console.log("서버로 게시글 요청");
   };
 
   return (
     <>
       <CommunityPresenter
-        posts={posts}
+        dummyposts={dummyposts}
         uid={uid}
         openSearch={openSearch}
         closeSearch={closeSearch}
@@ -115,6 +119,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         onChange={onChange}
         clearInput={clearInput}
         clickEnter={clickEnter}
+        posts={posts}
       />
     </>
   );

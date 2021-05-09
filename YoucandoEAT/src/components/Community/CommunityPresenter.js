@@ -161,7 +161,7 @@ const ErrorBackground = styled.div`
 `;
 
 function CommunityPresenter({
-  posts,
+  dummyposts,
   uid,
   openSearch,
   closeSearch,
@@ -170,6 +170,7 @@ function CommunityPresenter({
   onChange,
   clearInput,
   clickEnter,
+  posts,
 }) {
   const LinkStyle = {
     color: "black",
@@ -203,15 +204,17 @@ function CommunityPresenter({
                 </ClearBtn>
               ) : null}
             </SearchBar>
-            {/* 최초 출력 화면 */}
-            <InitalBackground>
-              <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
-              <p style={{ color: "#adb5bd" }}>
-                You should search for your writing.
-              </p>
 
-              {/* 검색 결과가 없을 경우 출력 화면 */}
-            </InitalBackground>
+            {input ? null : (
+              <InitalBackground>
+                <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
+                <p style={{ color: "#adb5bd" }}>
+                  You should search for your writing.
+                </p>
+              </InitalBackground>
+            )}
+
+            {/* 검색 결과가 없을경우 */}
             {/* <ErrorBackground>
               <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
               <p style={{ color: "#adb5bd" }}>No search results.</p>
@@ -219,7 +222,7 @@ function CommunityPresenter({
           </>
         ) : (
           <>
-            {posts.map((post, index) => (
+            {dummyposts.map((post, index) => (
               <Post key={index} index={index}>
                 <div>
                   <Title>{post.title}</Title>
