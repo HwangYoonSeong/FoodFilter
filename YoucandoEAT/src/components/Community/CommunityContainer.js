@@ -10,6 +10,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
   useEffect(() => {
     setDummyPosts([
       {
+        id: 0,
         title: "Dummy Title1",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -18,6 +19,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 1,
         title: "Dummy Title2",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -26,6 +28,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 2,
         title: "Dummy Title3",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -34,6 +37,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 3,
         title: "Dummy Title4",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -42,6 +46,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 4,
         title: "Dummy Title5",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -50,6 +55,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 5,
         title: "Dummy Title6",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -58,6 +64,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 6,
         title: "Dummy Title7",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -66,6 +73,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 7,
         title: "Dummy Title8",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -74,6 +82,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 8,
         title: "Dummy Title9",
         content: "dummy content",
         date: "2021-04-18 21:52",

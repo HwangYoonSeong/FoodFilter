@@ -10,6 +10,7 @@ import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
 import SelectAllergy from "./components/SelectAllergy/SAContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
+import Detail from "./components/Community/Detail/DetailContainer";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -38,12 +39,17 @@ function App() {
 
       <Container>
         <Route exact path="/" component={Main} />
+
+        <Route exact path="/selectAllergy" component={SelectAllergy} />
+
         <Route exact path="/capture" component={Capture} />
+
         <Route
           exact
           path="/logic"
           render={(props) => <Logic {...props} uid={uid} />}
         />
+
         <Route
           exact
           path="/community"
@@ -57,9 +63,13 @@ function App() {
           )}
         />
 
-        <Route exact path="/selectAllergy" component={SelectAllergy} />
-
         <Route exact path="/community/write" component={WritePost} />
+
+        <Route
+          exact
+          path="/community/detail/:id"
+          render={(props) => <Detail {...props} uid={uid} />}
+        />
       </Container>
     </>
   );

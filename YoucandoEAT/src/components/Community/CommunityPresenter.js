@@ -222,7 +222,7 @@ function CommunityPresenter({
         ) : (
           <>
             {dummyposts.map((post, index) => (
-              <Post key={index} index={index}>
+              <Post key={post.id} index={post.id}>
                 <div>
                   <Title>{post.title}</Title>
                   <Content>{post.content}</Content>
