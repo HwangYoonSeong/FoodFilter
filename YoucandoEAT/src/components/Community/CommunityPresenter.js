@@ -142,14 +142,14 @@ const ClearBtn = styled.button`
   }
 `;
 
-const InitalBackground = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 20%;
-  width: 100%;
-  transform: translateX(-50%);
-  text-align: center;
-`;
+// const InitalBackground = styled.div`
+//   position: fixed;
+//   left: 50%;
+//   top: 20%;
+//   width: 100%;
+//   transform: translateX(-50%);
+//   text-align: center;
+// `;
 
 const ErrorBackground = styled.div`
   position: fixed;
