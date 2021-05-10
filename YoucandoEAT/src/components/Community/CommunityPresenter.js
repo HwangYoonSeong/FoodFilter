@@ -170,7 +170,7 @@ function CommunityPresenter({
   onChange,
   clearInput,
   clickEnter,
-  posts,
+  searchPosts,
 }) {
   const LinkStyle = {
     color: "black",
@@ -205,20 +205,19 @@ function CommunityPresenter({
               ) : null}
             </SearchBar>
 
-            {input ? null : (
-              <InitalBackground>
-                <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
-                <p style={{ color: "#adb5bd" }}>
-                  You should search for your writing.
-                </p>
-              </InitalBackground>
+            {searchPosts.length ? null : (
+              <ErrorBackground>
+                <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
+                <p style={{ color: "#adb5bd" }}>No search results.</p>
+              </ErrorBackground>
             )}
 
-            {/* 검색 결과가 없을경우 */}
-            {/* <ErrorBackground>
-              <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
-              <p style={{ color: "#adb5bd" }}>No search results.</p>
-            </ErrorBackground> */}
+            {/* <InitalBackground>
+              <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
+              <p style={{ color: "#adb5bd" }}>
+                You should search for your writing.
+              </p>
+            </InitalBackground> */}
           </>
         ) : (
           <>
