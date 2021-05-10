@@ -67,7 +67,7 @@ function App() {
 
         <Route
           exact
-          path="/community/detail/:id"
+          path="/community/detail/:pid"
           render={(props) => <Detail {...props} uid={uid} />}
         />
       </Container>

@@ -222,16 +222,22 @@ function CommunityPresenter({
         ) : (
           <>
             {dummyposts.map((post, index) => (
-              <Post key={post.id} index={post.id}>
-                <div>
-                  <Title>{post.title}</Title>
-                  <Content>{post.content}</Content>
-                  <SmallFont>
-                    {post.date} | {post.writer}
-                  </SmallFont>
-                </div>
-                <ThumbNail src={post.thumbnail} />
-              </Post>
+              <Link
+                key={post.id}
+                to={`community/detail/${post.id}`}
+                style={LinkStyle}
+              >
+                <Post index={post.id}>
+                  <div>
+                    <Title>{post.title}</Title>
+                    <Content>{post.content}</Content>
+                    <SmallFont>
+                      {post.date} | {post.writer}
+                    </SmallFont>
+                  </div>
+                  <ThumbNail src={post.thumbnail} />
+                </Post>
+              </Link>
             ))}
             <MagBtn onClick={openSearch}>
               <MagIcon size="1.8rem" />
