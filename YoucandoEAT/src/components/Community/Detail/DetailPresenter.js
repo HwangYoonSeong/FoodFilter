@@ -31,6 +31,30 @@ const CommentTime = styled.p`
   color: #adb5bd;
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Input = styled.textarea`
+  background: #e9ecef;
+  position: fixed;
+  bottom: 1%;
+  border: none;
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-family: "NanumSquare";
+  width: 90%;
+
+  overflow:visible;
+  border-radius: 0.7rem;
+
+  text-overflow: ellipsis
+  &:focus {
+    outline: none;
+  }
+`;
+
 function DetailPresenter({ post }) {
   // 지금은 더미 데이터이지만 post로 데이터 바인딩 변경
   // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
@@ -66,6 +90,13 @@ function DetailPresenter({ post }) {
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
       </CommentsContainer>
+      <InputContainer>
+        <Input
+          rows="5"
+          type="text"
+          placeholder="Please type in the comments."
+        />
+      </InputContainer>
     </>
   );
 }
