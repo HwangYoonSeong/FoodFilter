@@ -46,10 +46,11 @@ const Input = styled.textarea`
   font-family: "NanumSquare";
   width: 90%;
 
-  overflow:visible;
+  overflow: visible;
   border-radius: 0.7rem;
 
-  text-overflow: ellipsis
+  text-overflow: ellipsis;
+
   &:focus {
     outline: none;
   }

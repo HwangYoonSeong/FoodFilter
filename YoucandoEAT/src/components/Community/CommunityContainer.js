@@ -3,9 +3,7 @@ import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 
 function CommunityContainer({ uid, setSearchMode, searchMode }) {
-  const [input, setInput] = useState("");
   const [dummyposts, setDummyPosts] = useState([]);
-  const [searchPosts, setSearchPosts] = useState([]);
 
   useEffect(() => {
     setDummyPosts([
@@ -90,30 +88,14 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         thumbnail: Dummy,
       },
     ]);
-  }, []);
+
+    return () => {
+      setSearchMode(false);
+    };
+  }, [setSearchMode]);
 
   const openSearch = () => {
     setSearchMode(true);
-  };
-
-  const closeSearch = () => {
-    setSearchMode(false);
-    setInput("");
-  };
-
-  const onChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  const clearInput = () => {
-    setInput("");
-  };
-
-  const clickEnter = () => {
-    // 서버로 사용자의 input을 보내어 게시판 데이터를 요청하여
-    // setPosts를 통해 데이터 갱신
-    console.log(input);
-    setSearchPosts([]);
   };
 
   return (
@@ -122,13 +104,8 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         dummyposts={dummyposts}
         uid={uid}
         openSearch={openSearch}
-        closeSearch={closeSearch}
         searchMode={searchMode}
-        input={input}
-        onChange={onChange}
-        clearInput={clearInput}
-        clickEnter={clickEnter}
-        searchPosts={searchPosts}
+        setSearchMode={setSearchMode}
       />
     </>
   );
