@@ -63,17 +63,19 @@ function DetailPresenter({ post }) {
     <>
       <ContentsContainer>
         <table>
-          <tr>
-            <td rowSpan="2">
-              <UserImage src={Dummy} alt="dummy image" />
-            </td>
-            <td>bung1438@gmail.com</td>
-          </tr>
-          <tr>
-            <td style={{ fontSize: "0.75rem", color: "#adb5bd" }}>
-              04/18 21:52
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td rowSpan="2">
+                <UserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td>bung1438@gmail.com</td>
+            </tr>
+            <tr>
+              <td style={{ fontSize: "0.75rem", color: "#adb5bd" }}>
+                04/18 21:52
+              </td>
+            </tr>
+          </tbody>
         </table>
         <h1 style={{ fontSize: "1.25rem" }}>Dummy Title</h1>
         <p>dummy content</p>
