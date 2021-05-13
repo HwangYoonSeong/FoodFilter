@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SAPresenter from "./SAPresenter";
-
+import axios from "axios";
+import ipObj from "../../key"
 //Food image
 import abaloneImg from "./FoodImg/abaloneImg.png";
 import beefImg from "./FoodImg/beefImg.png";
@@ -24,14 +25,33 @@ import tomatoImg from "./FoodImg/tomatoImg.png";
 import walnutImg from "./FoodImg/walnutImg.png";
 import wheatImg from "./FoodImg/wheatImg.png";
 
-function SAContainer () {
+function SAContainer ({ uid }) {
   const [allergyList, setAllergyList] = useState([]);
   const [userALInfo, setUserALInfo] = useState(0);
 
   const save = () => {
     // 서버로 유저의 알러지정보인 userALInfo를
     // 10진수로 전송
+    console.log(uid);
     console.log(userALInfo);
+
+    // let form = new FormData();
+    // form.append("filterBit", userALInfo);
+
+    axios
+      .post(`${ipObj.ip}/user`, { "filterBit": userALInfo, "uid": uid }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
+
+
   };
 
   const onToggle = (id) => {

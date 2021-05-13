@@ -28,7 +28,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
+function App () {
   const [uid, setUid] = useState("");
   const [searchMode, setSearchMode] = useState(false);
   return (
@@ -57,7 +57,13 @@ function App() {
           )}
         />
 
-        <Route exact path="/selectAllergy" component={SelectAllergy} />
+        <Route exact path="/selectAllergy" render={(props) => (
+          <SelectAllergy
+            {...props}
+            uid={uid}
+          />
+        )}
+        />
 
         <Route exact path="/community/write" component={WritePost} />
       </Container>
