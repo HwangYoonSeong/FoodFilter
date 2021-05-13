@@ -34,6 +34,7 @@ const CommentTime = styled.p`
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 115px;
 `;
 
 const Input = styled.textarea`
@@ -58,7 +59,7 @@ function DetailPresenter({ post }) {
   // 지금은 더미 데이터이지만 post로 데이터 바인딩 변경
   // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
   return (
-    <>
+    <div>
       {/* CONTENT */}
       <ContentsContainer>
         <table>
@@ -79,29 +80,87 @@ function DetailPresenter({ post }) {
         <h1 style={{ fontSize: "1.25rem" }}>Dummy Title</h1>
         <p>dummy content</p>
       </ContentsContainer>
-
       {/* COMMENT */}
       <CommentsContainer>
         <table style={{ marginTop: "0.2rem" }}>
-          <tr>
-            <td>
-              <SmallUserImage src={Dummy} alt="dummy image" />
-            </td>
-            <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
         </table>
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
       </CommentsContainer>
-
       <CommentsContainer>
         <table style={{ marginTop: "0.2rem" }}>
-          <tr>
-            <td>
-              <SmallUserImage src={Dummy} alt="dummy image" />
-            </td>
-            <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={{ margin: "0" }}>dummy comment</p>
+        <CommentTime>04/18 21:52</CommentTime>
+      </CommentsContainer>
+      <CommentsContainer>
+        <table style={{ marginTop: "0.2rem" }}>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={{ margin: "0" }}>dummy comment</p>
+        <CommentTime>04/18 21:52</CommentTime>
+      </CommentsContainer>
+      <CommentsContainer>
+        <table style={{ marginTop: "0.2rem" }}>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={{ margin: "0" }}>dummy comment</p>
+        <CommentTime>04/18 21:52</CommentTime>
+      </CommentsContainer>
+      <CommentsContainer>
+        <table style={{ marginTop: "0.2rem" }}>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={{ margin: "0" }}>dummy comment</p>
+        <CommentTime>04/18 21:52</CommentTime>
+      </CommentsContainer>
+      <CommentsContainer>
+        <table style={{ marginTop: "0.2rem" }}>
+          <tbody>
+            <tr>
+              <td>
+                <SmallUserImage src={Dummy} alt="dummy image" />
+              </td>
+              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+            </tr>
+          </tbody>
         </table>
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
@@ -115,7 +174,7 @@ function DetailPresenter({ post }) {
           placeholder="Please type in the comments."
         />
       </InputContainer>
-    </>
+    </div>
   );
 }
 
