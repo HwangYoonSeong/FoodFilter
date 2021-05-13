@@ -23,7 +23,7 @@ const CircleBtn = styled.label`
   margin-top: 3rem;
 `;
 
-function MainPresenter ({ onChange }) {
+function MainPresenter({ onChange }) {
   const LinkStyle = {
     color: "white",
     textDecorationLine: "none",
@@ -32,7 +32,7 @@ function MainPresenter ({ onChange }) {
   return (
     <>
       <Container>
-        <Link to="/selectAllergy" style={LinkStyle}>
+        <Link to="/selectIngredients" style={LinkStyle}>
           <CircleBtn>Select Ingredients</CircleBtn>
         </Link>
 

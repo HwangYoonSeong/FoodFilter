@@ -52,7 +52,7 @@ const SaveBtn = styled.button`
   }
 `;
 
-function SAPresenter ({ allergyList, save, onToggle }) {
+function SIPresenter({ ingrdList, save, onToggle }) {
   return (
     <>
       <Title>
@@ -63,7 +63,7 @@ function SAPresenter ({ allergyList, save, onToggle }) {
       </Title>
 
       <IngrdContainer>
-        {allergyList.map((el) => {
+        {ingrdList.map((el) => {
           return (
             <Ingrd
               isClick={el.checked}
@@ -80,4 +80,4 @@ function SAPresenter ({ allergyList, save, onToggle }) {
   );
 }
 
-export default SAPresenter;
+export default SIPresenter;

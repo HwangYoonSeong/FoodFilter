@@ -8,7 +8,7 @@ import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
-import SelectAllergy from "./components/SelectAllergy/SAContainer";
+import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
 import Detail from "./components/Community/Detail/DetailContainer";
 
@@ -40,7 +40,7 @@ function App() {
       <Container>
         <Route exact path="/" component={Main} />
 
-        <Route exact path="/selectAllergy" component={SelectAllergy} />
+        <Route exact path="/selectIngredients" component={SelectIngredients} />
 
         <Route exact path="/capture" component={Capture} />
 

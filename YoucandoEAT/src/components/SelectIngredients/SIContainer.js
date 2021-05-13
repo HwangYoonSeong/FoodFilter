@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SAPresenter from "./SAPresenter";
+import SIPresenter from "./SIPresenter";
 
 //Food image
 import abaloneImg from "./FoodImg/abaloneImg.png";
@@ -24,20 +24,20 @@ import tomatoImg from "./FoodImg/tomatoImg.png";
 import walnutImg from "./FoodImg/walnutImg.png";
 import wheatImg from "./FoodImg/wheatImg.png";
 
-function SAContainer () {
-  const [allergyList, setAllergyList] = useState([]);
-  const [userALInfo, setUserALInfo] = useState(0);
+function SIContainer() {
+  const [ingrdList, setIngrdList] = useState([]);
+  const [userInfo, setUserInfo] = useState(0);
 
   const save = () => {
-    // 서버로 유저의 알러지정보인 userALInfo를
+    // 서버로 유저의 알러지정보인 userInfo를
     // 10진수로 전송
-    console.log(userALInfo);
+    console.log(userInfo);
   };
 
   const onToggle = (id) => {
-    setAllergyList(
-      allergyList.map((allergy) =>
-        allergy.id === id ? { ...allergy, checked: !allergy.checked } : allergy
+    setIngrdList(
+      ingrdList.map((ingrd) =>
+        ingrd.id === id ? { ...ingrd, checked: !ingrd.checked } : ingrd
       )
     );
   };
@@ -45,9 +45,9 @@ function SAContainer () {
   useEffect(() => {
     // 이 컴포넌트 마운트 시
     // 서버에서 받은 10진수나 2진수를
-    // 가공하여 setAllergyList 함수 호출하여
-    // allergyList 를 초기화
-    setAllergyList([
+    // 가공하여 setIngrdList 함수 호출하여
+    // ingrdList 를 초기화
+    setIngrdList([
       {
         name: "abalone",
         image: abaloneImg,
@@ -179,19 +179,19 @@ function SAContainer () {
   }, []);
 
   useEffect(() => {
-    setUserALInfo(
+    setUserInfo(
       parseInt(
-        allergyList.map((allergy) => (allergy.checked ? 1 : 0)).join(""),
+        ingrdList.map((allergy) => (allergy.checked ? 1 : 0)).join(""),
         2
       )
     );
-  }, [allergyList]);
+  }, [ingrdList]);
 
   return (
     <>
-      <SAPresenter allergyList={allergyList} save={save} onToggle={onToggle} />
+      <SIPresenter ingrdList={ingrdList} save={save} onToggle={onToggle} />
     </>
   );
 }
 
-export default SAContainer;
+export default SIContainer;
