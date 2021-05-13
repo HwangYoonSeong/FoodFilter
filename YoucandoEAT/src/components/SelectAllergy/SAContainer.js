@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SAPresenter from "./SAPresenter";
-import axios from "axios";
-import ipObj from "../../key"
+// import axios from "axios";
+// import ipObj from "../../key"
 //Food image
 import abaloneImg from "./FoodImg/abaloneImg.png";
 import beefImg from "./FoodImg/beefImg.png";
@@ -38,19 +38,18 @@ function SAContainer ({ uid }) {
     // let form = new FormData();
     // form.append("filterBit", userALInfo);
 
-    axios
-      .post(`${ipObj.ip}/user`, { "filterBit": userALInfo, "uid": uid }, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.error(err.response);
-      });
-
+    // axios
+    //   .post(`${ipObj.ip}/user`, { "filterBit": userALInfo, "uid": uid }, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.response);
+    //   });
 
   };
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
 
 import axios from "axios";
-
-function LogicContainer({ location }) {
+// import ipObj from "../../key"
+function LogicContainer ({ location }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -32,7 +32,16 @@ function LogicContainer({ location }) {
   }, [resizeImage]);
 
   const getData = () => {
-    console.log("서버와 연결!");
+    // axios
+    //   .get(`${ipObj.ip}/search/${result}`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.response);
+    //   });
+    // 서버 측에서 응답으로 오는 데이터의 구조를 정한 후에 
+    // LogicPresenter에 데이터 전달 
   };
 
   useEffect(() => {
