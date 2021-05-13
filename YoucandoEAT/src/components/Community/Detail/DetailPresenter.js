@@ -49,8 +49,6 @@ const Input = styled.textarea`
   overflow: visible;
   border-radius: 0.7rem;
 
-  text-overflow: ellipsis;
-
   &:focus {
     outline: none;
   }
@@ -61,6 +59,7 @@ function DetailPresenter({ post }) {
   // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
   return (
     <>
+      {/* CONTENT */}
       <ContentsContainer>
         <table>
           <tbody>
@@ -81,6 +80,7 @@ function DetailPresenter({ post }) {
         <p>dummy content</p>
       </ContentsContainer>
 
+      {/* COMMENT */}
       <CommentsContainer>
         <table style={{ marginTop: "0.2rem" }}>
           <tr>
@@ -93,9 +93,24 @@ function DetailPresenter({ post }) {
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
       </CommentsContainer>
+
+      <CommentsContainer>
+        <table style={{ marginTop: "0.2rem" }}>
+          <tr>
+            <td>
+              <SmallUserImage src={Dummy} alt="dummy image" />
+            </td>
+            <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
+          </tr>
+        </table>
+        <p style={{ margin: "0" }}>dummy comment</p>
+        <CommentTime>04/18 21:52</CommentTime>
+      </CommentsContainer>
+
+      {/* INPUT */}
       <InputContainer>
         <Input
-          rows="5"
+          rows="4"
           type="text"
           placeholder="Please type in the comments."
         />
