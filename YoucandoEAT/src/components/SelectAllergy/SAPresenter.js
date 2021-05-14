@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { BiAddToQueue } from "react-icons/bi";
 import { GiSaveArrow } from "react-icons/gi";
-const Title = styled.div`
+const Header = styled.div`
   display: flex;
   position: fixed;
   width: 100%;
-  padding: 1rem 0 0 0;
+  padding: 1rem 1rem 1rem 0;
   background: black;
   font-size: 20px;
   color: white;
   top:0;
   margin-top: 2.8rem;
-  justify-content:space-around;
+  justify-content:center;
 `;
 const Footer = styled.div`
   display: flex;
@@ -25,7 +25,12 @@ const Footer = styled.div`
   flex-direction: column;
   justify-content:space-around;
 `;
-const SubTitle = styled.p`
+const Title = styled.div`
+   font-size:25px;
+   text-align:center;
+`;
+const SubTitle = styled.div`
+  margin-top: 0.5rem;
    font-size:13px;
    text-align:center;
 `;
@@ -35,7 +40,6 @@ const IngrdContainer = styled.ul`
   width: 100%;
   margin-top: 8rem;
   padding: 0;
-  margin-bottom: 5rem;
 `;
 
 const Ingrd = styled.li`
@@ -73,21 +77,12 @@ background: black;
 function SAPresenter ({ allergyList, save, onToggle }) {
   return (
     <>
-      <Title>
-        {/* <SaveBtn onClick={save}>
-          <BiAddToQueue size="30" />
-          <b >Add</b>
-        </SaveBtn> */}
+      <Header>
         <div>
-          Ingredients Check List <SubTitle>Select ingredients you can't eat  </SubTitle>
+          <Title>Ingredients Check List</Title>
+          <SubTitle>Select ingredients you can't eat  </SubTitle>
         </div>
-
-        {/* <SaveBtn onClick={save}>
-          <GrSave size="30" />
-          <b >Save</b>
-        </SaveBtn> */}
-
-      </Title>
+      </Header>
 
       < IngrdContainer >
         {
