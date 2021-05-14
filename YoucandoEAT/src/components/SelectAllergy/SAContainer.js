@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import SAPresenter from "./SAPresenter";
+
 // import axios from "axios";
 // import ipObj from "../../key"
+
 //Food image
 import abaloneImg from "./FoodImg/abaloneImg.png";
 import beefImg from "./FoodImg/beefImg.png";
@@ -196,6 +198,22 @@ function SAContainer ({ uid }) {
       },
     ]);
   }, []);
+
+
+  // 로그인한 경우 uid로 해당 사용자의 filterBit로 allergyList 초기화
+  // 그렇지 않은 경우 서버에서 받은 allergyList 그대로 표시
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`${ipObj.ip}/ingredientList/${uid}`)
+  //     .then((response) => {
+  //       setAllergyList(response.data.results);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err.response);
+  //     });
+
+  // }, []);
 
   useEffect(() => {
     setUserALInfo(

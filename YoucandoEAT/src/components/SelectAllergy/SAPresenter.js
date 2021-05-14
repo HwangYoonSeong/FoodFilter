@@ -70,6 +70,7 @@ function SAPresenter ({ allergyList, save, onToggle }) {
               key={el.id}
               onClick={() => onToggle(el.id)}
             >
+              {/* <IngrdImg src={`${ipObj.ip}/images/${el.image}`} alt="FoodImg" /> */}
               <IngrdImg src={el.image} alt="FoodImg" />
               <IngrdName>{el.name}</IngrdName>
             </Ingrd>
