@@ -41,7 +41,7 @@ function SAContainer ({ uid }) {
     // form.append("filterBit", userALInfo);
 
     // axios
-    //   .post(`${ipObj.ip}/user`, { "filterBit": userALInfo, "uid": uid }, {
+    //   .post(`${ipObj.ip}/filterBit`, { "filterBit": userALInfo, "uid": uid }, {
     //     headers: {
     //       "Content-Type": "application/json",
     //     },
@@ -202,7 +202,6 @@ function SAContainer ({ uid }) {
 
   // 로그인한 경우 uid로 해당 사용자의 filterBit로 allergyList 초기화
   // 그렇지 않은 경우 서버에서 받은 allergyList 그대로 표시
-
   // useEffect(() => {
   //   axios
   //     .get(`${ipObj.ip}/ingredientList/${uid}`)

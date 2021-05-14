@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { BiAddToQueue } from "react-icons/bi";
 import { GiSaveArrow } from "react-icons/gi";
 const Header = styled.div`
   display: flex;
@@ -17,7 +16,7 @@ const Header = styled.div`
 const Footer = styled.div`
   display: flex;
   position: fixed;
-  height:200px;
+  height:100px;
   padding: 1rem 1rem 1rem 0;
   font-size: 20px;
   right:0;
@@ -102,12 +101,6 @@ function SAPresenter ({ allergyList, save, onToggle }) {
         } </IngrdContainer>
 
       <Footer>
-        <Btn onClick={save}>
-          <BiAddToQueue size="30" />
-          <b >Add</b>
-        </Btn>
-
-
         <Btn onClick={save}>
           <GiSaveArrow size="30" />
           <b >Save</b>
