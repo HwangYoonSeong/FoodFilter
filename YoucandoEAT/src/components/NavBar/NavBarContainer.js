@@ -28,7 +28,9 @@ function NavBarContainer({ setUid }) {
             setUid(user.uid);
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
-            setSidebar(false);
+            // 사진, uid, email등
+            // 서버로 유저 정보 전송
+            // setSidebar(false);
           });
       })
       .catch((error) => {
@@ -42,7 +44,7 @@ function NavBarContainer({ setUid }) {
       .signOut()
       .then(function () {
         setUserEmail(null);
-        setSidebar(false);
+        // setSidebar(false);
       })
       .catch(function (error) {
         alert(`ERROR : ${error}`);

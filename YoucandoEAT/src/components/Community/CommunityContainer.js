@@ -3,13 +3,12 @@ import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 
 function CommunityContainer({ uid, setSearchMode, searchMode }) {
-  const [input, setInput] = useState("");
   const [dummyposts, setDummyPosts] = useState([]);
-  const [searchPosts, setSearchPosts] = useState([]);
 
   useEffect(() => {
     setDummyPosts([
       {
+        id: 0,
         title: "Dummy Title1",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -18,6 +17,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 1,
         title: "Dummy Title2",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -26,6 +26,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 2,
         title: "Dummy Title3",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -34,6 +35,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 3,
         title: "Dummy Title4",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -42,6 +44,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 4,
         title: "Dummy Title5",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -50,6 +53,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 5,
         title: "Dummy Title6",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -58,6 +62,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 6,
         title: "Dummy Title7",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -66,6 +71,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 7,
         title: "Dummy Title8",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -74,6 +80,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
       },
 
       {
+        id: 8,
         title: "Dummy Title9",
         content: "dummy content",
         date: "2021-04-18 21:52",
@@ -81,30 +88,14 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         thumbnail: Dummy,
       },
     ]);
-  }, []);
+
+    return () => {
+      setSearchMode(false);
+    };
+  }, [setSearchMode]);
 
   const openSearch = () => {
     setSearchMode(true);
-  };
-
-  const closeSearch = () => {
-    setSearchMode(false);
-    setInput("");
-  };
-
-  const onChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  const clearInput = () => {
-    setInput("");
-  };
-
-  const clickEnter = () => {
-    // 서버로 사용자의 input을 보내어 게시판 데이터를 요청하여
-    // setPosts를 통해 데이터 갱신
-    console.log(input);
-    setSearchPosts([]);
   };
 
   return (
@@ -113,13 +104,8 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         dummyposts={dummyposts}
         uid={uid}
         openSearch={openSearch}
-        closeSearch={closeSearch}
         searchMode={searchMode}
-        input={input}
-        onChange={onChange}
-        clearInput={clearInput}
-        clickEnter={clickEnter}
-        searchPosts={searchPosts}
+        setSearchMode={setSearchMode}
       />
     </>
   );

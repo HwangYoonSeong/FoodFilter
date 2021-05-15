@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
-import { GrPrevious, GrClose } from "react-icons/gr";
-import { RiErrorWarningLine } from "react-icons/ri";
+
+import SearchContainer from "./Search/SearchContainer";
 
 const PostContainer = styled.ul`
   list-style: none;
@@ -80,97 +80,12 @@ const MagBtn = styled.button`
   }
 `;
 
-const SearchBar = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3);
-`;
-
-const Input = styled.input`
-  border: none;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: 18px;
-  font-family: "NanumSquare";
-
-  &::-ms-clear,
-  &::-ms-reveal {
-    display: none;
-    width: 0;
-    height: 0;
-  }
-  &::-webkit-search-decoration,
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration {
-    display: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const CloseBtn = styled.button`
-  margin: 5px 0 5px 0.5rem;
-  border: none;
-  outline: none;
-  background: white;
-
-  border-radius: 8px;
-
-  &:active {
-    filter: brightness(85%);
-  }
-`;
-
-const ClearBtn = styled.button`
-  margin: 5px 0.5rem 5px 0;
-
-  border: none;
-  outline: none;
-  background: white;
-
-  border-radius: 8px;
-
-  &:active {
-    filter: brightness(85%);
-  }
-`;
-
-// const InitalBackground = styled.div`
-//   position: fixed;
-//   left: 50%;
-//   top: 20%;
-//   width: 100%;
-//   transform: translateX(-50%);
-//   text-align: center;
-// `;
-
-const ErrorBackground = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 20%;
-  width: 100%;
-  transform: translateX(-50%);
-  text-align: center;
-`;
-
 function CommunityPresenter({
   dummyposts,
   uid,
   openSearch,
-  closeSearch,
   searchMode,
-  input,
-  onChange,
-  clearInput,
-  clickEnter,
-  searchPosts,
+  setSearchMode,
 }) {
   const LinkStyle = {
     color: "black",
@@ -182,56 +97,26 @@ function CommunityPresenter({
     <>
       <PostContainer>
         {searchMode ? (
-          <>
-            <SearchBar>
-              <CloseBtn onClick={closeSearch}>
-                <GrPrevious size="24" />
-              </CloseBtn>
-
-              <Input
-                type="search"
-                placeholder="Post title, content"
-                value={input}
-                onChange={onChange}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") clickEnter();
-                }}
-              />
-
-              {input ? (
-                <ClearBtn onClick={clearInput}>
-                  <GrClose size="24" />
-                </ClearBtn>
-              ) : null}
-            </SearchBar>
-
-            {searchPosts.length ? null : (
-              <ErrorBackground>
-                <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
-                <p style={{ color: "#adb5bd" }}>No search results.</p>
-              </ErrorBackground>
-            )}
-
-            {/* <InitalBackground>
-              <MagIcon style={{ color: "#adb5bd" }} size="4rem" />
-              <p style={{ color: "#adb5bd" }}>
-                You should search for your writing.
-              </p>
-            </InitalBackground> */}
-          </>
+          <SearchContainer setSearchMode={setSearchMode} />
         ) : (
           <>
             {dummyposts.map((post, index) => (
-              <Post key={index} index={index}>
-                <div>
-                  <Title>{post.title}</Title>
-                  <Content>{post.content}</Content>
-                  <SmallFont>
-                    {post.date} | {post.writer}
-                  </SmallFont>
-                </div>
-                <ThumbNail src={post.thumbnail} />
-              </Post>
+              <Link
+                key={post.id}
+                to={`community/detail/${post.id}`}
+                style={LinkStyle}
+              >
+                <Post index={post.id}>
+                  <div>
+                    <Title>{post.title}</Title>
+                    <Content>{post.content}</Content>
+                    <SmallFont>
+                      {post.date} | {post.writer}
+                    </SmallFont>
+                  </div>
+                  <ThumbNail src={post.thumbnail} />
+                </Post>
+              </Link>
             ))}
             <MagBtn onClick={openSearch}>
               <MagIcon size="1.8rem" />
