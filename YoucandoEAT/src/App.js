@@ -69,7 +69,7 @@ function App () {
         )}
         />
 
-        <Route exact path="/community/write" component={WritePost} />
+        <Route exact path="/community/write" render={(props) => <WritePost {...props} uid={uid} />} />
 
         <Route
           exact

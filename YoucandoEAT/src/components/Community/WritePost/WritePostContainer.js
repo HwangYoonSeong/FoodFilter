@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import WritePostPresenter from "./WritePostPresenter"
+import axios from "axios";
+import ipObj from "../../../key"
 
-function WritePostContainer() {
+function WritePostContainer ({ history, uid }) {
     const [image, setImage] = useState(null);
     const [inputs, setInputs] = useState({
         title: '',
@@ -31,11 +33,23 @@ function WritePostContainer() {
     const onClick = () => {
         // uid, image, title, content
         // 서버로 보내기
-        console.log(image)
-        console.log(inputs);
+        // console.log(image)
+
+        axios
+            .post(`${ipObj.ip}/postInput`, { "inputs": inputs, "uid": uid }, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => {
+                console.log(response);
+                history.goBack();
+            })
+            .catch((err) => {
+                console.error(err.response);
+            });
+
     }
-
-
 
     return (
         <>
