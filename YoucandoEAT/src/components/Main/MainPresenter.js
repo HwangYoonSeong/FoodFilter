@@ -32,7 +32,7 @@ function MainPresenter ({ onChange }) {
   return (
     <>
       <Container>
-        <Link to="/selectAllergy" style={LinkStyle}>
+        <Link to="/selectIngredients" style={LinkStyle}>
           <CircleBtn>Select Ingredients</CircleBtn>
         </Link>
 

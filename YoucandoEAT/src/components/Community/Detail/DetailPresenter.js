@@ -55,7 +55,7 @@ const Input = styled.textarea`
   }
 `;
 
-function DetailPresenter({ post }) {
+function DetailPresenter ({ post }) {
   // 지금은 더미 데이터이지만 post로 데이터 바인딩 변경
   // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
   return (
@@ -68,19 +68,22 @@ function DetailPresenter({ post }) {
               <td rowSpan="2">
                 <UserImage src={Dummy} alt="dummy image" />
               </td>
-              <td>bung1438@gmail.com</td>
+              <td>{post.writer}</td>
             </tr>
             <tr>
               <td style={{ fontSize: "0.75rem", color: "#adb5bd" }}>
-                04/18 21:52
+                {post.date}
               </td>
             </tr>
           </tbody>
         </table>
-        <h1 style={{ fontSize: "1.25rem" }}>Dummy Title</h1>
-        <p>dummy content</p>
+        <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
+        <p>{post.content}</p>
       </ContentsContainer>
+
+
       {/* COMMENT */}
+
       <CommentsContainer>
         <table style={{ marginTop: "0.2rem" }}>
           <tbody>
@@ -95,76 +98,7 @@ function DetailPresenter({ post }) {
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
       </CommentsContainer>
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
+
 
       {/* INPUT */}
       <InputContainer>

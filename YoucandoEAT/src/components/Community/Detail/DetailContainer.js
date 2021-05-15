@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { useParams } from "react-router-dom";
 
-function DetailContainer() {
+import axios from "axios";
+import ipObj from "../../../key"
+
+function DetailContainer () {
   const { pid } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([]);
 
   useEffect(() => {
-    console.log(
-      `페이지 고유 아이디인 pid : ${pid}를 서버로 보내어 적절한 게시물을 받아오는 통신 수행`
-    );
-    setPost("해당페이지");
+    axios
+      .get(`${ipObj.ip}/postDetail/${pid}`)
+      .then((response) => {
+        setPost(response.data.results);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
+
   }, [pid]);
 
   return (
