@@ -61,7 +61,7 @@ function App () {
           )}
         />
 
-        <Route exact path="/selectAllergy" render={(props) => (
+        <Route exact path="/selectIngredients" render={(props) => (
           <SelectAllergy
             {...props}
             uid={uid}
