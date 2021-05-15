@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Dummy from "../../../assets/Lenna.png";
-
+import { GrPrevious } from "react-icons/gr";
 const ContentsContainer = styled.div`
   margin: 50px 0.5rem 0 0.5rem;
 `;
@@ -55,11 +55,38 @@ const Input = styled.textarea`
   }
 `;
 
-function DetailPresenter ({ post }) {
+const TopBar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3);
+`;
+
+const PreviosBtn = styled.button`
+  margin: 5px 0 5px 0.5rem;
+  border: none;
+  outline: none;
+  background: white;
+
+  border-radius: 8px;
+
+  &:active {
+    filter: brightness(85%);
+  }
+`;
+
+function DetailPresenter ({ post, goBack }) {
   // 지금은 더미 데이터이지만 post로 데이터 바인딩 변경
   // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
   return (
     <div>
+      <TopBar>
+        <PreviosBtn onClick={goBack}>
+          <GrPrevious size="24" />
+        </PreviosBtn>
+      </TopBar>
       {/* CONTENT */}
       <ContentsContainer>
         <table>

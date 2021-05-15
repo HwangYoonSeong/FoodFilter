@@ -5,11 +5,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ipObj from "../../../key"
 
-function DetailContainer () {
+function DetailContainer ({ history, setSearchMode }) {
   const { pid } = useParams();
   const [post, setPost] = useState([]);
 
   useEffect(() => {
+    setSearchMode(true);
     axios
       .get(`${ipObj.ip}/postDetail/${pid}`)
       .then((response) => {
@@ -19,11 +20,16 @@ function DetailContainer () {
         console.error(err.response);
       });
 
-  }, [pid]);
+  }, [pid, setSearchMode]);
+
+  const goBack = () => {
+    setSearchMode(false);
+    history.goBack();
+  };
 
   return (
     <>
-      <DetailPresenter post={post} />
+      <DetailPresenter post={post} goBack={goBack} />
     </>
   );
 }

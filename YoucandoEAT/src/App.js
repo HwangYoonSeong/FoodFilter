@@ -74,7 +74,7 @@ function App () {
         <Route
           exact
           path="/community/detail/:pid"
-          render={(props) => <Detail {...props} uid={uid} />}
+          render={(props) => <Detail {...props} setSearchMode={setSearchMode} />}
         />
       </Container>
     </>
