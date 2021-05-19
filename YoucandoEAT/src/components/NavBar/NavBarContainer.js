@@ -4,8 +4,6 @@ import firebase from "firebase/app";
 import { connect } from "react-redux";
 
 function NavBarContainer({ setUid, state, dispatch }) {
-  console.log(state);
-
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -63,14 +61,19 @@ function NavBarContainer({ setUid, state, dispatch }) {
       if (user) {
         console.log("login");
         setUserEmail(user.email);
+
         setUid(user.uid);
+        dispatch({ type: "SET_UID", uid: user.uid });
+
         setUserPhoto(user.photoURL);
       } else {
         setUid(null);
+        dispatch({ type: "SET_UID", uid: "" });
+
         console.log("!login");
       }
     });
-  }, [setUid]);
+  }, [dispatch, setUid]);
 
   useEffect(() => {
     GoogleSignIn();

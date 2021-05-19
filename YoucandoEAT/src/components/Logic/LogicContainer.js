@@ -38,7 +38,8 @@ function LogicContainer({ location, state }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-  }, [kakaoOCR]);
+    console.log(state.uid);
+  }, [kakaoOCR, state.uid]);
 
   return (
     <>
