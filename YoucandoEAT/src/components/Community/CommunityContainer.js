@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
+import { connect } from "react-redux";
 
-function CommunityContainer({ uid, setSearchMode, searchMode }) {
+function CommunityContainer({ setSearchMode, searchMode, state, dispatch }) {
   const [dummyposts, setDummyPosts] = useState([]);
 
   useEffect(() => {
@@ -90,25 +91,29 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
     ]);
 
     return () => {
-      setSearchMode(false);
+      dispatch({ type: "SET_SEARCHMODE", mode: false });
     };
-  }, [setSearchMode]);
+  }, [dispatch, setSearchMode]);
 
   const openSearch = () => {
-    setSearchMode(true);
+    dispatch({ type: "SET_SEARCHMODE", mode: true });
   };
 
   return (
     <>
       <CommunityPresenter
         dummyposts={dummyposts}
-        uid={uid}
+        uid={state.uid}
         openSearch={openSearch}
-        searchMode={searchMode}
+        searchMode={state.searchMode}
         setSearchMode={setSearchMode}
       />
     </>
   );
 }
 
-export default CommunityContainer;
+function stateTOprops(state) {
+  return { state };
+}
+
+export default connect(stateTOprops)(CommunityContainer);

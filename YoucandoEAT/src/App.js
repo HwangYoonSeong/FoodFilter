@@ -39,17 +39,9 @@ function App() {
 
       <Container>
         <Route exact path="/" component={Main} />
-
         <Route exact path="/selectIngredients" component={SelectIngredients} />
-
         <Route exact path="/capture" component={Capture} />
-
-        <Route
-          exact
-          path="/logic"
-          render={(props) => <Logic {...props} uid={uid} />}
-        />
-
+        <Route exact path="/logic" component={Logic} />
         <Route
           exact
           path="/community"
@@ -62,9 +54,7 @@ function App() {
             />
           )}
         />
-
         <Route exact path="/community/write" component={WritePost} />
-
         <Route
           exact
           path="/community/detail/:pid"

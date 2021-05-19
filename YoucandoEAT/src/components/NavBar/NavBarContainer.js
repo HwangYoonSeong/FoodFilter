@@ -3,7 +3,7 @@ import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
 import { connect } from "react-redux";
 
-function NavBarContainer({ setUid, state, dispatch }) {
+function NavBarContainer({ setUid, dispatch }) {
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);

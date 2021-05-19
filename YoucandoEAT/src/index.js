@@ -26,20 +26,24 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const initialState = { uid: "", searchMode: false };
+
 function reducer(state = initialState, action) {
-  if (action.type === "SET_UID") console.log("SET_UID!");
   switch (action.type) {
     case "SET_UID":
       return {
         ...state,
         uid: action.uid,
       };
+    case "SET_SEARCHMODE":
+      return {
+        ...state,
+        searchMode: action.mode,
+      };
     default:
       return state;
   }
-
-  return state;
 }
+
 const store = createStore(reducer);
 
 ReactDOM.render(
