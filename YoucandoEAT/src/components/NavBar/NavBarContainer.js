@@ -90,7 +90,9 @@ function NavBarContainer({ dispatch }) {
 }
 
 function stateTOprops(state) {
-  return { state };
+  return {
+    uidState: state.uidReducer,
+  };
 }
 
 export default React.memo(connect(stateTOprops)(NavBarContainer));

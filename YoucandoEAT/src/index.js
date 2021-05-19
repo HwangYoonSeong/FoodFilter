@@ -11,7 +11,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbRWC7N0QVQZiUERqu4s3bRxf2G7X4whA",
@@ -25,26 +25,22 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const initialState = { uid: "", searchMode: false };
-
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "SET_UID":
-      return {
-        ...state,
-        uid: action.uid,
-      };
-    case "SET_SEARCHMODE":
-      return {
-        ...state,
-        searchMode: action.mode,
-      };
-    default:
-      return state;
-  }
+// uid reducer
+const initialUid = "";
+function uidReducer(state = initialUid, action) {
+  if (action.type === "SET_UID") return action.uid;
+  else return state;
 }
 
-const store = createStore(reducer);
+// searchMode reducer
+const initialSearchMode = false;
+function searchModeReducer(state = initialSearchMode, action) {
+  if (action.type === "SET_SEARCHMODE") return action.mode;
+  else return state;
+}
+
+// store
+const store = createStore(combineReducers({ uidReducer, searchModeReducer }));
 
 ReactDOM.render(
   <React.StrictMode>

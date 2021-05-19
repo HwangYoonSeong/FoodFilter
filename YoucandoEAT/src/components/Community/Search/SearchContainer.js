@@ -41,7 +41,7 @@ function SearchContainer({ dispatch }) {
 }
 
 function stateTOprops(state) {
-  return { state };
+  return { searchModeState: state.searchModeReducer };
 }
 
 export default connect(stateTOprops)(SearchContainer);

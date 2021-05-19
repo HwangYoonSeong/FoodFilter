@@ -80,13 +80,7 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter({
-  dummyposts,
-  uid,
-  openSearch,
-  searchMode,
-  setSearchMode,
-}) {
+function CommunityPresenter({ dummyposts, uid, openSearch, searchMode }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -97,7 +91,7 @@ function CommunityPresenter({
     <>
       <PostContainer>
         {searchMode ? (
-          <SearchContainer setSearchMode={setSearchMode} />
+          <SearchContainer />
         ) : (
           <>
             {dummyposts.map((post, index) => (

@@ -3,7 +3,7 @@ import LogicPresenter from "./LogicPresenter";
 import axios from "axios";
 import { connect } from "react-redux";
 
-function LogicContainer({ location, state }) {
+function LogicContainer({ location, uidState }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -38,8 +38,8 @@ function LogicContainer({ location, state }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-    console.log(state.uid);
-  }, [kakaoOCR, state.uid]);
+    console.log(uidState);
+  }, [kakaoOCR, uidState]);
 
   return (
     <>
@@ -49,7 +49,9 @@ function LogicContainer({ location, state }) {
 }
 
 function stateTOprops(state) {
-  return { state };
+  return {
+    uidState: state.uidReducer,
+  };
 }
 
 export default React.memo(connect(stateTOprops)(LogicContainer));

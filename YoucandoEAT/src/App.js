@@ -31,11 +31,11 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App({ state }) {
+function App({ searchModeState }) {
   return (
     <>
       <GlobalStyle />
-      {state.searchMode ? null : <NavBar />}
+      {searchModeState ? null : <NavBar />}
 
       <Container>
         <Route exact path="/" component={Main} />
@@ -51,7 +51,7 @@ function App({ state }) {
 }
 
 function stateTOprops(state) {
-  return { state };
+  return { searchModeState: state.searchModeReducer };
 }
 
 export default connect(stateTOprops)(App);
