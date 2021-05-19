@@ -3,7 +3,7 @@ import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 import { connect } from "react-redux";
 
-function CommunityContainer({ setSearchMode, searchMode, state, dispatch }) {
+function CommunityContainer({ setSearchMode, state, dispatch }) {
   const [dummyposts, setDummyPosts] = useState([]);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ function CommunityContainer({ setSearchMode, searchMode, state, dispatch }) {
     return () => {
       dispatch({ type: "SET_SEARCHMODE", mode: false });
     };
-  }, [dispatch, setSearchMode]);
+  }, [dispatch]);
 
   const openSearch = () => {
     dispatch({ type: "SET_SEARCHMODE", mode: true });

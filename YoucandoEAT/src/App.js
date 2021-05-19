@@ -12,6 +12,8 @@ import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
 import Detail from "./components/Community/Detail/DetailContainer";
 
+import { connect } from "react-redux";
+
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
@@ -29,40 +31,31 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
-  const [uid, setUid] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
+function App({ state }) {
   return (
     <>
       <GlobalStyle />
-      {searchMode ? null : <NavBar setUid={setUid} />}
+      {state.searchMode ? null : <NavBar />}
 
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/selectIngredients" component={SelectIngredients} />
         <Route exact path="/capture" component={Capture} />
         <Route exact path="/logic" component={Logic} />
-        <Route
-          exact
-          path="/community"
-          render={(props) => (
-            <Community
-              {...props}
-              uid={uid}
-              setSearchMode={setSearchMode}
-              searchMode={searchMode}
-            />
-          )}
-        />
+        <Route exact path="/community" component={Community} />
         <Route exact path="/community/write" component={WritePost} />
         <Route
           exact
           path="/community/detail/:pid"
-          render={(props) => <Detail {...props} uid={uid} />}
+          render={(props) => <Detail {...props} uid={state.uid} />}
         />
       </Container>
     </>
   );
 }
 
-export default App;
+function stateTOprops(state) {
+  return { state };
+}
+
+export default connect(stateTOprops)(App);

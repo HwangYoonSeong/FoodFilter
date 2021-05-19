@@ -3,7 +3,7 @@ import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
 import { connect } from "react-redux";
 
-function NavBarContainer({ setUid, dispatch }) {
+function NavBarContainer({ dispatch }) {
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -27,7 +27,6 @@ function NavBarContainer({ setUid, dispatch }) {
             var user = result.user;
 
             dispatch({ type: "SET_UID", uid: user.uid });
-            setUid(user.uid);
 
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
@@ -62,18 +61,16 @@ function NavBarContainer({ setUid, dispatch }) {
         console.log("login");
         setUserEmail(user.email);
 
-        setUid(user.uid);
         dispatch({ type: "SET_UID", uid: user.uid });
 
         setUserPhoto(user.photoURL);
       } else {
-        setUid(null);
         dispatch({ type: "SET_UID", uid: "" });
 
         console.log("!login");
       }
     });
-  }, [dispatch, setUid]);
+  }, [dispatch]);
 
   useEffect(() => {
     GoogleSignIn();
