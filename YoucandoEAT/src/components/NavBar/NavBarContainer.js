@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
-// import "firebase/auth";
+import { connect } from "react-redux";
 
-function NavBarContainer({ setUid }) {
+function NavBarContainer({ setUid, state, dispatch }) {
+  console.log(state);
+
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -25,7 +27,10 @@ function NavBarContainer({ setUid }) {
           .signInWithPopup(provider)
           .then((result) => {
             var user = result.user;
+
+            dispatch({ type: "SET_UID", uid: user.uid });
             setUid(user.uid);
+
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
             // 사진, uid, email등
@@ -85,4 +90,8 @@ function NavBarContainer({ setUid }) {
   );
 }
 
-export default React.memo(NavBarContainer);
+function stateTOprops(state) {
+  return { state };
+}
+
+export default React.memo(connect(stateTOprops)(NavBarContainer));

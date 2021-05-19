@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
-
 import axios from "axios";
+import { connect } from "react-redux";
 
-function LogicContainer({ location }) {
+function LogicContainer({ location, state }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -47,4 +47,8 @@ function LogicContainer({ location }) {
   );
 }
 
-export default React.memo(LogicContainer);
+function stateTOprops(state) {
+  return { state };
+}
+
+export default React.memo(connect(stateTOprops)(LogicContainer));

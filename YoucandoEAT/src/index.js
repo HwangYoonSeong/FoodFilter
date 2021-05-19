@@ -10,6 +10,9 @@ import { BrowserRouter } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDbRWC7N0QVQZiUERqu4s3bRxf2G7X4whA",
   authDomain: "watsin-3b4e3.firebaseapp.com",
@@ -22,10 +25,29 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const initialState = { uid: "", searchMode: false };
+function reducer(state = initialState, action) {
+  if (action.type === "SET_UID") console.log("SET_UID!");
+  switch (action.type) {
+    case "SET_UID":
+      return {
+        ...state,
+        uid: action.uid,
+      };
+    default:
+      return state;
+  }
+
+  return state;
+}
+const store = createStore(reducer);
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
