@@ -24,14 +24,18 @@ import tomatoImg from "./FoodImg/tomatoImg.png";
 import walnutImg from "./FoodImg/walnutImg.png";
 import wheatImg from "./FoodImg/wheatImg.png";
 
-function SIContainer() {
+import { connect } from "react-redux";
+
+function SIContainer({ uidState }) {
   const [ingrdList, setIngrdList] = useState([]);
   const [userInfo, setUserInfo] = useState(0);
 
   const save = () => {
     // 서버로 유저의 알러지정보인 userInfo를
     // 10진수로 전송
-    console.log(userInfo);
+    console.log(
+      `유저 uid : ${uidState}의 userInfo : ${userInfo}를 서버로 전송`
+    );
   };
 
   const onToggle = (id) => {
@@ -194,4 +198,10 @@ function SIContainer() {
   );
 }
 
-export default SIContainer;
+function stateTOprops(state) {
+  return {
+    uidState: state.uidReducer,
+  };
+}
+
+export default connect(stateTOprops)(SIContainer);
