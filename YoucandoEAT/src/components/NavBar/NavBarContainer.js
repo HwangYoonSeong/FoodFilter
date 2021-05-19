@@ -32,7 +32,6 @@ function NavBarContainer({ dispatch }) {
             setUserPhoto(user.photoURL);
             // 사진, uid, email등
             // 서버로 유저 정보 전송
-            // setSidebar(false);
           });
       })
       .catch((error) => {

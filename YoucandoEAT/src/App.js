@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
@@ -44,11 +44,7 @@ function App({ state }) {
         <Route exact path="/logic" component={Logic} />
         <Route exact path="/community" component={Community} />
         <Route exact path="/community/write" component={WritePost} />
-        <Route
-          exact
-          path="/community/detail/:pid"
-          render={(props) => <Detail {...props} uid={state.uid} />}
-        />
+        <Route exact path="/community/detail/:pid" component={Detail} />
       </Container>
     </>
   );
