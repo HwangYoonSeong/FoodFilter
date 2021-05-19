@@ -8,7 +8,7 @@ function NavBarContainer({ dispatch }) {
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
 
-  const logIn = (e) => {
+  const logIn = useCallback(() => {
     firebase
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -37,7 +37,7 @@ function NavBarContainer({ dispatch }) {
       .catch((error) => {
         console.error(`ERROR : ${error}`);
       });
-  };
+  }, [dispatch]);
 
   const logOut = (e) => {
     firebase
@@ -45,7 +45,6 @@ function NavBarContainer({ dispatch }) {
       .signOut()
       .then(function () {
         setUserEmail(null);
-        // setSidebar(false);
       })
       .catch(function (error) {
         alert(`ERROR : ${error}`);
@@ -59,9 +58,7 @@ function NavBarContainer({ dispatch }) {
       if (user) {
         console.log("login");
         setUserEmail(user.email);
-
         dispatch({ type: "SET_UID", uid: user.uid });
-
         setUserPhoto(user.photoURL);
       } else {
         dispatch({ type: "SET_UID", uid: "" });
@@ -95,4 +92,4 @@ function stateTOprops(state) {
   };
 }
 
-export default React.memo(connect(stateTOprops)(NavBarContainer));
+export default connect(stateTOprops)(React.memo(NavBarContainer));

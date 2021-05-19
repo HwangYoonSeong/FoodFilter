@@ -56,4 +56,4 @@ function MainPresenter({ onChange }) {
   );
 }
 
-export default MainPresenter;
+export default React.memo(MainPresenter);

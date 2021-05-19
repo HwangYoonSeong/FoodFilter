@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SIPresenter from "./SIPresenter";
 
 //Food image
@@ -30,21 +30,21 @@ function SIContainer({ uidState }) {
   const [ingrdList, setIngrdList] = useState([]);
   const [userInfo, setUserInfo] = useState(0);
 
-  const save = () => {
+  const save = useCallback(() => {
     // 서버로 유저의 알러지정보인 userInfo를
     // 10진수로 전송
     console.log(
       `유저 uid : ${uidState}의 userInfo : ${userInfo}를 서버로 전송`
     );
-  };
+  }, [uidState, userInfo]);
 
-  const onToggle = (id) => {
-    setIngrdList(
+  const onToggle = useCallback((id) => {
+    setIngrdList((ingrdList) =>
       ingrdList.map((ingrd) =>
         ingrd.id === id ? { ...ingrd, checked: !ingrd.checked } : ingrd
       )
     );
-  };
+  }, []);
 
   useEffect(() => {
     // 이 컴포넌트 마운트 시
@@ -204,4 +204,4 @@ function stateTOprops(state) {
   };
 }
 
-export default connect(stateTOprops)(SIContainer);
+export default connect(stateTOprops)(React.memo(SIContainer));

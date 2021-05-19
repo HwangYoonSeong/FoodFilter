@@ -52,4 +52,4 @@ function LogicPresenter({ croppedImage, result }) {
   );
 }
 
-export default LogicPresenter;
+export default React.memo(LogicPresenter);

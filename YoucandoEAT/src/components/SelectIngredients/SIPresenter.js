@@ -80,4 +80,4 @@ function SIPresenter({ ingrdList, save, onToggle }) {
   );
 }
 
-export default SIPresenter;
+export default React.memo(SIPresenter);

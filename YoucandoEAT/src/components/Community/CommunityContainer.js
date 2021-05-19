@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
 import { connect } from "react-redux";
 
-function CommunityContainer({
-  setSearchMode,
-  uidState,
-  searchModeState,
-  dispatch,
-}) {
+function CommunityContainer({ uidState, searchModeState, dispatch }) {
   const [dummyposts, setDummyPosts] = useState([]);
 
   useEffect(() => {
@@ -100,9 +95,9 @@ function CommunityContainer({
     };
   }, [dispatch]);
 
-  const openSearch = () => {
+  const openSearch = useCallback(() => {
     dispatch({ type: "SET_SEARCHMODE", mode: true });
-  };
+  }, [dispatch]);
 
   return (
     <>
@@ -123,4 +118,4 @@ function stateTOprops(state) {
   };
 }
 
-export default connect(stateTOprops)(CommunityContainer);
+export default connect(stateTOprops)(React.memo(CommunityContainer));

@@ -116,4 +116,4 @@ function SearchPresenter({
   );
 }
 
-export default SearchPresenter;
+export default React.memo(SearchPresenter);

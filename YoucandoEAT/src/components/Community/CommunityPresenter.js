@@ -130,4 +130,4 @@ function CommunityPresenter({ dummyposts, uid, openSearch, searchMode }) {
   );
 }
 
-export default CommunityPresenter;
+export default React.memo(CommunityPresenter);

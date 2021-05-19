@@ -7,7 +7,7 @@ function LogicContainer({ location, uidState }) {
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
-  let [result, setResult] = useState(null);
+  const [result, setResult] = useState(null);
 
   const kakaoOCR = useCallback(() => {
     let form = new FormData();
@@ -54,4 +54,4 @@ function stateTOprops(state) {
   };
 }
 
-export default React.memo(connect(stateTOprops)(LogicContainer));
+export default connect(stateTOprops)(React.memo(LogicContainer));

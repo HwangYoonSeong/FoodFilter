@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import CapturePresenter from "./CapturePresenter";
 
 function CaptureContainer({ history, location }) {
@@ -18,7 +18,7 @@ function CaptureContainer({ history, location }) {
     return new Blob([ab], { type: mimeString });
   };
 
-  const getResizeFile = (image, file) => {
+  const getResizeFile = useCallback((image, file) => {
     var canvas = document.createElement("canvas");
 
     var comp_size = 102400; //100KB (썸네일 작업 결과물 사이즈, 50~200KB 수준으로 압축됨)
@@ -34,9 +34,9 @@ function CaptureContainer({ history, location }) {
     canvas.getContext("2d").drawImage(image, 0, 0, width, height);
     var tmpResizeImage = dataURItoBlob(canvas.toDataURL("image/png")); //dataURLtoBlob 부분은 이전 포스팅 참조
     return tmpResizeImage;
-  };
+  }, []);
 
-  const getData = () => {
+  const getData = useCallback(() => {
     setModal(false);
 
     // Croppping
@@ -55,7 +55,7 @@ function CaptureContainer({ history, location }) {
         },
       });
     };
-  };
+  }, [cropper, getResizeFile, history]);
 
   return (
     <>

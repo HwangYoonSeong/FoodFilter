@@ -163,4 +163,4 @@ function NavBarPresenter({
   );
 }
 
-export default NavBarPresenter;
+export default React.memo(NavBarPresenter);
