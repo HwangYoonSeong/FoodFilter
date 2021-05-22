@@ -39,15 +39,17 @@ const searchModeReducer = (state, action) => {
   else return state;
 }
 
+export const dispatch = React.createContext(null);
+
 function App () {
   // const [uid, setUid] = useState("");
   // const [searchMode, setSearchMode] = useState(false);
   const [uid, uidDispatch] = useReducer(uidReducer, "");
   const [searchMode, smDispatch] = useReducer(searchModeReducer, false);
 
-  const setUid = useCallback(uid => {
-    uidDispatch({ type: 'SET_UID', uid });
-  }, []);
+  // const setUid = useCallback(uid => {
+  //   uidDispatch({ type: 'SET_UID', uid });
+  // }, []);
 
   const setSearchMode = useCallback(mode => {
     smDispatch({ type: 'SET_SEARCHMODE', mode });
@@ -55,9 +57,9 @@ function App () {
 
 
   return (
-    <>
+    <dispatch.Provider value={uidDispatch}>
       <GlobalStyle />
-      {searchMode ? null : <NavBar setUid={setUid} />}
+      {searchMode ? null : <NavBar />}
 
       <Container>
         <Route exact path="/" component={Main} />
@@ -93,7 +95,7 @@ function App () {
           render={(props) => <Detail {...props} uid={uid} />}
         />
       </Container>
-    </>
+    </dispatch.Provider>
   );
 }
 

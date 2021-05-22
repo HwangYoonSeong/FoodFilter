@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
+import { dispatch } from '../../App';
 // import "firebase/auth";
 
-function NavBarContainer({ setUid }) {
+function NavBarContainer () {
+  const uidDispatch = useContext(dispatch);
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -25,7 +27,7 @@ function NavBarContainer({ setUid }) {
           .signInWithPopup(provider)
           .then((result) => {
             var user = result.user;
-            setUid(user.uid);
+            uidDispatch({ type: 'SET_UID', uid: user.uid });
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
             // 사진, uid, email등
@@ -58,14 +60,14 @@ function NavBarContainer({ setUid }) {
       if (user) {
         console.log("login");
         setUserEmail(user.email);
-        setUid(user.uid);
+        uidDispatch({ type: 'SET_UID', uid: user.uid });
         setUserPhoto(user.photoURL);
       } else {
-        setUid(null);
+        uidDispatch({ type: 'SET_UID', uid: null });
         console.log("!login");
       }
     });
-  }, [setUid]);
+  }, [uidDispatch]);
 
   useEffect(() => {
     GoogleSignIn();
