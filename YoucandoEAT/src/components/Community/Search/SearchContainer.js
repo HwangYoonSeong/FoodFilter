@@ -1,13 +1,17 @@
 import React, { useState, useCallback } from "react";
 import SearchPresenter from "./SearchPresenter";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function SearchContainer({ dispatch }) {
+import { setSearchMode } from "../../../modules/searchMode";
+
+function SearchContainer() {
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState("");
   const [searchPosts, setSearchPosts] = useState([]);
 
   const closeSearch = useCallback(() => {
-    dispatch({ type: "SET_SEARCHMODE", mode: false });
+    dispatch(setSearchMode(false));
     setInput("");
   }, [dispatch]);
 
@@ -40,8 +44,4 @@ function SearchContainer({ dispatch }) {
   );
 }
 
-function stateTOprops(state) {
-  return { searchModeState: state.searchModeReducer };
-}
-
-export default connect(stateTOprops)(React.memo(SearchContainer));
+export default React.memo(SearchContainer);
