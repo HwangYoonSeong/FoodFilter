@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
 import axios from "axios";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-function LogicContainer({ location, uidState }) {
+function LogicContainer({ location }) {
+  const uid = useSelector((state) => state.uid);
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
@@ -38,8 +39,8 @@ function LogicContainer({ location, uidState }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-    console.log(uidState);
-  }, [kakaoOCR, uidState]);
+    console.log(uid);
+  }, [kakaoOCR, uid]);
 
   return (
     <>
@@ -48,10 +49,4 @@ function LogicContainer({ location, uidState }) {
   );
 }
 
-function stateTOprops(state) {
-  return {
-    uidState: state.uidReducer,
-  };
-}
-
-export default connect(stateTOprops)(React.memo(LogicContainer));
+export default React.memo(LogicContainer);
