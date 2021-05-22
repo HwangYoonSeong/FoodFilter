@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import uidReducer from "./uid";
-import searchModeReducer from "./searchMode";
+import uid from "./uid";
+import searchMode from "./searchMode";
 
-const rootReducer = combineReducers({ uidReducer, searchModeReducer });
+const rootReducer = combineReducers({ uid, searchMode });
 
 export default rootReducer;

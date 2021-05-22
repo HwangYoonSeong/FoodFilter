@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
@@ -11,9 +12,6 @@ import Community from "./components/Community/CommunityContainer";
 import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
 import Detail from "./components/Community/Detail/DetailContainer";
-
-import { connect } from "react-redux";
-
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
@@ -31,12 +29,12 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App({ searchModeState }) {
+function App() {
+  const searchMode = useSelector((state) => state.searchMode);
   return (
     <>
       <GlobalStyle />
-      {searchModeState ? null : <NavBar />}
-
+      {searchMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/selectIngredients" component={SelectIngredients} />
@@ -50,8 +48,4 @@ function App({ searchModeState }) {
   );
 }
 
-function stateTOprops(state) {
-  return { searchModeState: state.searchModeReducer };
-}
-
-export default connect(stateTOprops)(App);
+export default App;

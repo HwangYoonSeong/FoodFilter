@@ -4,7 +4,7 @@ export const setSearchMode = (mode) => ({ type: SET_SEARCHMODE, mode });
 
 const initialSearchMode = false;
 
-export default function searchModeReducer(state = initialSearchMode, action) {
+export default function searchMode(state = initialSearchMode, action) {
   if (action.type === SET_SEARCHMODE) return action.mode;
   else return state;
 }
