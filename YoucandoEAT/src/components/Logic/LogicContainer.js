@@ -39,7 +39,7 @@ function LogicContainer({ location }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-    console.log(uid);
+    console.log(`접속 유저 uid : ${uid}`);
   }, [kakaoOCR, uid]);
 
   return (

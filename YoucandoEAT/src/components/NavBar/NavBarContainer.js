@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function NavBarContainer({ dispatch }) {
+import { setUid } from "../../modules/uid";
+
+function NavBarContainer() {
+  const dispatch = useDispatch();
+
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -26,7 +30,7 @@ function NavBarContainer({ dispatch }) {
           .then((result) => {
             var user = result.user;
 
-            dispatch({ type: "SET_UID", uid: user.uid });
+            dispatch(setUid(user.uid));
 
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
@@ -58,10 +62,10 @@ function NavBarContainer({ dispatch }) {
       if (user) {
         console.log("login");
         setUserEmail(user.email);
-        dispatch({ type: "SET_UID", uid: user.uid });
+        dispatch(setUid(user.uid));
         setUserPhoto(user.photoURL);
       } else {
-        dispatch({ type: "SET_UID", uid: "" });
+        dispatch(setUid(""));
 
         console.log("!login");
       }
@@ -86,10 +90,4 @@ function NavBarContainer({ dispatch }) {
   );
 }
 
-function stateTOprops(state) {
-  return {
-    uidState: state.uidReducer,
-  };
-}
-
-export default connect(stateTOprops)(React.memo(NavBarContainer));
+export default React.memo(NavBarContainer);
