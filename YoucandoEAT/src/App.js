@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useCallback } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
@@ -29,9 +29,31 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
-  const [uid, setUid] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
+const uidReducer = (state, action) => {
+  if (action.type === "SET_UID") return action.uid;
+  else return state;
+}
+
+const searchModeReducer = (state, action) => {
+  if (action.type === "SET_SEARCHMODE") return action.mode;
+  else return state;
+}
+
+function App () {
+  // const [uid, setUid] = useState("");
+  // const [searchMode, setSearchMode] = useState(false);
+  const [uid, uidDispatch] = useReducer(uidReducer, "");
+  const [searchMode, smDispatch] = useReducer(searchModeReducer, false);
+
+  const setUid = useCallback(uid => {
+    uidDispatch({ type: 'SET_UID', uid });
+  }, []);
+
+  const setSearchMode = useCallback(mode => {
+    smDispatch({ type: 'SET_SEARCHMODE', mode });
+  }, []);
+
+
   return (
     <>
       <GlobalStyle />
