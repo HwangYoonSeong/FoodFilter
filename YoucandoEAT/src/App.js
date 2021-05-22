@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from "react";
+import React, { useReducer } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
@@ -28,36 +28,40 @@ const Container = styled.div`
   max-width: 767px;
   margin: 0 auto;
 `;
+const initialState = {
+  uid: "",
+  searchMode: false
 
-const uidReducer = (state, action) => {
-  if (action.type === "SET_UID") return action.uid;
-  else return state;
+}
+const reducer = (state, action) => {
+
+  switch (action.type) {
+    case 'SET_UID':
+      return {
+        ...state,
+        uid: action.uid
+      };
+
+    case 'SET_SEARCHMODE':
+      return {
+        ...state,
+        searchMode: action.mode
+      };
+
+    default:
+      return state;
+  }
+
 }
 
-const searchModeReducer = (state, action) => {
-  if (action.type === "SET_SEARCHMODE") return action.mode;
-  else return state;
-}
-
-export const dispatch = React.createContext(null);
+export const globalDispatch = React.createContext(null);
 
 function App () {
-  // const [uid, setUid] = useState("");
-  // const [searchMode, setSearchMode] = useState(false);
-  const [uid, uidDispatch] = useReducer(uidReducer, "");
-  const [searchMode, smDispatch] = useReducer(searchModeReducer, false);
-
-  // const setUid = useCallback(uid => {
-  //   uidDispatch({ type: 'SET_UID', uid });
-  // }, []);
-
-  const setSearchMode = useCallback(mode => {
-    smDispatch({ type: 'SET_SEARCHMODE', mode });
-  }, []);
-
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { uid, searchMode } = state;
 
   return (
-    <dispatch.Provider value={uidDispatch}>
+    <globalDispatch.Provider value={dispatch}>
       <GlobalStyle />
       {searchMode ? null : <NavBar />}
 
@@ -81,7 +85,6 @@ function App () {
             <Community
               {...props}
               uid={uid}
-              setSearchMode={setSearchMode}
               searchMode={searchMode}
             />
           )}
@@ -95,7 +98,7 @@ function App () {
           render={(props) => <Detail {...props} uid={uid} />}
         />
       </Container>
-    </dispatch.Provider>
+    </globalDispatch.Provider>
   );
 }
 

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchPresenter from "./SearchPresenter";
-
-function SearchContainer({ setSearchMode }) {
+import { globalDispatch } from '../../../App';
+function SearchContainer () {
+  const dispatch = useContext(globalDispatch);
   const [input, setInput] = useState("");
   const [searchPosts, setSearchPosts] = useState([]);
 
   const closeSearch = () => {
-    setSearchMode(false);
+    dispatch({ type: 'SET_SEARCHMODE', mode: false });
     setInput("");
   };
 

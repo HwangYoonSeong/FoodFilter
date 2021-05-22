@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
-
-function CommunityContainer({ uid, setSearchMode, searchMode }) {
+import { globalDispatch } from '../../App';
+function CommunityContainer ({ uid, searchMode }) {
+  const dispatch = useContext(globalDispatch);
   const [dummyposts, setDummyPosts] = useState([]);
 
   useEffect(() => {
@@ -90,12 +91,12 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
     ]);
 
     return () => {
-      setSearchMode(false);
+      dispatch({ type: 'SET_SEARCHMODE', mode: false });
     };
-  }, [setSearchMode]);
+  }, [dispatch]);
 
   const openSearch = () => {
-    setSearchMode(true);
+    dispatch({ type: 'SET_SEARCHMODE', mode: true });
   };
 
   return (
@@ -105,7 +106,7 @@ function CommunityContainer({ uid, setSearchMode, searchMode }) {
         uid={uid}
         openSearch={openSearch}
         searchMode={searchMode}
-        setSearchMode={setSearchMode}
+
       />
     </>
   );
