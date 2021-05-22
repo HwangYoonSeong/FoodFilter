@@ -94,7 +94,7 @@ function CommunityPresenter({ dummyposts, uid, openSearch, searchMode }) {
           <SearchContainer />
         ) : (
           <>
-            {dummyposts.map((post, index) => (
+            {dummyposts.map((post) => (
               <Link
                 key={post.id}
                 to={`community/detail/${post.id}`}
