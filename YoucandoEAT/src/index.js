@@ -12,6 +12,7 @@ import "firebase/auth";
 
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
+import rootReducer from "./modules";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbRWC7N0QVQZiUERqu4s3bRxf2G7X4whA",
