@@ -89,8 +89,9 @@ function DetailPresenter ({ post, goBack }) {
           <GrPrevious size="24" />
         </PreviosBtn>
       </TopBar>
-      {/* CONTENT */}
 
+
+      {/* CONTENT */}
       {!Array.isArray(post) ? (<ContentsContainer>
         <table>
           <tbody>
@@ -109,26 +110,32 @@ function DetailPresenter ({ post, goBack }) {
         </table>
         <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
         <p>{post.content}</p>
-      </ContentsContainer>) : null
+      </ContentsContainer>) : null}
 
 
-      }
       {/* COMMENT */}
+      {post.comments ? (
+        <>
+          {post.comments.map((comment, index) => (
+            <CommentsContainer key={comment.id}>
+              <table style={{ marginTop: "0.2rem" }}>
+                <tbody>
+                  <tr>
+                    <td>
+                      <SmallUserImage src={Dummy} alt="dummy image" />
+                    </td>
+                    <td style={{ fontSize: "0.75rem" }}>{comment.writer}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style={{ margin: "0" }}>{comment.contents}</p>
+              <CommentTime>{comment.date}</CommentTime>
+            </CommentsContainer>
 
-      <CommentsContainer>
-        <table style={{ marginTop: "0.2rem" }}>
-          <tbody>
-            <tr>
-              <td>
-                <SmallUserImage src={Dummy} alt="dummy image" />
-              </td>
-              <td style={{ fontSize: "0.75rem" }}>bung1438@gmail.com</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ margin: "0" }}>dummy comment</p>
-        <CommentTime>04/18 21:52</CommentTime>
-      </CommentsContainer>
+          ))}
+        </>
+
+      ) : null}
 
 
 
