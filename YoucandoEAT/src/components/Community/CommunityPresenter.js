@@ -81,7 +81,7 @@ const MagBtn = styled.button`
 `;
 
 function CommunityPresenter ({
-  dummyposts,
+  posts,
   uid,
   openSearch,
   searchMode,
@@ -92,7 +92,6 @@ function CommunityPresenter ({
     textDecorationLine: "none",
     WebkitTapHighlightColor: "rgba(0,0,0,0)",
   };
-
   return (
     <>
       <PostContainer>
@@ -100,7 +99,7 @@ function CommunityPresenter ({
           <SearchContainer setSearchMode={setSearchMode} />
         ) : (
           <>
-            {dummyposts.map((post, index) => (
+            {posts.map((post, index) => (
               <Link
                 key={post._id}
                 to={`community/detail/${post._id}`}
@@ -115,7 +114,7 @@ function CommunityPresenter ({
                     </SmallFont>
                   </div>
                   <ThumbNail src={`${ipObj.ip}/images/${post.thumbnail}`} />
-                  {/* <ThumbNail src={post.thumbnail} /> */}
+
                 </Post>
               </Link>
             ))}

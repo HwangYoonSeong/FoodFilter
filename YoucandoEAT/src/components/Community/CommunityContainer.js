@@ -4,7 +4,7 @@ import CommunityPresenter from "./CommunityPresenter";
 import axios from "axios";
 import ipObj from "../../key"
 function CommunityContainer ({ uid, setSearchMode, searchMode }) {
-  const [dummyposts, setDummyPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   // useEffect(() => {
   //   setDummyPosts([
@@ -102,7 +102,7 @@ function CommunityContainer ({ uid, setSearchMode, searchMode }) {
     axios
       .get(`${ipObj.ip}/postList`)
       .then((response) => {
-        setDummyPosts(response.data.results);
+        setPosts(response.data.results);
       })
       .catch((err) => {
         console.error(err.response);
@@ -117,7 +117,7 @@ function CommunityContainer ({ uid, setSearchMode, searchMode }) {
   return (
     <>
       <CommunityPresenter
-        dummyposts={dummyposts}
+        posts={posts}
         uid={uid}
         openSearch={openSearch}
         searchMode={searchMode}

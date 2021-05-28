@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Dummy from "../../../assets/Lenna.png";
 import { GrPrevious } from "react-icons/gr";
+
+import ipObj from "../../../key"
 const ContentsContainer = styled.div`
   margin: 50px 0.5rem 0 0.5rem;
 `;
@@ -88,12 +90,13 @@ function DetailPresenter ({ post, goBack }) {
         </PreviosBtn>
       </TopBar>
       {/* CONTENT */}
-      <ContentsContainer>
+
+      {!Array.isArray(post) ? (<ContentsContainer>
         <table>
           <tbody>
             <tr>
               <td rowSpan="2">
-                <UserImage src={Dummy} alt="dummy image" />
+                <UserImage src={`${ipObj.ip}/images/${post.thumbnail}`} alt="dummy image" />
               </td>
               <td>{post.writer}</td>
             </tr>
@@ -106,9 +109,10 @@ function DetailPresenter ({ post, goBack }) {
         </table>
         <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
         <p>{post.content}</p>
-      </ContentsContainer>
+      </ContentsContainer>) : null
 
 
+      }
       {/* COMMENT */}
 
       <CommentsContainer>
@@ -125,6 +129,7 @@ function DetailPresenter ({ post, goBack }) {
         <p style={{ margin: "0" }}>dummy comment</p>
         <CommentTime>04/18 21:52</CommentTime>
       </CommentsContainer>
+
 
 
       {/* INPUT */}
