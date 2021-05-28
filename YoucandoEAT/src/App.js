@@ -54,51 +54,28 @@ const reducer = (state, action) => {
 
 }
 
-export const globalDispatch = React.createContext(null);
+export const store = React.createContext(initialState);
 
 function App () {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { uid, searchMode } = state;
+  const { searchMode } = state;
 
   return (
-    <globalDispatch.Provider value={dispatch}>
+    <store.Provider value={{ state, dispatch }}>
       <GlobalStyle />
       {searchMode ? null : <NavBar />}
 
       <Container>
         <Route exact path="/" component={Main} />
-
         <Route exact path="/selectIngredients" component={SelectIngredients} />
-
         <Route exact path="/capture" component={Capture} />
-
-        <Route
-          exact
-          path="/logic"
-          render={(props) => <Logic {...props} uid={uid} />}
-        />
-
-        <Route
-          exact
-          path="/community"
-          render={(props) => (
-            <Community
-              {...props}
-              uid={uid}
-              searchMode={searchMode}
-            />
-          )}
-        />
-
+        <Route exact path="/logic" component={Logic} />
+        <Route exact path="/community" component={Community} />
         <Route exact path="/community/write" component={WritePost} />
+        <Route exact path="/community/detail/:pid" component={Detail} />
 
-        <Route
-          exact
-          path="/community/detail/:pid"
-          render={(props) => <Detail {...props} uid={uid} />}
-        />
       </Container>
-    </globalDispatch.Provider>
+    </store.Provider>
   );
 }
 

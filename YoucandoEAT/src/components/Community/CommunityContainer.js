@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import CommunityPresenter from "./CommunityPresenter";
 import Dummy from "../../assets/Lenna.png";
-import { globalDispatch } from '../../App';
-function CommunityContainer ({ uid, searchMode }) {
-  const dispatch = useContext(globalDispatch);
+import { store } from '../../App';
+function CommunityContainer () {
+  const globalState = useContext(store);
+  const { state, dispatch } = globalState
   const [dummyposts, setDummyPosts] = useState([]);
 
   useEffect(() => {
@@ -103,9 +104,9 @@ function CommunityContainer ({ uid, searchMode }) {
     <>
       <CommunityPresenter
         dummyposts={dummyposts}
-        uid={uid}
+        uid={state.uid}
         openSearch={openSearch}
-        searchMode={searchMode}
+        searchMode={state.searchMode}
 
       />
     </>

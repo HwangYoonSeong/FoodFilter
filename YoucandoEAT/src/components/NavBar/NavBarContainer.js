@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
-import { globalDispatch } from '../../App';
+import { store } from '../../App';
 // import "firebase/auth";
 
 function NavBarContainer () {
-  const dispatch = useContext(globalDispatch);
+  const globalState = useContext(store);
+  const { dispatch } = globalState
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);

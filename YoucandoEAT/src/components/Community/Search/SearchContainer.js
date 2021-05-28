@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import SearchPresenter from "./SearchPresenter";
-import { globalDispatch } from '../../../App';
+import { store } from '../../../App';
 function SearchContainer () {
-  const dispatch = useContext(globalDispatch);
+  const globalState = useContext(store);
+  const { dispatch } = globalState
   const [input, setInput] = useState("");
   const [searchPosts, setSearchPosts] = useState([]);
 
