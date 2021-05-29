@@ -33,7 +33,7 @@ function WritePostContainer ({ history, uid }) {
     const onClick = () => {
         // uid, image, title, content
         // 서버로 보내기
-        console.log(image)
+        console.log(image) //이미지 전송하는 부분은 서버 코드를 확인해야함 
 
         axios
             .post(`${ipObj.ip}/postInput`, { "inputs": inputs, "uid": uid }, {

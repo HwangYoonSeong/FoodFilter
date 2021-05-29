@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
 // import "firebase/auth";
-
-function NavBarContainer({ setUid }) {
+import axios from "axios";
+import ipObj from "../../key"
+function NavBarContainer ({ setUid }) {
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -30,7 +31,20 @@ function NavBarContainer({ setUid }) {
             setUserPhoto(user.photoURL);
             // 사진, uid, email등
             // 서버로 유저 정보 전송
-            // setSidebar(false);
+            axios
+              .post(`${ipObj.ip}/userInput`, { "uid": user.uid, "email": user.email, "userImg": user.photoURL }, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((err) => {
+                console.error(err.response);
+              });
+
+
           });
       })
       .catch((error) => {
