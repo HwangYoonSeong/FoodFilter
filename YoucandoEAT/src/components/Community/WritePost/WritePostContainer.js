@@ -1,9 +1,11 @@
 import React, { useState, useCallback } from "react";
 import WritePostPresenter from "./WritePostPresenter"
 import axios from "axios";
+import { useSelector } from "react-redux";
 import ipObj from "../../../key"
 
 function WritePostContainer ({ history }) {
+  const uid = useSelector((state) => state.uid);
   const [image, setImage] = useState(null);
   const [inputs, setInputs] = useState({
     title: '',
@@ -54,7 +56,7 @@ function WritePostContainer ({ history }) {
 
     console.log(image);
     console.log(inputs);
-  }, [image, inputs]);
+  }, [image, inputs, history, uid]);
 
   return (
     <>

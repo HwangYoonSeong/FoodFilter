@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import SIPresenter from "./SIPresenter";
-
 import axios from "axios";
 import ipObj from "../../key"
 
@@ -39,14 +38,18 @@ function SIContainer () {
   // 로그인한 경우 uid로 해당 사용자의 filterBit로 allergyList 초기화
   // 그렇지 않은 경우 서버에서 받은 allergyList 그대로 표시
   useEffect(() => {
-    axios
-      .get(`${ipObj.ip}/ingredientList/${uid}`)
-      .then((response) => {
-        setAllergyList(response.data.results);
-      })
-      .catch((err) => {
-        console.error(err.response);
-      });
+
+    if (uid) {
+      axios
+        .get(`${ipObj.ip}/ingredientList/${uid}`)
+        .then((response) => {
+          setIngrdList(response.data.results);
+        })
+        .catch((err) => {
+          console.error(err.response);
+        });
+    }
+
 
   }, [uid]);
 
