@@ -37,18 +37,18 @@ function SIContainer ({ uid }) {
     console.log(uid);
     console.log(userALInfo);
 
-    // axios
-    //   .post(`${ipObj.ip}/filterBit`, { "filterBit": userALInfo, "uid": uid }, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
+    axios
+      .post(`${ipObj.ip}/filterBit`, { "filterBit": userALInfo, "uid": uid }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
 
   };
 
