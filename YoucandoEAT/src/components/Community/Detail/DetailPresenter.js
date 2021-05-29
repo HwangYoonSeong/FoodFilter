@@ -45,7 +45,7 @@ const InputContainer = styled.div`
 `;
 
 const Input = styled.textarea`
-  background: #e9ecef;
+  background: white;
   position: fixed;
   bottom: 1%;
   border: none;

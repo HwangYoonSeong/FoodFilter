@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    background:#e9ecef;
   }
 `;
 

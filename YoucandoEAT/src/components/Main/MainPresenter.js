@@ -8,7 +8,7 @@ import { AiOutlineTeam } from "react-icons/ai";
 
 const Container = styled.div`
   text-align: -webkit-center;
-  background: #dee2e6;
+  background: #e9ecef;
 `;
 
 const BackgroundContainer = styled.div`
@@ -16,22 +16,22 @@ const BackgroundContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 250px;
+  height: 350px;
 `;
 
 const TextContainer = styled.div`
   font-size: 1.5rem;
-  color: white;
+  color: #b2f2bb;
   width: 100%;
   position: absolute;
-  top: 8%;
+  top: 10%;
 `;
 
 const CaptureBtn = styled.label`
   background: white;
   border-radius: 1rem;
   width: 90%;
-  height: 180px;
+  height: 200px;
   color: black;
   margin-top: 1rem;
   font-size: 1rem;
@@ -51,7 +51,7 @@ const LinkBtnContainer = styled.div`
 const LinkBtn = styled.button`
   background: white;
   border-radius: 1rem;
-  height: 150px;
+  height: 180px;
   color: black;
   margin-top: 1rem;
   width: 100%;
@@ -64,6 +64,11 @@ const LinkBtn = styled.button`
   justify-content: space-evenly;
   align-items: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+`;
+
+const BtnName = styled.p`
+  margin: 0 0.5rem 0 0.5rem;
+  color: #2b8a3e;
 `;
 
 function MainPresenter({ onChange }) {
@@ -80,10 +85,16 @@ function MainPresenter({ onChange }) {
         </BackgroundContainer>
 
         <CaptureBtn htmlFor="capture">
-          <h1 style={{ margin: "0.5rem 0 0 0.5rem", alignSelf: "start" }}>
+          <h1
+            style={{
+              margin: "0.5rem 0 0 0.5rem",
+              alignSelf: "start",
+              color: "#2b8a3e",
+            }}
+          >
             Capture
           </h1>
-          <FiCamera size="3rem" />
+          <FiCamera size="3rem" style={{ color: "#2b8a3e" }} />
           <p style={{ margin: "0 0.5rem 0.5rem 0.5rem" }}>
             Take a picture of the menu you want to know the ingredients and
             capture it
@@ -101,15 +112,15 @@ function MainPresenter({ onChange }) {
         <LinkBtnContainer>
           <Link to="/selectIngredients" style={LinkStyle}>
             <LinkBtn>
-              <BsCardChecklist size="3rem" />
-              <p style={{ margin: "0.5rem 0 0 0.5rem" }}>Select Ingredients</p>
+              <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
+              <BtnName>Select Ingredients</BtnName>
             </LinkBtn>
           </Link>
 
           <Link to="/community" style={LinkStyle}>
             <LinkBtn>
-              <AiOutlineTeam size="3rem" />
-              <p style={{ margin: "0.5rem 0 0 0.5rem" }}>Community</p>
+              <AiOutlineTeam size="3rem" style={{ color: "#2b8a3e" }} />
+              <BtnName>Community</BtnName>
             </LinkBtn>
           </Link>
         </LinkBtnContainer>

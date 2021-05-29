@@ -118,7 +118,7 @@ function NavBarPresenter({
   userPhoto,
 }) {
   const LinkStyle = {
-    color: "black",
+    color: "#2b8a3e",
     textDecorationLine: "none",
     WebkitTapHighlightColor: "rgba(0,0,0,0)",
   };
