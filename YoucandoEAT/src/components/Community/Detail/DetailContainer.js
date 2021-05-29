@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSearchMode } from "../../../modules/searchMode";
 import axios from "axios";
-import ipObj from "../../../key"
+import ipObj from "../../../key";
 
-function DetailContainer ({ history }) {
+function DetailContainer({ history }) {
   const dispatch = useDispatch();
   const { pid } = useParams();
   const [post, setPost] = useState([]);
@@ -16,15 +16,14 @@ function DetailContainer ({ history }) {
     dispatch(setSearchMode(true));
     axios
       .get(`${ipObj.ip}/postDetail/${pid}`)
-      .then((response) => {//post, comment, user join해서 한번에 정보를 받음 
+      .then((response) => {
+        //post, comment, user join해서 한번에 정보를 받음
         setPost(response.data.results);
       })
       .catch((err) => {
         console.error(err.response);
       });
-
   }, [pid, dispatch]);
-
 
   const goBack = () => {
     dispatch(setSearchMode(false));
@@ -46,17 +45,21 @@ function DetailContainer ({ history }) {
     //   .catch((err) => {
     //     console.error(err.response);
     //   });
-
   };
 
   const onChangeInputs = (e) => {
     setComment(e.target.value);
-
-  }
+  };
 
   return (
     <>
-      <DetailPresenter post={post} goBack={goBack} onChangeInputs={onChangeInputs} clickEnter={clickEnter} comment={comment} />
+      <DetailPresenter
+        post={post}
+        goBack={goBack}
+        onChangeInputs={onChangeInputs}
+        clickEnter={clickEnter}
+        comment={comment}
+      />
     </>
   );
 }

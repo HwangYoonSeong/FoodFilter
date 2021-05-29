@@ -29,7 +29,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App () {
+function App() {
   const searchMode = useSelector((state) => state.searchMode);
   return (
     <>

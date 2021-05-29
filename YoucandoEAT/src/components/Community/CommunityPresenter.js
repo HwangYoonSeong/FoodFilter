@@ -5,7 +5,7 @@ import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
 
 import SearchContainer from "./Search/SearchContainer";
-import ipObj from "../../key"
+import ipObj from "../../key";
 const PostContainer = styled.ul`
   list-style: none;
   margin-top: 50px;
@@ -80,8 +80,7 @@ const MagBtn = styled.button`
   }
 `;
 
-
-function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
+function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -94,13 +93,13 @@ function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
           <SearchContainer />
         ) : (
           <>
-            {posts.map((post) => (
+            {posts.map((post, index) => (
               <Link
                 key={post._id}
                 to={`community/detail/${post._id}`}
                 style={LinkStyle}
               >
-                <Post index={post._id}>
+                <Post index={index}>
                   <div>
                     <Title>{post.title}</Title>
                     <Content>{post.content}</Content>
@@ -109,7 +108,6 @@ function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
                     </SmallFont>
                   </div>
                   <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
-
                 </Post>
               </Link>
             ))}

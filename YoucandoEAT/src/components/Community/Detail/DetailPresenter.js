@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import Dummy from "../../../assets/Lenna.png";
 import { GrPrevious } from "react-icons/gr";
 
-import ipObj from "../../../key"
+import ipObj from "../../../key";
 const ContentsContainer = styled.div`
   margin: 50px 0.5rem 0 0.5rem;
 `;
@@ -86,8 +86,13 @@ const PreviosBtn = styled.button`
   }
 `;
 
-function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment }) {
-
+function DetailPresenter({
+  post,
+  goBack,
+  onChangeInputs,
+  clickEnter,
+  comment,
+}) {
   return (
     <div>
       <TopBar>
@@ -96,29 +101,35 @@ function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment })
         </PreviosBtn>
       </TopBar>
 
-
       {/* CONTENT */}
-      {!Array.isArray(post) ? (<ContentsContainer>
-        <table>
-          <tbody>
-            <tr>
-              <td rowSpan="2">
-                <UserImage src={`${ipObj.ip}/images/${post.userImg}`} alt="user image" />
-              </td>
-              <td>{post.writer}</td>
-            </tr>
-            <tr>
-              <td style={{ fontSize: "0.75rem", color: "#adb5bd" }}>
-                {post.date}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
-        <PostImage src={`${ipObj.ip}/images/${post.postImg}`} alt="post"></PostImage>
-        <p>{post.content}</p>
-      </ContentsContainer>) : null}
-
+      {!Array.isArray(post) ? (
+        <ContentsContainer>
+          <table>
+            <tbody>
+              <tr>
+                <td rowSpan="2">
+                  <UserImage
+                    src={`${ipObj.ip}/images/${post.userImg}`}
+                    alt="user image"
+                  />
+                </td>
+                <td>{post.writer}</td>
+              </tr>
+              <tr>
+                <td style={{ fontSize: "0.75rem", color: "#adb5bd" }}>
+                  {post.date}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
+          <PostImage
+            src={`${ipObj.ip}/images/${post.postImg}`}
+            alt="post"
+          ></PostImage>
+          <p>{post.content}</p>
+        </ContentsContainer>
+      ) : null}
 
       {/* COMMENT */}
       {post.comments ? (
@@ -129,7 +140,10 @@ function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment })
                 <tbody>
                   <tr>
                     <td>
-                      <SmallUserImage src={`${ipObj.ip}/images/${comment.writerImg}`} alt="dummy image" />
+                      <SmallUserImage
+                        src={`${ipObj.ip}/images/${comment.writerImg}`}
+                        alt="dummy image"
+                      />
                     </td>
                     <td style={{ fontSize: "0.75rem" }}>{comment.writer}</td>
                   </tr>
@@ -138,10 +152,8 @@ function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment })
               <p style={{ margin: "0" }}>{comment.contents}</p>
               <CommentTime>{comment.date}</CommentTime>
             </CommentsContainer>
-
           ))}
         </>
-
       ) : null}
 
       {/*COMMENT INPUT */}
@@ -155,8 +167,7 @@ function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment })
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               clickEnter();
-              e.preventDefault()
-
+              e.preventDefault();
             }
           }}
         />
