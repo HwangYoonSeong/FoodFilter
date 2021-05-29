@@ -165,4 +165,4 @@ function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
   );
 }
 
-export default CapturePresenter;
+export default React.memo(CapturePresenter);

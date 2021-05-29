@@ -87,8 +87,7 @@ const PreviosBtn = styled.button`
 `;
 
 function DetailPresenter ({ post, goBack, onChangeInputs, clickEnter, comment }) {
-  // 지금은 더미 데이터이지만 post로 데이터 바인딩 변경
-  // 댓글 정보도 따로 받아온다면 댓글도 데이터 바인딩 변경
+
   return (
     <div>
       <TopBar>

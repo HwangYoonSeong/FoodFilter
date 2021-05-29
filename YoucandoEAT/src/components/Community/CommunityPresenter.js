@@ -80,13 +80,8 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter ({
-  posts,
-  uid,
-  openSearch,
-  searchMode,
-  setSearchMode,
-}) {
+
+function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -96,10 +91,10 @@ function CommunityPresenter ({
     <>
       <PostContainer>
         {searchMode ? (
-          <SearchContainer setSearchMode={setSearchMode} />
+          <SearchContainer />
         ) : (
           <>
-            {posts.map((post, index) => (
+            {posts.map((post) => (
               <Link
                 key={post._id}
                 to={`community/detail/${post._id}`}
@@ -136,4 +131,4 @@ function CommunityPresenter ({
   );
 }
 
-export default CommunityPresenter;
+export default React.memo(CommunityPresenter);

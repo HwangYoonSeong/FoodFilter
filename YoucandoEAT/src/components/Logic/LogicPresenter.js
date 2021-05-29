@@ -24,7 +24,7 @@ const IngredientsContainer = styled.div`
   margin-left: 1rem;
 `;
 
-function LogicPresenter({ croppedImage, result }) {
+function LogicPresenter ({ croppedImage, result }) {
   return (
     <>
       <Container>
@@ -52,4 +52,4 @@ function LogicPresenter({ croppedImage, result }) {
   );
 }
 
-export default LogicPresenter;
+export default React.memo(LogicPresenter);

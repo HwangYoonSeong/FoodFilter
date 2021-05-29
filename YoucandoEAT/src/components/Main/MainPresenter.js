@@ -23,7 +23,7 @@ const CircleBtn = styled.label`
   margin-top: 3rem;
 `;
 
-function MainPresenter ({ onChange }) {
+function MainPresenter({ onChange }) {
   const LinkStyle = {
     color: "white",
     textDecorationLine: "none",
@@ -56,4 +56,4 @@ function MainPresenter ({ onChange }) {
   );
 }
 
-export default MainPresenter;
+export default React.memo(MainPresenter);

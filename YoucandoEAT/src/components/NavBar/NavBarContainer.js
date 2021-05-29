@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NavBarPresenter from "./NavBarPresenter";
 import firebase from "firebase/app";
-// import "firebase/auth";
 import axios from "axios";
 import ipObj from "../../key"
-function NavBarContainer ({ setUid }) {
+import { useDispatch } from "react-redux";
+import { setUid } from "../../modules/uid";
+
+function NavBarContainer () {
+  const dispatch = useDispatch();
+
   const [sidebar, setSidebar] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userPhoto, setUserPhoto] = useState(null);
 
-  const logIn = (e) => {
+  const logIn = useCallback(() => {
     firebase
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -26,7 +30,7 @@ function NavBarContainer ({ setUid }) {
           .signInWithPopup(provider)
           .then((result) => {
             var user = result.user;
-            setUid(user.uid);
+            dispatch(setUid(user.uid));
             setUserEmail(user.email);
             setUserPhoto(user.photoURL);
             // 사진, uid, email등
@@ -44,13 +48,12 @@ function NavBarContainer ({ setUid }) {
                 console.error(err.response);
               });
 
-
           });
       })
       .catch((error) => {
         console.error(`ERROR : ${error}`);
       });
-  };
+  }, [dispatch]);
 
   const logOut = (e) => {
     firebase
@@ -58,7 +61,6 @@ function NavBarContainer ({ setUid }) {
       .signOut()
       .then(function () {
         setUserEmail(null);
-        // setSidebar(false);
       })
       .catch(function (error) {
         alert(`ERROR : ${error}`);
@@ -72,14 +74,15 @@ function NavBarContainer ({ setUid }) {
       if (user) {
         console.log("login");
         setUserEmail(user.email);
-        setUid(user.uid);
+        dispatch(setUid(user.uid));
         setUserPhoto(user.photoURL);
       } else {
-        setUid(null);
+        dispatch(setUid(""));
+
         console.log("!login");
       }
     });
-  }, [setUid]);
+  }, [dispatch]);
 
   useEffect(() => {
     GoogleSignIn();

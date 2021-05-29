@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setSearchMode } from "../../../modules/searchMode";
 import axios from "axios";
 import ipObj from "../../../key"
 
-function DetailContainer ({ history, setSearchMode, uid }) {
+function DetailContainer ({ history }) {
+  const dispatch = useDispatch();
   const { pid } = useParams();
   const [post, setPost] = useState([]);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    setSearchMode(true);
+    dispatch(setSearchMode(true));
     axios
       .get(`${ipObj.ip}/postDetail/${pid}`)
       .then((response) => {//post, comment, user join해서 한번에 정보를 받음 
@@ -21,11 +23,11 @@ function DetailContainer ({ history, setSearchMode, uid }) {
         console.error(err.response);
       });
 
-  }, [pid, setSearchMode]);
+  }, [pid, dispatch]);
 
 
   const goBack = () => {
-    setSearchMode(false);
+    dispatch(setSearchMode(false));
     history.goBack();
   };
 
@@ -51,7 +53,6 @@ function DetailContainer ({ history, setSearchMode, uid }) {
     setComment(e.target.value);
 
   }
-
 
   return (
     <>

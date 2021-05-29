@@ -113,4 +113,4 @@ function WritePostPresenter({
   );
 }
 
-export default WritePostPresenter;
+export default React.memo(WritePostPresenter);

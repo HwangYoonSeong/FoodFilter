@@ -74,7 +74,7 @@ background: black;
   }
 `;
 
-function SAPresenter ({ allergyList, save, onToggle }) {
+function SIPresenter ({ ingrdList, save, onToggle }) {
   return (
     <>
       <Header>
@@ -86,7 +86,7 @@ function SAPresenter ({ allergyList, save, onToggle }) {
 
       < IngrdContainer >
         {
-          allergyList.map((el) => {
+          ingrdList.map((el) => {
             return (
               <Ingrd
                 isClick={el.checked}
@@ -94,7 +94,6 @@ function SAPresenter ({ allergyList, save, onToggle }) {
                 onClick={() => onToggle(el.id)}
               >
                 <IngrdImg src={`${ipObj.ip}/images/${el.image}`} alt="FoodImg" />
-                {/* <IngrdImg src={el.image} alt="FoodImg" /> */}
                 <IngrdName>{el.name}</IngrdName>
               </Ingrd>
             );
@@ -112,4 +111,4 @@ function SAPresenter ({ allergyList, save, onToggle }) {
   );
 }
 
-export default SAPresenter;
+export default React.memo(SIPresenter);

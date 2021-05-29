@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
-
 import axios from "axios";
-// import ipObj from "../../key"
+import { useSelector } from "react-redux";
+
 function LogicContainer ({ location }) {
+  const uid = useSelector((state) => state.uid);
   const resizeImage = location.state.resizeImage;
   const croppedImage = location.state.croppedImage;
 
-  let [result, setResult] = useState(null);
+  const [result, setResult] = useState(null);
 
   const kakaoOCR = useCallback(() => {
     let form = new FormData();
@@ -32,6 +33,7 @@ function LogicContainer ({ location }) {
   }, [resizeImage]);
 
   const getData = () => {
+    // 음식재료 요청 
     // axios
     //   .get(`${ipObj.ip}/search/${result}`)
     //   .then((response) => {
@@ -47,7 +49,8 @@ function LogicContainer ({ location }) {
   useEffect(() => {
     kakaoOCR();
     getData();
-  }, [kakaoOCR]);
+    console.log(`접속 유저 uid : ${uid}`);
+  }, [kakaoOCR, uid]);
 
   return (
     <>

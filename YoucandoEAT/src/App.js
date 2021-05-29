@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
-import SelectAllergy from "./components/SelectAllergy/SAContainer";
+import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
 import Detail from "./components/Community/Detail/DetailContainer";
-
 const GlobalStyle = createGlobalStyle`
   body{
     font-family : 'NanumSquare';
@@ -30,52 +30,19 @@ const Container = styled.div`
 `;
 
 function App () {
-  const [uid, setUid] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
+  const searchMode = useSelector((state) => state.searchMode);
   return (
     <>
       <GlobalStyle />
-      {searchMode ? null : <NavBar setUid={setUid} />}
-
+      {searchMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
-
+        <Route exact path="/selectIngredients" component={SelectIngredients} />
         <Route exact path="/capture" component={Capture} />
-
-        <Route
-          exact
-          path="/logic"
-          render={(props) => <Logic {...props} uid={uid} />}
-        />
-
-        <Route
-          exact
-          path="/community"
-          render={(props) => (
-            <Community
-              {...props}
-              uid={uid}
-              setSearchMode={setSearchMode}
-              searchMode={searchMode}
-            />
-          )}
-        />
-
-        <Route exact path="/selectIngredients" render={(props) => (
-          <SelectAllergy
-            {...props}
-            uid={uid}
-          />
-        )}
-        />
-
-        <Route exact path="/community/write" render={(props) => <WritePost {...props} uid={uid} />} />
-
-        <Route
-          exact
-          path="/community/detail/:pid"
-          render={(props) => <Detail {...props} uid={uid} setSearchMode={setSearchMode} />}
-        />
+        <Route exact path="/logic" component={Logic} />
+        <Route exact path="/community" component={Community} />
+        <Route exact path="/community/write" component={WritePost} />
+        <Route exact path="/community/detail/:pid" component={Detail} />
       </Container>
     </>
   );
