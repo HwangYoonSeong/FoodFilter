@@ -13,7 +13,7 @@ function DetailContainer ({ history, setSearchMode }) {
     setSearchMode(true);
     axios
       .get(`${ipObj.ip}/postDetail/${pid}`)
-      .then((response) => {//post와 comment 내용 join 해서 한꺼번에 받음
+      .then((response) => {//post, comment, user join해서 한번에 정보를 받음 
         setPost(response.data.results);
       })
       .catch((err) => {

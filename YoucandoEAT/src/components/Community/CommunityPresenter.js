@@ -113,7 +113,7 @@ function CommunityPresenter ({
                       {post.date} | {post.writer}
                     </SmallFont>
                   </div>
-                  <ThumbNail src={`${ipObj.ip}/images/${post.thumbnail}`} />
+                  <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
 
                 </Post>
               </Link>

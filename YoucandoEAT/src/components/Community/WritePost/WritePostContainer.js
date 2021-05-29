@@ -36,7 +36,7 @@ function WritePostContainer ({ history, uid }) {
         console.log(image) //이미지 전송하는 부분은 서버 코드를 확인해야함 
 
         axios
-            .post(`${ipObj.ip}/postInput`, { "inputs": inputs, "uid": uid }, {
+            .post(`${ipObj.ip}/postInput`, { "inputs": inputs, "writerId": uid }, {
                 headers: {
                     "Content-Type": "application/json",
                 },
