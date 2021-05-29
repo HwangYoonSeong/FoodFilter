@@ -74,7 +74,7 @@ background: black;
   }
 `;
 
-function SIPresenter ({ allergyList, save, onToggle }) {
+function SAPresenter ({ allergyList, save, onToggle }) {
   return (
     <>
       <Header>
@@ -112,4 +112,4 @@ function SIPresenter ({ allergyList, save, onToggle }) {
   );
 }
 
-export default SIPresenter;
+export default SAPresenter;
