@@ -8,7 +8,7 @@ import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
 import Community from "./components/Community/CommunityContainer";
-import SelectAllergy from "./components/SelectAllergy/SAContainer";
+import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
 import Detail from "./components/Community/Detail/DetailContainer";
 
@@ -62,7 +62,7 @@ function App () {
         />
 
         <Route exact path="/selectIngredients" render={(props) => (
-          <SelectAllergy
+          <SelectIngredients
             {...props}
             uid={uid}
           />

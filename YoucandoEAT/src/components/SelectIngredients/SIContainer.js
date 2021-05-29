@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SAPresenter from "./SAPresenter";
+import SIPresenter from "./SIPresenter";
 
 import axios from "axios";
 import ipObj from "../../key"
@@ -27,7 +27,7 @@ import ipObj from "../../key"
 // import walnutImg from "./FoodImg/walnutImg.png";
 // import wheatImg from "./FoodImg/wheatImg.png";
 
-function SAContainer ({ uid }) {
+function SIContainer ({ uid }) {
   const [allergyList, setAllergyList] = useState([]);
   const [userALInfo, setUserALInfo] = useState(0);
 
@@ -222,9 +222,9 @@ function SAContainer ({ uid }) {
 
   return (
     <>
-      <SAPresenter allergyList={allergyList} save={save} onToggle={onToggle} />
+      <SIPresenter allergyList={allergyList} save={save} onToggle={onToggle} />
     </>
   );
 }
 
-export default SAContainer;
+export default SIContainer;
