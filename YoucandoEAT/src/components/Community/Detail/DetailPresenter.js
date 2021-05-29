@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import Dummy from "../../../assets/Lenna.png";
-import { GrPrevious } from "react-icons/gr";
 
 import ipObj from "../../../key";
 const ContentsContainer = styled.div`
@@ -64,43 +62,15 @@ const Input = styled.textarea`
   }
 `;
 
-const TopBar = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3);
-`;
-
-const PreviosBtn = styled.button`
-  margin: 5px 0 5px 0.5rem;
-  border: none;
-  outline: none;
-  background: white;
-
-  border-radius: 8px;
-
-  &:active {
-    filter: brightness(85%);
-  }
-`;
-
 function DetailPresenter({
   post,
-  goBack,
+
   onChangeInputs,
   clickEnter,
   comment,
 }) {
   return (
     <div>
-      <TopBar>
-        <PreviosBtn onClick={goBack}>
-          <GrPrevious size="24" />
-        </PreviosBtn>
-      </TopBar>
-
       {/* CONTENT */}
       {!Array.isArray(post) ? (
         <ContentsContainer>

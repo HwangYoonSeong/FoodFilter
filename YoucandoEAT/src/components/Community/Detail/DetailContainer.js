@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setSearchMode } from "../../../modules/searchMode";
+
 import axios from "axios";
 import ipObj from "../../../key";
 
-function DetailContainer({ history }) {
+function DetailContainer() {
   const dispatch = useDispatch();
   const { pid } = useParams();
   const [post, setPost] = useState([]);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    dispatch(setSearchMode(true));
     axios
       .get(`${ipObj.ip}/postDetail/${pid}`)
       .then((response) => {
@@ -24,11 +23,6 @@ function DetailContainer({ history }) {
         console.error(err.response);
       });
   }, [pid, dispatch]);
-
-  const goBack = () => {
-    dispatch(setSearchMode(false));
-    history.goBack();
-  };
 
   const clickEnter = () => {
     console.log(comment);
@@ -55,7 +49,6 @@ function DetailContainer({ history }) {
     <>
       <DetailPresenter
         post={post}
-        goBack={goBack}
         onChangeInputs={onChangeInputs}
         clickEnter={clickEnter}
         comment={comment}
