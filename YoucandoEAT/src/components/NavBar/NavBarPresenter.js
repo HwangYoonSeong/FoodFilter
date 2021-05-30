@@ -93,16 +93,15 @@ const MenuList = styled.ul`
 `;
 
 const MenuItem = styled.li`
+  color: #2b8a3e;
   font-size: 30px;
   width: 85%;
   border-radius: 8px;
   background: white;
-  border: 2px dashed black;
   padding: 5px 0 5px 0;
 
   &:active {
     filter: brightness(85%);
-    border: 2px solid black;
   }
   & + & {
     margin-top: 2rem;
