@@ -7,6 +7,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
+  color: #2b8a3e;
   font-weight: bold;
   font-size: 24px;
   text-align: left;
@@ -24,7 +25,7 @@ const IngredientsContainer = styled.div`
   margin-left: 1rem;
 `;
 
-function LogicPresenter ({ croppedImage, result }) {
+function LogicPresenter({ croppedImage, result }) {
   return (
     <>
       <Container>

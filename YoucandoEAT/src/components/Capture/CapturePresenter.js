@@ -14,7 +14,7 @@ const ImageContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background: black;
+  background: #2b8a3e;
   border: none;
   color: white;
   width: 150px;
@@ -112,7 +112,7 @@ const ModalFooter = styled.div`
 const ModalBtn = styled.button`
   outline: none;
   border: none;
-  background: black;
+  background: #2b8a3e;
   color: white;
   margin-right: 1rem;
   font-size: 20px;
