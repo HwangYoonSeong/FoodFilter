@@ -37,6 +37,7 @@ const SearchBar = styled.div`
 
 const Input = styled.input`
   border: none;
+  background: #e9ecef;
   margin: 0.5rem;
   padding: 0.5rem;
   width: 100%;
@@ -65,7 +66,7 @@ const CloseBtn = styled.button`
   margin: 5px 0 5px 0.5rem;
   border: none;
   outline: none;
-  background: white;
+  background: #e9ecef;
 
   border-radius: 8px;
 

@@ -20,6 +20,7 @@ const InputTitle = styled.input`
   font-size: 1.4rem;
   border-bottom: solid 1px #adb5bd;
   font-family: "NanumSquare";
+  background: #e9ecef;
 
   &:focus {
     outline: none;
@@ -33,6 +34,7 @@ const InputContentContainer = styled.div`
 `;
 
 const InputContent = styled.textarea`
+  background: #e9ecef;
   border: none;
   margin: 0 1rem 0 1rem;
   width: 100%;
@@ -53,6 +55,7 @@ const CamBtn = styled.label`
   border-radius: 0.5rem;
   bottom: 2%;
   left: 2%;
+  background: #e9ecef;
 `;
 
 const CompBtn = styled.button`
@@ -64,6 +67,7 @@ const CompBtn = styled.button`
   border-radius: 0.5rem;
   bottom: 2%;
   right: 2%;
+  background: #e9ecef;
 `;
 
 function WritePostPresenter({
