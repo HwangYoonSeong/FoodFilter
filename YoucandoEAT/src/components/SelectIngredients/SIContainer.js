@@ -27,10 +27,10 @@ function SIContainer () {
     //   });
   }, [uid, userInfo]);
 
-  const onToggle = useCallback((id) => {
+  const onToggle = useCallback((index) => {
     setIngrdList((ingrdList) =>
-      ingrdList.map((ingrd) =>
-        ingrd.id === id ? { ...ingrd, checked: !ingrd.checked } : ingrd
+      ingrdList.map((ingrd, i) =>
+        i === index ? { ...ingrd, checked: !ingrd.checked } : ingrd
       )
     );
   }, []);

@@ -74,7 +74,7 @@ const Btn = styled.button`
   }
 `;
 
-function SIPresenter({ ingrdList, save, onToggle }) {
+function SIPresenter ({ ingrdList, save, onToggle }) {
   return (
     <>
       <Header>
@@ -85,12 +85,12 @@ function SIPresenter({ ingrdList, save, onToggle }) {
       </Header>
 
       <IngrdContainer>
-        {ingrdList.map((el) => {
+        {ingrdList.map((el, index) => {
           return (
             <Ingrd
               isClick={el.checked}
-              key={el.id}
-              onClick={() => onToggle(el.id)}
+              key={index}
+              onClick={() => onToggle(index)}
             >
               <IngrdImg src={`${ipObj.ip}/images/${el.image}`} alt="FoodImg" />
               <IngrdName>{el.name}</IngrdName>
