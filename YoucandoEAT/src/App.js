@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-user-select: none;
     user-select: none;
     background:#e9ecef;
+    height:10000px;
   }
 `;
 

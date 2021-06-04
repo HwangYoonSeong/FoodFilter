@@ -12,6 +12,8 @@ const Container = styled.div`
 `;
 
 const BackgroundContainer = styled.div`
+  display: flex;
+  justify-content: center;
   background-image: url(${bgImage});
   background-repeat: no-repeat;
   background-size: cover;

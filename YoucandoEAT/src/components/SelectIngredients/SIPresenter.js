@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { GiSaveArrow } from "react-icons/gi";
 import ipObj from "../../key";
 const Header = styled.div`
-  display: flex;
   position: fixed;
   width: 100%;
   padding: 1rem 1rem 1rem 0;
@@ -11,8 +10,9 @@ const Header = styled.div`
   font-size: 20px;
   color: white;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 2.8rem;
-  justify-content: center;
 `;
 const Footer = styled.div`
   display: flex;
@@ -74,7 +74,7 @@ const Btn = styled.button`
   }
 `;
 
-function SIPresenter ({ ingrdList, save, onToggle }) {
+function SIPresenter({ ingrdList, save, onToggle }) {
   return (
     <>
       <Header>
