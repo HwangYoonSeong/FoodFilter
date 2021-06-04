@@ -1,0 +1,46 @@
+<body>
+    <form action = "/ycde/userInput" method="post">
+        {% csrf_token %}
+        <legend>userInput2222</legend>
+        <input id="uid" type="text" name="uid" value="uid">
+        <input id="userImg" type="text" name="userImg" value="userImg">
+        <input id="email" type="text" name="email" value="email">
+        <input type="submit">
+    </form>
+
+    <form action = "/ycde/postInput" method="post">
+        {% csrf_token %}
+        <legend>postInput</legend>
+        <input id="title" type="text" name="title" value="title">
+        <input id="content" type="text" name="content" value="content">
+        <input id="uid" type="text" name="uid" value="uid">
+        <input id="posImg" type="text" name="posImg" value="posImg">
+        <input type="submit">
+    </form>
+
+    <form action = "/ycde/commentInput" method="post">
+        {% csrf_token %}
+        <legend>commentInput</legend>
+        <input id="pid" type="text" name="pid" value="pid">
+        <input id="uid" type="text" name="uid" value="uid">
+        <input id="contents" type="text" name="contents" value="contents">
+        <input type="submit">
+    </form>
+
+    <form action = "/ycde/postList" method="get">
+        <legend>postList</legend>
+        <input type="submit">
+    </form>
+
+    <form action = "/ycde/postDetail" method="get">
+        <legend>postDetail</legend>
+        <input id="pid" type="text" name="pid" value="pid">
+        <input type="submit">
+    </form>
+
+    <form action = "/ycde/ingredientList" method="get">
+        <legend>ingredientList</legend>
+        <input id="uid" type="text" name="uid" value="uid">
+        <input type="submit">
+    </form>
+</body>
