@@ -24,7 +24,7 @@ function MainContainer({ history }) {
         });
       };
     },
-    [history]
+    [history, dispatch]
   );
 
   return (

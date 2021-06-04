@@ -3,14 +3,12 @@ import styled, { keyframes, css } from "styled-components";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-const Container = styled.div`
-  text-align: center;
-  margin-top: 60px;
-`;
-
 const ImageContainer = styled.div`
-  margin: 0 auto;
-  width: 65%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
 `;
 
 const Button = styled.button`
@@ -135,8 +133,8 @@ function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
         </ModalFooter>
       </ModalBox>
 
-      <Container>
-        <p style={{ fontSize: "1.1rem" }}>Select the menu you want to know</p>
+      <div>
+        {/* <p style={{ fontSize: "1.1rem" }}>Select the menu you want to know</p> */}
         <ImageContainer>
           <Cropper
             style={{ width: "100%" }}
@@ -158,8 +156,8 @@ function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
           />
         </ImageContainer>
 
-        <Button onClick={() => setModal(true)}>SELECT!!</Button>
-      </Container>
+        {/* <Button onClick={() => setModal(true)}>SELECT!!</Button> */}
+      </div>
     </>
   );
 }
