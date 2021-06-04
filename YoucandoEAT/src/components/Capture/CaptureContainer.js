@@ -1,7 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import CapturePresenter from "./CapturePresenter";
+import { useDispatch } from "react-redux";
+
+import { setCaptureMode } from "../../modules/captureMode";
 
 function CaptureContainer({ history, location }) {
+  const dispatch = useDispatch();
+
   const image = location.state.image;
   const [cropper, setCropper] = useState(null);
   const [modal, setModal] = useState(false);
@@ -56,6 +61,13 @@ function CaptureContainer({ history, location }) {
       });
     };
   }, [cropper, getResizeFile, history]);
+
+  useEffect(() => {
+    dispatch(setCaptureMode(true));
+    return () => {
+      dispatch(setCaptureMode(false));
+    };
+  }, [dispatch]);
 
   return (
     <>

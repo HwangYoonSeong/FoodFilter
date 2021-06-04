@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
     -webkit-user-select: none;
     user-select: none;
     background:#e9ecef;
-    height:10000px;
   }
 `;
 
@@ -33,10 +32,12 @@ const Container = styled.div`
 
 function App() {
   const searchMode = useSelector((state) => state.searchMode);
+  const captureMode = useSelector((state) => state.captureMode);
+
   return (
     <>
       <GlobalStyle />
-      {searchMode ? null : <NavBar />}
+      {searchMode || captureMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
         <Route exact path="/selectIngredients" component={SelectIngredients} />
