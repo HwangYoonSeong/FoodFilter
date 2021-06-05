@@ -42,6 +42,7 @@ function WritePostContainer({ history }) {
 
     if (inputs.title === "" || inputs.content === "") {
       setModal(true);
+      return;
     }
     // uid, image, title, content
     // 서버로 보내기
