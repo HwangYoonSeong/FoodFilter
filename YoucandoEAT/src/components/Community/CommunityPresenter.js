@@ -96,7 +96,7 @@ function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
             {posts.map((post, index) => (
               <Link
                 key={index}
-                to={`community/detail/${post._id}`}
+                to={`community/detail/${post.pid}`}
                 style={LinkStyle}
               >
                 <Post index={index}>
@@ -107,7 +107,7 @@ function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
                       {post.date} | {post.writer}
                     </SmallFont>
                   </div>
-                  {post.postImg[0] ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
+                  {post.postImg ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
 
                 </Post>
               </Link>

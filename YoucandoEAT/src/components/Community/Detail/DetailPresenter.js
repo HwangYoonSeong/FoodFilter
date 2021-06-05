@@ -62,12 +62,13 @@ const Input = styled.textarea`
   }
 `;
 
-function DetailPresenter({
+function DetailPresenter ({
   post,
 
   onChangeInputs,
   clickEnter,
   comment,
+  comments
 }) {
   return (
     <div>
@@ -79,7 +80,7 @@ function DetailPresenter({
               <tr>
                 <td rowSpan="2">
                   <UserImage
-                    src={`${ipObj.ip}/images/${post.userImg}`}
+                    src={`${post.userImg}`}
                     alt="user image"
                   />
                 </td>
@@ -94,7 +95,7 @@ function DetailPresenter({
           </table>
           <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
           <PostImage
-            src={`${ipObj.ip}/images/${post.postImg}`}
+            src={`${ipObj.ip}/${post.postImg}`}
             alt="post"
           ></PostImage>
           <p>{post.content}</p>
@@ -102,16 +103,16 @@ function DetailPresenter({
       ) : null}
 
       {/* COMMENT */}
-      {post.comments ? (
+      {comments ? (
         <>
-          {post.comments.map((comment, index) => (
+          {comments.map((comment, index) => (
             <CommentsContainer key={comment.id}>
               <table style={{ marginTop: "0.2rem" }}>
                 <tbody>
                   <tr>
                     <td>
                       <SmallUserImage
-                        src={`${ipObj.ip}/images/${comment.writerImg}`}
+                        src={`${comment.writerImg}`}
                         alt="dummy image"
                       />
                     </td>

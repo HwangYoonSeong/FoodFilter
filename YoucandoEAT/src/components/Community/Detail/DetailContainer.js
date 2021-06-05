@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
 import ipObj from "../../../key";
 
-function DetailContainer() {
+function DetailContainer () {
   const dispatch = useDispatch();
+  const uid = useSelector((state) => state.uid);
   const { pid } = useParams();
   const [post, setPost] = useState([]);
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${ipObj.ip}/postDetail/${pid}`)
+      .get(`${ipObj.ip}/postDetail?pid=${pid}`)
       .then((response) => {
         //post, comment, user join해서 한번에 정보를 받음
         setPost(response.data.results);
+        setComments(response.data.results.comments);
+
       })
       .catch((err) => {
         console.error(err.response);
@@ -27,18 +31,18 @@ function DetailContainer() {
   const clickEnter = () => {
     console.log(comment);
     setComment("");
-    // axios
-    //   .post(`${ipObj.ip}/commentInput`, { "pid": pid, "writerId": uid, "comment": comment }, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
+    axios
+      .post(`${ipObj.ip}/commentInput`, { "pid": pid, "uid": uid, "contents": comment }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
   };
 
   const onChangeInputs = (e) => {
@@ -52,6 +56,7 @@ function DetailContainer() {
         onChangeInputs={onChangeInputs}
         clickEnter={clickEnter}
         comment={comment}
+        comments={comments}
       />
     </>
   );
