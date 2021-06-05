@@ -7,25 +7,25 @@ import ipObj from "../../key"
 function SIContainer () {
   const uid = useSelector((state) => state.uid);
   const [ingrdList, setIngrdList] = useState([]);
-  const [userInfo, setUserInfo] = useState(0);
+  const [filterBit, setFilterBit] = useState(0);
 
   const save = useCallback(() => {
     // 서버로 유저의 알러지정보인 userInfo를
     // 10진수로 전송
-    console.log(`유저 uid : ${uid}의 userInfo : ${userInfo}를 서버로 전송`);
-    // axios
-    //   .post(`${ipObj.ip}/filterBit`, { "filterBit": userALInfo, "uid": uid }, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
-  }, [uid, userInfo]);
+    console.log(`유저 uid : ${uid}의 filterBit : ${filterBit}를 서버로 전송`);
+    axios
+      .post(`${ipObj.ip}/filterBit`, { "filterBit": filterBit, "uid": uid }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
+  }, [uid, filterBit]);
 
   const onToggle = useCallback((index) => {
     setIngrdList((ingrdList) =>
@@ -41,7 +41,7 @@ function SIContainer () {
 
     if (uid) {
       axios
-        .get(`${ipObj.ip}/ingredientList/${uid}`)
+        .get(`${ipObj.ip}/ingredientList?uid=${uid}`)
         .then((response) => {
           setIngrdList(response.data.results);
         })
@@ -54,9 +54,9 @@ function SIContainer () {
   }, [uid]);
 
   useEffect(() => {
-    setUserInfo(
+    setFilterBit(
       parseInt(
-        ingrdList.map((allergy) => (allergy.checked ? 1 : 0)).join(""),
+        ingrdList.slice(0).reverse().map((allergy) => (allergy.checked ? 1 : 0)).join(""),
         2
       )
     );

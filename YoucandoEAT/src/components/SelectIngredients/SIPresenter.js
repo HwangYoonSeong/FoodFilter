@@ -92,7 +92,7 @@ function SIPresenter ({ ingrdList, save, onToggle }) {
               key={index}
               onClick={() => onToggle(index)}
             >
-              <IngrdImg src={`${ipObj.ip}/images/${el.image}`} alt="FoodImg" />
+              <IngrdImg src={`${ipObj.ip}/${el.image}`} alt="FoodImg" />
               <IngrdName>{el.name}</IngrdName>
             </Ingrd>
           );
