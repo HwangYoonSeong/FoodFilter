@@ -48,7 +48,7 @@ function DetailContainer() {
         },
 
         {
-          id: 0,
+          id: 1,
           writerImg: Dummy,
           writer: "Lenna",
           contents:
@@ -86,8 +86,6 @@ function DetailContainer() {
   const onChangeInputs = (e) => {
     setComment(e.target.value);
   };
-
-  console.log(post);
 
   return (
     <>

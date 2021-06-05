@@ -92,6 +92,7 @@ const DarkBackground = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
+  z-index: 9;
 `;
 
 const slideUp = keyframes`
