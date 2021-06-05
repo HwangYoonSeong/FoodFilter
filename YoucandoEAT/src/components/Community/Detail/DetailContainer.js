@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Dummy from "../../../assets/Lenna.png";
 
-import axios from "axios";
-import ipObj from "../../../key";
+// import axios from "axios";
+// import ipObj from "../../../key";
 
 function DetailContainer() {
   const dispatch = useDispatch();
 
   const [modal, setModal] = useState(false);
-  const { pid } = useParams();
+  // const { pid } = useParams();
   const [post, setPost] = useState(null);
   const [comment, setComment] = useState("");
 
@@ -39,14 +39,6 @@ function DetailContainer() {
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       comments: [
-        {
-          id: 0,
-          writerImg: Dummy,
-          writer: "Lenna",
-          contents: "short contents",
-          date: "2021-06-06 19:43",
-        },
-
         {
           id: 0,
           writerImg: Dummy,
@@ -92,6 +84,8 @@ function DetailContainer() {
   const onChangeInputs = (e) => {
     setComment(e.target.value);
   };
+
+  console.log(post);
 
   return (
     <>

@@ -158,7 +158,6 @@ const ModalBtn = styled.button`
 
 function DetailPresenter({
   post,
-
   onChangeInputs,
   clickEnter,
   comment,
@@ -178,14 +177,15 @@ function DetailPresenter({
       </ModalBox>
 
       {/* CONTENT */}
-      {!post ? (
+      {post ? (
         <ContentsContainer>
           <table>
             <tbody>
               <tr>
                 <td rowSpan="2">
                   <UserImage
-                    src={`${ipObj.ip}/images/${post.userImg}`}
+                    // src={`${ipObj.ip}/images/${post.userImg}`}
+                    src={post.userImg}
                     alt="user image"
                   />
                 </td>
@@ -200,7 +200,8 @@ function DetailPresenter({
           </table>
           <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
           <PostImage
-            src={`${ipObj.ip}/images/${post.postImg}`}
+            // src={`${ipObj.ip}/images/${post.postImg}`}
+            src={post.postImg}
             alt="post"
           ></PostImage>
           <p>{post.content}</p>
@@ -208,7 +209,7 @@ function DetailPresenter({
       ) : null}
 
       {/* COMMENT */}
-      {post.comments ? (
+      {post ? (
         <>
           {post.comments.map((comment, index) => (
             <CommentsContainer key={comment.id}>
@@ -217,7 +218,8 @@ function DetailPresenter({
                   <tr>
                     <td>
                       <SmallUserImage
-                        src={`${ipObj.ip}/images/${comment.writerImg}`}
+                        // src={`${ipObj.ip}/images/${comment.writerImg}`}
+                        src={comment.writerImg}
                         alt="dummy image"
                       />
                     </td>
