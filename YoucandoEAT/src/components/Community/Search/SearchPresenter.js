@@ -17,7 +17,7 @@ const ClearBtn = styled.button`
 
   border: none;
   outline: none;
-  background: white;
+  background: #e9ecef;
 
   border-radius: 8px;
 
