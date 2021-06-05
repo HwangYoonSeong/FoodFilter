@@ -80,7 +80,7 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
+function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -95,7 +95,7 @@ function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
           <>
             {posts.map((post, index) => (
               <Link
-                key={post._id}
+                key={index}
                 to={`community/detail/${post._id}`}
                 style={LinkStyle}
               >
@@ -107,7 +107,8 @@ function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
                       {post.date} | {post.writer}
                     </SmallFont>
                   </div>
-                  <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
+                  {post.postImg[0] ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
+
                 </Post>
               </Link>
             ))}

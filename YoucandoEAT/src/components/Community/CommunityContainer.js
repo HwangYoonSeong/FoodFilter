@@ -20,6 +20,7 @@ function CommunityContainer () {
       .get(`${ipObj.ip}/postList`)
       .then((response) => {
         setPosts(response.data.results);
+        console.log(response.data.results);
       })
       .catch((err) => {
         console.error(err.response);

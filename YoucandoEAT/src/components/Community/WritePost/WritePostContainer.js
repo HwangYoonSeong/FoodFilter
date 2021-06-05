@@ -15,13 +15,15 @@ function WritePostContainer ({ history }) {
   const onChangeImage = (e) => {
     e.preventDefault();
     let files;
-    if (e.dataTransfer) files = e.dataTransfer.files;
-    else if (e.target) files = e.target.files;
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = () => {
-      setImage(reader.result)
-    }
+    // if (e.dataTransfer) files = e.dataTransfer.files;
+    // else if (e.target) files = e.target.files;
+    if (e.target) files = e.target.files;
+    // const reader = new FileReader();
+    // reader.readAsDataURL(files[0]);
+    setImage(files[0]);
+    // reader.onload = () => {
+    //   setImage(reader.result)
+    // }
   }
 
   const onChangeInputs = useCallback(
@@ -39,10 +41,16 @@ function WritePostContainer ({ history }) {
   const onClick = useCallback(() => {
     // uid, image, title, content
     // 서버로 보내기
+    var form = new FormData();
+    form.append("title", inputs.title);
+    form.append("content", inputs.content);
+    form.append("uid", uid);
+    form.append("postImg", image);
+
     axios
-      .post(`${ipObj.ip}/postInput`, { "inputs": inputs, "writerId": uid }, {
+      .post(`${ipObj.ip}/postInput`, form, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
