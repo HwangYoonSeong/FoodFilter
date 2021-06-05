@@ -73,12 +73,12 @@ def get_postlist(request):
         reslist = []
         for idx, p in enumerate(post):
             res = {}
-            res['pid'] = [str(p.id)]
-            res['title'] = [str(p.title)]
-            res['content'] = [str(p.contents)]
-            res['date'] = [str(p.date)]
-            res['writer'] = [str(p.writer)]
-            res['postImg'] = [str(p.postImg)]
+            res['pid'] = str(p.id)
+            res['title'] = str(p.title)
+            res['content'] = str(p.contents)
+            res['date'] = str(p.date)
+            res['writer'] = str(p.writer)
+            res['postImg'] = str(p.postImg)
             reslist.append(res)
 
         return JsonResponse({'results':reslist})
@@ -88,26 +88,26 @@ def get_post(request):
     if request.method == "GET":
         res = {}
         post = list(Post.objects.filter(id=request.GET["pid"]).values())[0]
-        res['writer'] = [str(post['writer'])]
-        res['date'] = [str(post['date'])]
-        res['title'] = [str(post['title'])]
-        res['content'] = [str(post['contents'])]
-        res['postImg'] = [str(post['postImg'])]
+        res['writer'] = str(post['writer'])
+        res['date'] = str(post['date'])
+        res['title'] = str(post['title'])
+        res['content'] = str(post['contents'])
+        res['postImg'] = str(post['postImg'])
         user = list(User.objects.filter(uid=post['writerID']).values())[0]
-        res['userImg'] = [str(user['userImg'])]
+        res['userImg'] = str(user['userImg'])
         res['comments'] = []
 
-        comments = Comment.objects.all()
+        comments = Comment.objects.filter(pid=request.GET["pid"])
         for idx, c in enumerate(comments):
             comm = {}
-            comm['id'] = [str(c.id)]
-            comm['writerImg'] = [str(c.writerImg)]
-            comm['writer'] = [str(c.writer)]
-            comm['contents'] = [str(c.contents)]
-            comm['date'] = [str(c.date)]
+            comm['id'] = str(c.id)
+            comm['writerImg'] = str(c.writerImg)
+            comm['writer'] = str(c.writer)
+            comm['contents'] = str(c.contents)
+            comm['date'] = str(c.date)
             res['comments'].append(comm)
 
-    return JsonResponse(res)
+    return JsonResponse({'results':res})
 
 def encode_bit(bit):
     cnt = Ingredient.objects.count()
@@ -145,3 +145,8 @@ def post_filterBit(request):
         user = User.objects.filter(uid=data['uid']).update(filterBit=data['filterBit'])
 
     return render(request, "test.html")
+
+@csrf_exempt
+def get_search(request):
+    if request.method == "GET":
+        pass
