@@ -5,7 +5,7 @@ import { FaPen } from "react-icons/fa";
 import MagIcon from "mdi-react/MagnifyIcon";
 
 import SearchContainer from "./Search/SearchContainer";
-import ipObj from "../../key";
+// import ipObj from "../../key";
 const PostContainer = styled.ul`
   list-style: none;
   margin-top: 50px;
@@ -13,6 +13,8 @@ const PostContainer = styled.ul`
 `;
 
 const Post = styled.li`
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 0.5rem;
   box-sizing: border-box;
@@ -25,15 +27,21 @@ const Post = styled.li`
       : null};
 `;
 
+const TextContainer = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
 const Title = styled.h1`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 17px;
 `;
 
 const Content = styled.p`
-  font-size: 0.8rem;
-  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: 0.8rem;
 `;
 
 const SmallFont = styled.p`
@@ -102,15 +110,18 @@ function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
                 style={LinkStyle}
               >
                 <Post index={index}>
-                  <Title>{post.title}</Title>
-                  <Content>{post.content}</Content>
-                  <SmallFont>
-                    {post.date} | {post.writer}
-                  </SmallFont>
+                  <TextContainer>
+                    <Title>{post.title}</Title>
+                    <Content>{post.content}</Content>
+                    <SmallFont>
+                      {post.date} | {post.writer}
+                    </SmallFont>
+                  </TextContainer>
 
-                  {post.postImg ? (
+                  {/* {post.postImg ? (
                     <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
-                  ) : null}
+                  ) : null} */}
+                  {post.postImg ? <ThumbNail src={post.postImg} /> : null}
                 </Post>
               </Link>
             ))}
