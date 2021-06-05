@@ -3,7 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from .models import Food, Ingredient, Post, Comment, User
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-import json
+from django.core.files.storage import default_storage
+from django.conf import settings
+import json, os
 
 # Create your views here.
 @csrf_exempt
@@ -34,21 +36,30 @@ def post_post(request):
         post.title = request.POST["title"]
         post.contents = request.POST["content"]
         post.writerID = request.POST["uid"]
-        post.postImg = request.POST["posImg"]
         query = list(User.objects.filter(uid=request.POST["uid"]).values())[0]
-        post.writer = query["email"],
+        post.writer = query["email"]
         post.userImg = query["userImg"]
         post.save()
 
-        return render(request, "test.html")
+        try:
+            postImg = request.FILES["postImg"]
+            postImg.name = str(post.id) + '.png'
+            Post.objects.filter(id=post.id).update(postImg='static/post/' + str(post.id) + '.png')
+            default_storage.save(str(settings.BASE_DIR) + '/ycde/static/post/' + postImg.name, postImg)
+
+        except:
+            return render(request, "test.html")
+
+    return render(request, "test.html")
         
 @csrf_exempt
 def post_comment(request):
     if request.method == "POST":
         comm = Comment()
-        comm.pid = request.POST["pid"]
-        comm.contents = request.POST["contents"]
-        query = list(User.objects.filter(uid=request.POST["uid"]).values())[0]
+        data = json.loads(request.body.decode('utf-8'))
+        comm.pid = data["pid"]
+        comm.contents = data["contents"]
+        query = list(User.objects.filter(uid=data["uid"]).values())[0]
         comm.writer = query["email"]
         comm.writerImg = query["userImg"]
         comm.save()
@@ -59,7 +70,7 @@ def post_comment(request):
 def get_postlist(request):
     if request.method == "GET":
         post = Post.objects.all()
-        reslist = {}
+        reslist = []
         for idx, p in enumerate(post):
             res = {}
             res['pid'] = [str(p.id)]
@@ -68,9 +79,9 @@ def get_postlist(request):
             res['date'] = [str(p.date)]
             res['writer'] = [str(p.writer)]
             res['postImg'] = [str(p.postImg)]
-            reslist[f'{idx}'] = res
+            reslist.append(res)
 
-        return JsonResponse(reslist)
+        return JsonResponse({'results':reslist})
 
 @csrf_exempt
 def get_post(request):
@@ -84,7 +95,7 @@ def get_post(request):
         res['postImg'] = [str(post['postImg'])]
         user = list(User.objects.filter(uid=post['writerID']).values())[0]
         res['userImg'] = [str(user['userImg'])]
-        res['comments'] = {}
+        res['comments'] = []
 
         comments = Comment.objects.all()
         for idx, c in enumerate(comments):
@@ -94,7 +105,7 @@ def get_post(request):
             comm['writer'] = [str(c.writer)]
             comm['contents'] = [str(c.contents)]
             comm['date'] = [str(c.date)]
-            res['comments'][f'{idx}'] = comm
+            res['comments'].append(comm)
 
     return JsonResponse(res)
 
