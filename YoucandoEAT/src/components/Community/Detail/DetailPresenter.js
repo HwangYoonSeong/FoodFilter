@@ -199,11 +199,14 @@ function DetailPresenter({
             </tbody>
           </table>
           <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
-          <PostImage
-            // src={`${ipObj.ip}/images/${post.postImg}`}
-            src={post.postImg}
-            alt="post"
-          ></PostImage>
+          {post.postImg ? (
+            <PostImage
+              // src={`${ipObj.ip}/images/${post.postImg}`}
+              src={post.postImg}
+              alt="post"
+            ></PostImage>
+          ) : null}
+
           <p>{post.content}</p>
         </ContentsContainer>
       ) : null}
