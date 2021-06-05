@@ -163,8 +163,57 @@ def get_postSearch(request):
 
         return JsonResponse({'results':reslist})
 
+alergy = {
+    "메밀":["메밀"],
+    "밀":["밀"],
+    "대두":["대두"],
+    "호두":["호두"],
+    "땅콩":["땅콩"],
+    "복숭아":["복숭아"],
+    "토마토":["토마토"],
+    "돼지고기":["돼지"],
+    "난류":["난류", "계란", "알"],
+    "우유":["우유", "버터", "요구르트", "요거트", "치즈"],
+    "닭고기":["닭"],
+    "쇠고기":["쇠고기", "소고기"],
+    "새우":["새우"],
+    "고등어":["고등어"],
+    "홍합":["홍합"],
+    "전복":["전복"],
+    "굴":["굴"],
+    "조개류":["조개"],
+    "게":["게"],
+    "오징어":["오징어"],
+    "아황산":["아황산"],
+}
+
 @csrf_exempt
 def get_foodSearch(request):
     if request.method == "GET":
-        
-        pass
+        res = []
+        try:
+            user = list(User.objects.filter(uid=request.GET["uid"]).values())[0]
+            food = list(Food.objects.filter(name=request.GET["result"]).values())[0]
+            idlist = food['ingredientDetail'].split(',')
+
+            bit = food['ingredientBit'] & user['filterBit']
+            
+            for indetail in idlist: 
+                resdict = {}
+                resdict['ingredient'] = indetail
+                resdict['danger'] = False
+                for idx, a in enumerate(alergy):
+                    match = bit & (2**idx)
+                    if match == 0:
+                        continue
+                    else:
+                        for ingred in a:
+                            if (ingred in indetail):
+                                resdict['danger'] = True
+                                break
+                res.append(resdict)
+
+        except:
+            pass
+
+        return JsonResponse({'results' : res[:-1]})
