@@ -117,7 +117,6 @@ def encode_bit(bit):
         ingredientDict = {}
         fbit = bit & (2**i)
         ing = list(Ingredient.objects.values())[i]
-        print(ing)
         ingredientDict['name'] = ing['name']
         ingredientDict['image'] = ing['image']
         if fbit == 0:
@@ -147,6 +146,25 @@ def post_filterBit(request):
     return render(request, "test.html")
 
 @csrf_exempt
-def get_search(request):
+def get_postSearch(request):
     if request.method == "GET":
+        post = Post.objects.filter(title__icontains=request.GET["input"])
+        reslist = []
+
+        for idx, p in enumerate(post):
+            res = {}
+            res['pid'] = str(p.id)
+            res['title'] = str(p.title)
+            res['content'] = str(p.contents)
+            res['date'] = str(p.date)
+            res['writer'] = str(p.writer)
+            res['postImg'] = str(p.postImg)
+            reslist.append(res)
+
+        return JsonResponse({'results':reslist})
+
+@csrf_exempt
+def get_foodSearch(request):
+    if request.method == "GET":
+        
         pass

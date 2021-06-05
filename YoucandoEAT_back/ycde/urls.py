@@ -29,4 +29,6 @@ urlpatterns = [
     path('ingredientList', views.get_ingredientlist, name='get_ingredientlist'),
     path('filterBit', views.post_filterBit, name='post_filterBit'),
     path('filterBit', views.post_filterBit, name='post_filterBit'),
+    path('foodSearch', views.get_foodSearch, name='get_foodSearch'),
+    path('postSearch', views.get_postSearch, name='get_postSearch'),
 ]
