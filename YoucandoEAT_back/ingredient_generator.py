@@ -37,12 +37,12 @@ ingredient = ['buckwheat',
 'peanut',
 'peach',
 'tomato',
-'pork',
+'fork',
 'egg',
 'milk',
 'chicken',
 'beef',
-'Shrimp',
+'shrimp',
 'mackerel',
 'mussel',
 'abalone',
@@ -50,7 +50,7 @@ ingredient = ['buckwheat',
 'shellfish',
 'crab',
 'squid',
-'sulfite',]
+'sulfurousacid',]
 
 # update
 # for idx, ing in enumerate(ingredient):
@@ -59,6 +59,6 @@ ingredient = ['buckwheat',
 
 # add
 for idx, ing in enumerate(ingredient):
-    i = Ingredient(name=ing,image='./ycde/ingImg/'+ing+'/Img.png')
+    i = Ingredient(name=ing,image='static/img/'+ing+'Img.png')
     i.save()
     print(f'Process ({idx + 1} / {len(ingredient)})')

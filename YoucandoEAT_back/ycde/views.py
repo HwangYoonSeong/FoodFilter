@@ -98,16 +98,39 @@ def get_post(request):
 
     return JsonResponse(res)
 
+def encode_bit(bit):
+    cnt = Ingredient.objects.count()
+    ingredientList = []
+
+    for i in range(cnt):
+        ingredientDict = {}
+        fbit = bit & (2**i)
+        ing = list(Ingredient.objects.values())[i]
+        print(ing)
+        ingredientDict['name'] = ing['name']
+        ingredientDict['image'] = ing['image']
+        if fbit == 0:
+            ingredientDict['checked'] = False
+        else:
+            ingredientDict['checked'] = True
+        ingredientList.append(ingredientDict)
+    
+    return ingredientList
+
 @csrf_exempt
 def get_ingredientlist(request):
     if request.method == "GET":
-        post = list(User.objects.filter(id=request.GET["uid"]).values())[0]
-        print(post)
+        post = list(User.objects.filter(uid=request.GET["uid"]).values())[0]
+        ingredientList = encode_bit(post['filterBit'])
 
-        return JsonResponse({"results":post['filterBit']})
+        return JsonResponse({"results":ingredientList})
 
-def encode_bit(bit):
-    cnt = Ingredient.objects.count()
-    match = 1
-    ingredientList = []
-        
+
+@csrf_exempt
+def post_filterBit(request):
+    if request.method == "POST":
+        print(request.body)
+        data = json.loads(request.body.decode('utf-8'))
+        user = User.objects.filter(uid=data['uid']).update(filterBit=data['filterBit'])
+
+    return render(request, "test.html")

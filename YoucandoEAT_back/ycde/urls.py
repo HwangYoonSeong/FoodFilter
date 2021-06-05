@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -24,5 +26,7 @@ urlpatterns = [
     path('commentInput', views.post_comment, name='post_comment'),
     path('postList', views.get_postlist, name='get_postlist'),
     path('postDetail', views.get_post, name='get_post'),
-    path('ingredientList', views.get_ingredientlist, name='get_ingredientlist')
+    path('ingredientList', views.get_ingredientlist, name='get_ingredientlist'),
+    path('filterBit', views.post_filterBit, name='post_filterBit'),
+    path('filterBit', views.post_filterBit, name='post_filterBit'),
 ]
