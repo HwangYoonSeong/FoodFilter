@@ -13,17 +13,16 @@ const PostContainer = styled.ul`
 `;
 
 const Post = styled.li`
+  width: 100%;
   padding: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  box-sizing: border-box;
 
   ${(props) =>
     props.index
       ? css`
           border-top: 1px solid #adb5bd;
         `
-      : null}
+      : null};
 `;
 
 const Title = styled.h1`
@@ -32,6 +31,9 @@ const Title = styled.h1`
 
 const Content = styled.p`
   font-size: 0.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const SmallFont = styled.p`
@@ -100,14 +102,15 @@ function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
                 style={LinkStyle}
               >
                 <Post index={index}>
-                  <div>
-                    <Title>{post.title}</Title>
-                    <Content>{post.content}</Content>
-                    <SmallFont>
-                      {post.date} | {post.writer}
-                    </SmallFont>
-                  </div>
-                  <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
+                  <Title>{post.title}</Title>
+                  <Content>{post.content}</Content>
+                  <SmallFont>
+                    {post.date} | {post.writer}
+                  </SmallFont>
+
+                  {post.postImg ? (
+                    <ThumbNail src={`${ipObj.ip}/images/${post.postImg}`} />
+                  ) : null}
                 </Post>
               </Link>
             ))}
