@@ -12,7 +12,6 @@ function SIContainer () {
   const save = useCallback(() => {
     // 서버로 유저의 알러지정보인 userInfo를
     // 10진수로 전송
-    console.log(`유저 uid : ${uid}의 filterBit : ${filterBit}를 서버로 전송`);
     axios
       .post(`${ipObj.ip}/filterBit`, { "filterBit": filterBit, "uid": uid }, {
         headers: {
@@ -20,7 +19,7 @@ function SIContainer () {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("url:", "POST /filterBit", "\nstatus:", response.status, "\nstatusText:", response.statusText);
       })
       .catch((err) => {
         console.error(err.response);
@@ -43,6 +42,7 @@ function SIContainer () {
       axios
         .get(`${ipObj.ip}/ingredientList?uid=${uid}`)
         .then((response) => {
+          console.log("url:", "GETT /ingredientList?uid", "\nstatus:", response.status, "\nstatusText:", response.statusText);
           setIngrdList(response.data.results);
         })
         .catch((err) => {

@@ -25,6 +25,7 @@ function LogicContainer ({ location }) {
         },
       })
       .then((response) => {
+        console.log("url:", "POST /kakaoAPI/ocr", "\nstatus:", response.status, "\nstatusText:", response.statusText);
         const menu = response.data.result
           .map((el) => el.recognition_words[0])
           .join(" ");
@@ -41,6 +42,7 @@ function LogicContainer ({ location }) {
       axios
         .get(`${ipObj.ip}/foodSearch?result=${result}&uid=${uid}`)
         .then((response) => {
+          console.log("url:", "GET /foodSearch?result&uid", "\nstatus:", response.status, "\nstatusText:", response.statusText);
           var results = response.data.results;
           var toTranslate = [];
           toTranslate.push(result);
@@ -50,7 +52,7 @@ function LogicContainer ({ location }) {
           axios //임시 서버 사용 >> 변경 필요
             .get(`http://192.168.232.41:3001/translate/${toTranslate.join(',')}`)
             .then((response) => {
-              console.log(response.status);
+              console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
               var translated = response.data.message.result.translatedText.split(', ');
               translated.slice(1).forEach((el, i) => {
                 results[i].translated = el;

@@ -54,16 +54,12 @@ function WritePostContainer ({ history }) {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("url:", "POST /postInput", "\nstatus:", response.status, "\nstatusText:", response.statusText);
         history.goBack();
       })
       .catch((err) => {
         console.error(err.response);
       });
-
-
-    console.log(image);
-    console.log(inputs);
   }, [image, inputs, history, uid]);
 
   return (

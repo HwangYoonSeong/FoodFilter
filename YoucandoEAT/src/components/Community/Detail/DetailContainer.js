@@ -18,6 +18,7 @@ function DetailContainer () {
       .get(`${ipObj.ip}/postDetail?pid=${pid}`)
       .then((response) => {
         //post, comment, user join해서 한번에 정보를 받음
+        console.log("url:", "GET /postDetail?pid", "\nstatus:", response.status, "\nstatusText:", response.statusText);
         setPost(response.data.results);
         setComments(response.data.results.comments);
       })
@@ -27,7 +28,6 @@ function DetailContainer () {
   }, [pid, isComment]);
 
   const clickEnter = () => {
-    console.log(comment);
     setComment("");
 
     axios
@@ -37,7 +37,7 @@ function DetailContainer () {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("url:", "POST /commentInput", "\nstatus:", response.status, "\nstatusText:", response.statusText);
         checkComment(!isComment);
 
       })

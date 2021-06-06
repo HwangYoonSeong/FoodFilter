@@ -42,7 +42,7 @@ function NavBarContainer () {
                 },
               })
               .then((response) => {
-                console.log(response);
+                console.log("url:", "POST /userInput", "\nstatus:", response.status, "\nstatusText:", response.statusText);
               })
               .catch((err) => {
                 console.error(err.response);
