@@ -62,13 +62,12 @@ const Input = styled.textarea`
   }
 `;
 
-function DetailPresenter ({
+function DetailPresenter({
   post,
-
   onChangeInputs,
   clickEnter,
-  comment,
-  comments
+  input,
+  comments,
 }) {
   return (
     <div>
@@ -79,10 +78,7 @@ function DetailPresenter ({
             <tbody>
               <tr>
                 <td rowSpan="2">
-                  <UserImage
-                    src={`${post.userImg}`}
-                    alt="user image"
-                  />
+                  <UserImage src={`${post.userImg}`} alt="user image" />
                 </td>
                 <td>{post.writer}</td>
               </tr>
@@ -95,15 +91,17 @@ function DetailPresenter ({
           </table>
           <h1 style={{ fontSize: "1.25rem" }}>{post.title}</h1>
 
-          {post.postImg ? (<PostImage
-            src={`${ipObj.ip}/${post.postImg}`}
-            alt="post"
-          ></PostImage>) : null}
+          {post.postImg ? (
+            <PostImage
+              src={`${ipObj.ip}/${post.postImg}`}
+              alt="post"
+            ></PostImage>
+          ) : null}
           <p>{post.content}</p>
         </ContentsContainer>
       ) : null}
 
-      {/* COMMENT */}
+      {/* COMMENTS */}
       {comments ? (
         <>
           {comments.map((comment, index) => (
@@ -133,7 +131,7 @@ function DetailPresenter ({
         <Input
           rows="4"
           type="text"
-          value={comment}
+          value={input}
           placeholder="Please type in the comments."
           onChange={onChangeInputs}
           onKeyPress={(e) => {
