@@ -29,7 +29,7 @@ const Ingrd = styled.p`
  fontSize: 17px;
  color: ${(props) => (props.danger ? "red" : "black")};
 `;
-function LogicPresenter ({ searchedIngrd, croppedImage, result }) {
+function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }) {
   return (
     <>
       <Container>
@@ -44,13 +44,13 @@ function LogicPresenter ({ searchedIngrd, croppedImage, result }) {
         <p style={{ fontSize: "24px" }}>{result}</p>
 
         <Title>Translated</Title>
-        <p style={{ fontSize: "24px" }}>Dummy</p>
+        <p style={{ fontSize: "24px" }}>{translatedMenu}</p>
 
         <Title>Ingredients</Title>
         <IngredientsContainer>
 
           {searchedIngrd ? (searchedIngrd.map((ingrd, index) => (
-            <Ingrd key={index} danger={ingrd.danger}>{ingrd.ingredient}</Ingrd>
+            <Ingrd key={index} danger={ingrd.danger}>{ingrd.translated}</Ingrd>
           ))) : null}
         </IngredientsContainer>
       </Container>

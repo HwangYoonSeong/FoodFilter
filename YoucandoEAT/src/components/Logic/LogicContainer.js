@@ -11,6 +11,7 @@ function LogicContainer ({ location }) {
 
   const [result, setResult] = useState(null);
   const [searchedIngrd, setSrchdIngrd] = useState(null);
+  const [translatedMenu, setTranslatedMenu] = useState(null);
 
   const kakaoOCR = useCallback(() => {
     let form = new FormData();
@@ -40,7 +41,7 @@ function LogicContainer ({ location }) {
       axios
         .get(`${ipObj.ip}/foodSearch?result=${result}&uid=${uid}`)
         .then((response) => {
-          setSrchdIngrd(response.data.results);
+
           var results = response.data.results;
           var toTranslate = [];
           toTranslate.push(result);
@@ -51,7 +52,15 @@ function LogicContainer ({ location }) {
           axios
             .get(`http://192.168.232.41:3001/translate/${toTranslate.join(',')}`)
             .then((response) => {
-              console.log(response.data.message.result.translatedText.slice(0, -1).split(', '))
+              // console.log(response.data.message.result.translatedText.slice(0, -1).split(', '))
+              var translated = response.data.message.result.translatedText.slice(0, -1).split(', ');
+
+              translated.slice(1).forEach((el, i) => {
+                results[i].translated = el;
+              })
+              setTranslatedMenu(translated[0]);
+              setSrchdIngrd(results);
+
             })
             .catch((err) => {
               console.error(err.response);
@@ -75,7 +84,7 @@ function LogicContainer ({ location }) {
 
   return (
     <>
-      <LogicPresenter searchedIngrd={searchedIngrd} croppedImage={croppedImage} result={result} />
+      <LogicPresenter translatedMenu={translatedMenu} searchedIngrd={searchedIngrd} croppedImage={croppedImage} result={result} />
     </>
   );
 }
