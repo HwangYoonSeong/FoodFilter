@@ -32,13 +32,22 @@ const Container = styled.div`
 
 function App() {
   const searchMode = useSelector((state) => state.searchMode);
+  const uid = useSelector((state) => state.uid);
   return (
     <>
       <GlobalStyle />
       {searchMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
-        <Route exact path="/selectIngredients" component={SelectIngredients} />
+        {/* <Route exact path="/selectIngredients" component={SelectIngredients} /> */}
+        <Route
+          exact
+          path="/selectIngredients"
+          render={(props) => {
+            if (uid) return <SelectIngredients {...props} />;
+            else return <Main {...props} />;
+          }}
+        />
         <Route exact path="/capture" component={Capture} />
         <Route exact path="/logic" component={Logic} />
         <Route exact path="/community" component={Community} />

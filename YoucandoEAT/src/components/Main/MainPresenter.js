@@ -110,7 +110,7 @@ function MainPresenter({ onChange }) {
         </CaptureBtn>
 
         <LinkBtnContainer>
-          <Link to="/selectIngredients" style={LinkStyle}>
+          <Link to="/selectIngredients" style={LinkStyle} >
             <LinkBtn>
               <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
               <BtnName>Select Ingredients</BtnName>
