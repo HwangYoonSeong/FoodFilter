@@ -26,6 +26,7 @@ function DetailContainer() {
   }, [pid]);
 
   const clickEnter = () => {
+    if (input === "") return;
     setInput("");
 
     axios
@@ -48,7 +49,6 @@ function DetailContainer() {
     axios
       .get(`${ipObj.ip}/postDetail?pid=${pid}`)
       .then((response) => {
-        setPost(response.data.results);
         setComments(response.data.results.comments);
       })
       .catch((err) => {

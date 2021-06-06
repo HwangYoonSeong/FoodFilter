@@ -53,6 +53,7 @@ const Input = styled.textarea`
   font-size: 1rem;
   font-family: "NanumSquare";
   width: 90%;
+  resize: none;
 
   overflow: visible;
   border-radius: 0.7rem;

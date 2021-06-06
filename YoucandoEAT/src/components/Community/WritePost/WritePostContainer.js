@@ -41,15 +41,11 @@ function WritePostContainer({ history }) {
   );
 
   const onClick = useCallback(() => {
-    console.log(image);
-    console.log(inputs);
-
+    console.log(inputs.content);
     if (inputs.title === "" || inputs.content === "") {
       setModal(true);
       return;
     }
-    // uid, image, title, content
-    // 서버로 보내기
     var form = new FormData();
     form.append("title", inputs.title);
     form.append("content", inputs.content);
