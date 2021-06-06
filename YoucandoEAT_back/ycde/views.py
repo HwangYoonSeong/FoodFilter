@@ -76,7 +76,9 @@ def get_postlist(request):
             res['pid'] = str(p.id)
             res['title'] = str(p.title)
             res['content'] = str(p.contents)
-            res['date'] = str(p.date)
+            date = str(p.date).split(':')[:-1]
+            date.insert(-1, ':')
+            res['date'] = ''.join(date)
             res['writer'] = str(p.writer)
             res['postImg'] = str(p.postImg)
             reslist.append(res)
@@ -89,7 +91,9 @@ def get_post(request):
         res = {}
         post = list(Post.objects.filter(id=request.GET["pid"]).values())[0]
         res['writer'] = str(post['writer'])
-        res['date'] = str(post['date'])
+        date = str(post['date']).split(':')[:-1]
+        date.insert(-1, ':')
+        res['date'] = ''.join(date)
         res['title'] = str(post['title'])
         res['content'] = str(post['contents'])
         res['postImg'] = str(post['postImg'])
@@ -104,7 +108,9 @@ def get_post(request):
             comm['writerImg'] = str(c.writerImg)
             comm['writer'] = str(c.writer)
             comm['contents'] = str(c.contents)
-            comm['date'] = str(c.date)
+            cdate = str(c.date).split(':')[:-1]
+            cdate.insert(-1, ':')
+            comm['date'] = ''.join(cdate)
             res['comments'].append(comm)
 
     return JsonResponse({'results':res})
@@ -156,7 +162,9 @@ def get_postSearch(request):
             res['pid'] = str(p.id)
             res['title'] = str(p.title)
             res['content'] = str(p.contents)
-            res['date'] = str(p.date)
+            date = str(post['date']).split(':')[:-1]
+            date.insert(-1, ':')
+            res['date'] = ''.join(date)
             res['writer'] = str(p.writer)
             res['postImg'] = str(p.postImg)
             reslist.append(res)
@@ -198,22 +206,28 @@ def get_foodSearch(request):
 
             bit = food['ingredientBit'] & user['filterBit']
             
-            for indetail in idlist: 
-                resdict = {}
-                resdict['ingredient'] = indetail
-                resdict['danger'] = False
-                for idx, a in enumerate(alergy):
-                    match = bit & (2**idx)
-                    if match == 0:
-                        continue
-                    else:
-                        for ingred in a:
-                            if (ingred in indetail):
-                                resdict['danger'] = True
-                                break
-                res.append(resdict)
-
         except:
-            pass
+            if request.GET["uid"]=='':
+                food = list(Food.objects.filter(name=request.GET["result"]).values())[0]
+                idlist = food['ingredientDetail'].split(',')
+                bit = food['ingredientBit'] & 0
+
+            else: # food not exist
+                pass
+
+        for indetail in idlist: 
+            resdict = {}
+            resdict['ingredient'] = indetail
+            resdict['danger'] = False
+            for idx, a in enumerate(alergy):
+                match = bit & (2**idx)
+                if match == 0:
+                    continue
+                else:
+                    for ingred in a:
+                        if (ingred in indetail):
+                            resdict['danger'] = True
+                            break
+            res.append(resdict)
 
         return JsonResponse({'results' : res[:-1]})
