@@ -40,8 +40,23 @@ function LogicContainer ({ location }) {
       axios
         .get(`${ipObj.ip}/foodSearch?result=${result}&uid=${uid}`)
         .then((response) => {
-          console.log(response.data.results);
           setSrchdIngrd(response.data.results);
+          var results = response.data.results;
+          var toTranslate = [];
+          toTranslate.push(result);
+          results.forEach(el => {
+            toTranslate.push(el.ingredient);
+          })
+          console.log(toTranslate);
+          axios
+            .get(`http://192.168.232.41:3001/translate/${toTranslate.join(',')}`)
+            .then((response) => {
+              console.log(response.data.message.result.translatedText.slice(0, -1).split(', '))
+            })
+            .catch((err) => {
+              console.error(err.response);
+            });
+
         })
         .catch((err) => {
           console.error(err.response);
