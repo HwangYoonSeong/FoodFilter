@@ -20,7 +20,7 @@ function CommunityContainer () {
       .get(`${ipObj.ip}/postList`)
       .then((response) => {
         console.log("url:", "GET /postList", "\nstatus:", response.status, "\nstatusText:", response.statusText);
-        setPosts(response.data.results);
+        setPosts(response.data.results.slice(0).reverse());
       })
       .catch((err) => {
         console.error(err.response);

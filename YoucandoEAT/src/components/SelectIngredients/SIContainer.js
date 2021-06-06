@@ -42,7 +42,7 @@ function SIContainer () {
       axios
         .get(`${ipObj.ip}/ingredientList?uid=${uid}`)
         .then((response) => {
-          console.log("url:", "GETT /ingredientList?uid", "\nstatus:", response.status, "\nstatusText:", response.statusText);
+          console.log("url:", "GET /ingredientList?uid", "\nstatus:", response.status, "\nstatusText:", response.statusText);
           setIngrdList(response.data.results);
         })
         .catch((err) => {
