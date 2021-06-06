@@ -10,6 +10,7 @@ function DetailContainer() {
   const uid = useSelector((state) => state.uid);
   const { pid } = useParams();
   const [post, setPost] = useState([]);
+  const [modal, setModal] = useState(false);
   const [input, setInput] = useState("");
   const [comments, setComments] = useState([]);
   useEffect(() => {
@@ -44,7 +45,6 @@ function DetailContainer() {
         console.error(err.response);
       });
 
-    //
     axios
       .get(`${ipObj.ip}/postDetail?pid=${pid}`)
       .then((response) => {
@@ -68,6 +68,8 @@ function DetailContainer() {
         clickEnter={clickEnter}
         input={input}
         comments={comments}
+        modal={modal}
+        setModal={setModal}
       />
     </>
   );

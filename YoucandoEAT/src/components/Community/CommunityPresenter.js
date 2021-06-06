@@ -13,24 +13,34 @@ const PostContainer = styled.ul`
 `;
 
 const Post = styled.li`
-  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
 
   ${(props) =>
     props.index
       ? css`
           border-top: 1px solid #adb5bd;
         `
-      : null}
+      : null};
+`;
+
+const TextContainer = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const Title = styled.h1`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 17px;
 `;
 
 const Content = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 0.8rem;
 `;
 
@@ -80,7 +90,7 @@ const MagBtn = styled.button`
   }
 `;
 
-function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
+function CommunityPresenter({ posts, uid, openSearch, searchMode }) {
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
@@ -100,15 +110,16 @@ function CommunityPresenter ({ posts, uid, openSearch, searchMode }) {
                 style={LinkStyle}
               >
                 <Post index={index}>
-                  <div>
+                  <TextContainer>
                     <Title>{post.title}</Title>
                     <Content>{post.content}</Content>
                     <SmallFont>
                       {post.date} | {post.writer}
                     </SmallFont>
-                  </div>
-                  {post.postImg ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
-
+                  </TextContainer>
+                  {post.postImg ? (
+                    <ThumbNail src={`${ipObj.ip}/${post.postImg}`} />
+                  ) : null}
                 </Post>
               </Link>
             ))}

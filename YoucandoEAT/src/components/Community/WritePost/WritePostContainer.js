@@ -1,17 +1,18 @@
 import React, { useState, useCallback } from "react";
-import WritePostPresenter from "./WritePostPresenter"
+import WritePostPresenter from "./WritePostPresenter";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import ipObj from "../../../key"
+import ipObj from "../../../key";
 
-function WritePostContainer ({ history }) {
+function WritePostContainer({ history }) {
+  const [modal, setModal] = useState(false);
   const uid = useSelector((state) => state.uid);
   const [image, setImage] = useState(null);
   const [inputImg, setInputImg] = useState({});
 
   const [inputs, setInputs] = useState({
-    title: '',
-    content: ''
+    title: "",
+    content: "",
   });
 
   const onChangeImage = (e) => {
@@ -24,9 +25,9 @@ function WritePostContainer ({ history }) {
     reader.readAsDataURL(files[0]);
     setImage(files[0]);
     reader.onload = () => {
-      setInputImg({ "fileName": files[0].name, "url": reader.result });
-    }
-  }
+      setInputImg({ fileName: files[0].name, url: reader.result });
+    };
+  };
 
   const onChangeInputs = useCallback(
     (e) => {
@@ -39,8 +40,14 @@ function WritePostContainer ({ history }) {
     [inputs]
   );
 
-
   const onClick = useCallback(() => {
+    console.log(image);
+    console.log(inputs);
+
+    if (inputs.title === "" || inputs.content === "") {
+      setModal(true);
+      return;
+    }
     // uid, image, title, content
     // 서버로 보내기
     var form = new FormData();
@@ -56,7 +63,14 @@ function WritePostContainer ({ history }) {
         },
       })
       .then((response) => {
-        console.log("url:", "POST /postInput", "\nstatus:", response.status, "\nstatusText:", response.statusText);
+        console.log(
+          "url:",
+          "POST /postInput",
+          "\nstatus:",
+          response.status,
+          "\nstatusText:",
+          response.statusText
+        );
         history.goBack();
       })
       .catch((err) => {
@@ -66,10 +80,17 @@ function WritePostContainer ({ history }) {
 
   return (
     <>
-      <WritePostPresenter inputImg={inputImg} onChangeImage={onChangeImage} onClick={onClick} inputs={inputs} onChangeInputs={onChangeInputs} />
+      <WritePostPresenter
+        inputImg={inputImg}
+        onChangeImage={onChangeImage}
+        onClick={onClick}
+        inputs={inputs}
+        onChangeInputs={onChangeInputs}
+        modal={modal}
+        setModal={setModal}
+      />
     </>
   );
 }
-
 
 export default React.memo(WritePostContainer);

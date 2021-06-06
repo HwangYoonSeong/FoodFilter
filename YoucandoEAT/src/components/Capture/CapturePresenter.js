@@ -3,58 +3,22 @@ import styled, { keyframes, css } from "styled-components";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-const Container = styled.div`
-  text-align: center;
-  margin-top: 60px;
-`;
+import { AiOutlineCheck } from "react-icons/ai";
 
 const ImageContainer = styled.div`
-  margin: 0 auto;
-  width: 65%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
 `;
 
-const Button = styled.button`
-  background: #2b8a3e;
-  border: none;
+const Phrase = styled.p`
+  position: absolute;
+  top: 2.5%;
+  left: 1.5%;
   color: white;
-  width: 150px;
-  height: 45px;
-  font-size: 1rem;
-  outline: none;
-  border-radius: 8px;
-  margin-top: 2rem;
-`;
-
-const fadeIn = keyframes`
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
-`;
-
-const DarkBackground = styled.div`
-  ${(props) =>
-    props.modal
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `};
-
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: ${fadeIn};
-  animation-fill-mode: forwards;
+  margin: 0;
 `;
 
 const slideUp = keyframes`
@@ -120,9 +84,15 @@ const ModalBtn = styled.button`
 `;
 
 function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
+  const buttonStyle = {
+    color: "white",
+    position: "absolute",
+    right: "1.5%",
+    top: "2%",
+  };
+
   return (
     <>
-      <DarkBackground modal={modal} />
       <ModalBox modal={modal}>
         <ModalBody>
           <ModalContents>
@@ -135,8 +105,13 @@ function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
         </ModalFooter>
       </ModalBox>
 
-      <Container>
-        <p style={{ fontSize: "1.1rem" }}>Select the menu you want to know</p>
+      <div>
+        <Phrase>Select the menu you want to know</Phrase>
+        <AiOutlineCheck
+          size="1.5rem"
+          style={buttonStyle}
+          onClick={() => setModal(true)}
+        />
         <ImageContainer>
           <Cropper
             style={{ width: "100%" }}
@@ -157,9 +132,7 @@ function CapturePresenter({ image, setCropper, getData, modal, setModal }) {
             }}
           />
         </ImageContainer>
-
-        <Button onClick={() => setModal(true)}>SELECT!!</Button>
-      </Container>
+      </div>
     </>
   );
 }

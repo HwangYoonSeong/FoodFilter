@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 import { Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -21,7 +21,16 @@ const GlobalStyle = createGlobalStyle`
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    background:#e9ecef;
+
+    ${(props) =>
+      props.captureMode
+        ? css`
+            background: black;
+          `
+        : css`
+            background: #e9ecef;
+          `}
+
   }
 `;
 
@@ -33,10 +42,12 @@ const Container = styled.div`
 function App() {
   const searchMode = useSelector((state) => state.searchMode);
   const uid = useSelector((state) => state.uid);
+  const captureMode = useSelector((state) => state.captureMode);
+
   return (
     <>
-      <GlobalStyle />
-      {searchMode ? null : <NavBar />}
+      <GlobalStyle captureMode={captureMode} />
+      {searchMode || captureMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
         {/* <Route exact path="/selectIngredients" component={SelectIngredients} /> */}

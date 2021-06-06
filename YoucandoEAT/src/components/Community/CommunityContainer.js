@@ -1,25 +1,30 @@
 import React, { useState, useEffect, useCallback } from "react";
 import CommunityPresenter from "./CommunityPresenter";
-// import Dummy from "../../assets/Lenna.png";
 import axios from "axios";
-import ipObj from "../../key"
+import ipObj from "../../key";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchMode } from "../../modules/searchMode";
 
-function CommunityContainer () {
+function CommunityContainer() {
   const uid = useSelector((state) => state.uid);
   const dispatch = useDispatch();
 
   const searchMode = useSelector((state) => state.searchMode);
   const [posts, setPosts] = useState([]);
 
-
-  //게시글 리스트 서버로부터 받아와서 postList 초기화 
+  //게시글 리스트 서버로부터 받아와서 postList 초기화
   useEffect(() => {
     axios
       .get(`${ipObj.ip}/postList`)
       .then((response) => {
-        console.log("url:", "GET /postList", "\nstatus:", response.status, "\nstatusText:", response.statusText);
+        console.log(
+          "url:",
+          "GET /postList",
+          "\nstatus:",
+          response.status,
+          "\nstatusText:",
+          response.statusText
+        );
         setPosts(response.data.results.slice(0).reverse());
       })
       .catch((err) => {
