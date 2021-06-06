@@ -33,6 +33,11 @@ const InputContentContainer = styled.div`
   margin-top: 1rem;
 `;
 
+const InputImgContainer = styled.div`
+  display:flex;
+  padding:0.5rem;
+`;
+
 const InputContent = styled.textarea`
   background: #e9ecef;
   border: none;
@@ -45,6 +50,17 @@ const InputContent = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const InputImg = styled.img`
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+`;
+const FileNmae = styled.p`
+font-size:1rem;
+margin:4rem 0 0 0.5rem;
 `;
 
 const CamBtn = styled.label`
@@ -70,11 +86,12 @@ const CompBtn = styled.button`
   background: #e9ecef;
 `;
 
-function WritePostPresenter({
+function WritePostPresenter ({
   onChangeImage,
   onClick,
   onChangeInputs,
   inputs,
+  inputImg
 }) {
   return (
     <>
@@ -97,6 +114,13 @@ function WritePostPresenter({
             placeholder="Enter the contents."
           ></InputContent>
         </InputContentContainer>
+
+
+        {inputImg.fileName ? (<InputImgContainer>
+          <InputImg src={inputImg.url} />
+          <FileNmae>{inputImg.fileName}</FileNmae>
+
+        </InputImgContainer>) : null}
 
         <CamBtn htmlFor="addPhoto">
           <FiCamera size="32px" />

@@ -7,6 +7,8 @@ import ipObj from "../../../key"
 function WritePostContainer ({ history }) {
   const uid = useSelector((state) => state.uid);
   const [image, setImage] = useState(null);
+  const [inputImg, setInputImg] = useState({});
+
   const [inputs, setInputs] = useState({
     title: '',
     content: ''
@@ -18,12 +20,12 @@ function WritePostContainer ({ history }) {
     // if (e.dataTransfer) files = e.dataTransfer.files;
     // else if (e.target) files = e.target.files;
     if (e.target) files = e.target.files;
-    // const reader = new FileReader();
-    // reader.readAsDataURL(files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
     setImage(files[0]);
-    // reader.onload = () => {
-    //   setImage(reader.result)
-    // }
+    reader.onload = () => {
+      setInputImg({ "fileName": files[0].name, "url": reader.result });
+    }
   }
 
   const onChangeInputs = useCallback(
@@ -64,7 +66,7 @@ function WritePostContainer ({ history }) {
 
   return (
     <>
-      <WritePostPresenter onChangeImage={onChangeImage} onClick={onClick} inputs={inputs} onChangeInputs={onChangeInputs} />
+      <WritePostPresenter inputImg={inputImg} onChangeImage={onChangeImage} onClick={onClick} inputs={inputs} onChangeInputs={onChangeInputs} />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import SearchPresenter from "./SearchPresenter";
 import { useDispatch } from "react-redux";
-
 import { setSearchMode } from "../../../modules/searchMode";
 import axios from "axios";
 import ipObj from "../../../key"
@@ -19,6 +18,7 @@ function SearchContainer () {
 
   const clearInput = () => {
     setInput("");
+    setSearchPosts([]);
   };
 
   const clickEnter = useCallback(() => {
