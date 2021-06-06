@@ -25,7 +25,11 @@ const IngredientsContainer = styled.div`
   margin-left: 1rem;
 `;
 
-function LogicPresenter({ croppedImage, result }) {
+const Ingrd = styled.p`
+ fontSize: 17px;
+ color: ${(props) => (props.danger ? "red" : "black")};
+`;
+function LogicPresenter ({ searchedIngrd, croppedImage, result }) {
   return (
     <>
       <Container>
@@ -44,9 +48,10 @@ function LogicPresenter({ croppedImage, result }) {
 
         <Title>Ingredients</Title>
         <IngredientsContainer>
-          <p style={{ fontSize: "17px" }}>dummy1</p>
-          <p style={{ fontSize: "17px" }}>dummy2</p>
-          <p style={{ fontSize: "17px" }}>dummy3</p>
+
+          {searchedIngrd ? (searchedIngrd.map((ingrd, index) => (
+            <Ingrd key={index} danger={ingrd.danger}>{ingrd.ingredient}</Ingrd>
+          ))) : null}
         </IngredientsContainer>
       </Container>
     </>

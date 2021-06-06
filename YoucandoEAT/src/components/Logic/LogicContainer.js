@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import LogicPresenter from "./LogicPresenter";
 import axios from "axios";
+import ipObj from "../../key"
 import { useSelector } from "react-redux";
 
 function LogicContainer ({ location }) {
@@ -9,6 +10,7 @@ function LogicContainer ({ location }) {
   const croppedImage = location.state.croppedImage;
 
   const [result, setResult] = useState(null);
+  const [searchedIngrd, setSrchdIngrd] = useState(null);
 
   const kakaoOCR = useCallback(() => {
     let form = new FormData();
@@ -32,29 +34,33 @@ function LogicContainer ({ location }) {
       });
   }, [resizeImage]);
 
-  const getData = () => {
+  const getData = useCallback(() => {
     // 음식재료 요청 
-    // axios
-    //   .get(`${ipObj.ip}/search/${result}`)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
+    if (result) {
+      axios
+        .get(`${ipObj.ip}/foodSearch?result=${result}&uid=${uid}`)
+        .then((response) => {
+          console.log(response.data.results);
+          setSrchdIngrd(response.data.results);
+        })
+        .catch((err) => {
+          console.error(err.response);
+        });
+    }
+
     // 서버 측에서 응답으로 오는 데이터의 구조를 정한 후에 
     // LogicPresenter에 데이터 전달 
-  };
+  }, [result, uid]);
 
   useEffect(() => {
     kakaoOCR();
     getData();
     console.log(`접속 유저 uid : ${uid}`);
-  }, [kakaoOCR, uid]);
+  }, [kakaoOCR, uid, getData]);
 
   return (
     <>
-      <LogicPresenter croppedImage={croppedImage} result={result} />
+      <LogicPresenter searchedIngrd={searchedIngrd} croppedImage={croppedImage} result={result} />
     </>
   );
 }

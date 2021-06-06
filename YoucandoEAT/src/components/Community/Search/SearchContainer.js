@@ -3,8 +3,10 @@ import SearchPresenter from "./SearchPresenter";
 import { useDispatch } from "react-redux";
 
 import { setSearchMode } from "../../../modules/searchMode";
+import axios from "axios";
+import ipObj from "../../../key"
 
-function SearchContainer() {
+function SearchContainer () {
   const dispatch = useDispatch();
 
   const [input, setInput] = useState("");
@@ -22,6 +24,16 @@ function SearchContainer() {
   const clickEnter = useCallback(() => {
     // 서버로 사용자의 input을 보내어 게시판 데이터를 요청하여
     // setPosts를 통해 데이터 갱신
+    axios
+      .get(`${ipObj.ip}/postSearch?input=${input}`)
+      .then((response) => {
+        //post, comment, user join해서 한번에 정보를 받음
+        console.log(response.data.results);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
+
     console.log(input);
     setSearchPosts([]);
   }, [input]);
