@@ -1,7 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GrPrevious, GrClose } from "react-icons/gr";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import ipObj from "../../../key";
 
 const ErrorBackground = styled.div`
   position: fixed;
@@ -17,7 +19,7 @@ const ClearBtn = styled.button`
 
   border: none;
   outline: none;
-  background: white;
+  background: #e9ecef;
 
   border-radius: 8px;
 
@@ -74,8 +76,42 @@ const CloseBtn = styled.button`
     filter: brightness(85%);
   }
 `;
+const Post = styled.li`
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-function SearchPresenter({
+  ${(props) =>
+    props.index
+      ? css`
+          border-top: 1px solid #adb5bd;
+        `
+      : null}
+`;
+
+
+const Title = styled.h1`
+  font-size: 17px;
+`;
+
+const Content = styled.p`
+  font-size: 0.8rem;
+`;
+
+const SmallFont = styled.p`
+  font-size: 0.5rem;
+`;
+
+const ThumbNail = styled.img`
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+`;
+
+
+function SearchPresenter ({
   closeSearch,
   input,
   searchPosts,
@@ -83,6 +119,14 @@ function SearchPresenter({
   clearInput,
   onChange,
 }) {
+
+  const LinkStyle = {
+    color: "black",
+    textDecorationLine: "none",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+  };
+
+
   return (
     <>
       <SearchBar>
@@ -107,7 +151,25 @@ function SearchPresenter({
         ) : null}
       </SearchBar>
 
-      {searchPosts.length ? null : (
+      {searchPosts.length ? (searchPosts.map((post, index) => (
+        <Link
+          key={index}
+          to={`community/detail/${post.pid}`}
+          style={LinkStyle}
+        >
+          <Post index={index}>
+            <div>
+              <Title>{post.title}</Title>
+              <Content>{post.content}</Content>
+              <SmallFont>
+                {post.date} | {post.writer}
+              </SmallFont>
+            </div>
+            {post.postImg ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
+
+          </Post>
+        </Link>
+      ))) : (
         <ErrorBackground>
           <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
           <p style={{ color: "#adb5bd" }}>No search results.</p>

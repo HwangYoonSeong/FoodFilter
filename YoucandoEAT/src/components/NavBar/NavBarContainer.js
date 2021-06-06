@@ -72,7 +72,6 @@ function NavBarContainer () {
   const GoogleSignIn = useCallback(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log("login");
         setUserEmail(user.email);
         dispatch(setUid(user.uid));
         setUserPhoto(user.photoURL);

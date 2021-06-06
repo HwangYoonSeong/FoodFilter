@@ -28,15 +28,14 @@ function SearchContainer () {
       .get(`${ipObj.ip}/postSearch?input=${input}`)
       .then((response) => {
         //post, comment, user join해서 한번에 정보를 받음
-        console.log("url:", "GET postSearch?input", "\nstatus:", response.status, "\nstatusText:", response.statusText);
-        console.log(response.data.results);
+        console.log("url:", `GET postSearch?input=${input}`, "\nstatus:", response.status, "\nstatusText:", response.statusText);
+        setSearchPosts(response.data.results);
+
       })
       .catch((err) => {
         console.error(err.response);
       });
 
-    console.log(input);
-    setSearchPosts([]);
   }, [input]);
 
   const onChange = (e) => {
