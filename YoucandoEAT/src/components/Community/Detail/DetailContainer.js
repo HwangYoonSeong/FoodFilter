@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import axios from "axios";
 import ipObj from "../../../key";
 
 function DetailContainer () {
-  const dispatch = useDispatch();
   const uid = useSelector((state) => state.uid);
   const { pid } = useParams();
   const [post, setPost] = useState([]);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-
+  const [isComment, checkComment] = useState(false);
   useEffect(() => {
     axios
       .get(`${ipObj.ip}/postDetail?pid=${pid}`)
@@ -21,16 +20,16 @@ function DetailContainer () {
         //post, comment, user join해서 한번에 정보를 받음
         setPost(response.data.results);
         setComments(response.data.results.comments);
-
       })
       .catch((err) => {
         console.error(err.response);
       });
-  }, [pid, dispatch]);
+  }, [pid, isComment]);
 
   const clickEnter = () => {
     console.log(comment);
     setComment("");
+
     axios
       .post(`${ipObj.ip}/commentInput`, { "pid": pid, "uid": uid, "contents": comment }, {
         headers: {
@@ -39,6 +38,8 @@ function DetailContainer () {
       })
       .then((response) => {
         console.log(response);
+        checkComment(!isComment);
+
       })
       .catch((err) => {
         console.error(err.response);

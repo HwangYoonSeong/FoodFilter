@@ -41,20 +41,17 @@ function LogicContainer ({ location }) {
       axios
         .get(`${ipObj.ip}/foodSearch?result=${result}&uid=${uid}`)
         .then((response) => {
-
           var results = response.data.results;
           var toTranslate = [];
           toTranslate.push(result);
           results.forEach(el => {
             toTranslate.push(el.ingredient);
           })
-          console.log(toTranslate);
-          axios
+          axios //임시 서버 사용 >> 변경 필요
             .get(`http://192.168.232.41:3001/translate/${toTranslate.join(',')}`)
             .then((response) => {
-              // console.log(response.data.message.result.translatedText.slice(0, -1).split(', '))
-              var translated = response.data.message.result.translatedText.slice(0, -1).split(', ');
-
+              console.log(response.status);
+              var translated = response.data.message.result.translatedText.split(', ');
               translated.slice(1).forEach((el, i) => {
                 results[i].translated = el;
               })
@@ -72,14 +69,11 @@ function LogicContainer ({ location }) {
         });
     }
 
-    // 서버 측에서 응답으로 오는 데이터의 구조를 정한 후에 
-    // LogicPresenter에 데이터 전달 
   }, [result, uid]);
 
   useEffect(() => {
     kakaoOCR();
     getData();
-    console.log(`접속 유저 uid : ${uid}`);
   }, [kakaoOCR, uid, getData]);
 
   return (
