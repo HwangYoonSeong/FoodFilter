@@ -27,9 +27,20 @@ const PostImage = styled.img`
   border-radius: 0.5rem;
 `;
 
+const PostContents = styled.p`
+  word-break: break-all;
+  word-wrap: break-word;
+`;
+
 const CommentsContainer = styled.div`
   margin: 0.5rem 0.5rem 0 0.5rem;
   border-top: solid 1px #adb5bd;
+`;
+
+const CommentsContents = styled.p`
+  margin: 0;
+  word-break: break-all;
+  word-wrap: break-word;
 `;
 
 const CommentTime = styled.p`
@@ -206,7 +217,8 @@ function DetailPresenter({
               alt="post"
             ></PostImage>
           ) : null}
-          <p>{post.content}</p>
+
+          <PostContents>{post.content}</PostContents>
         </ContentsContainer>
       ) : null}
 
@@ -228,7 +240,7 @@ function DetailPresenter({
                   </tr>
                 </tbody>
               </table>
-              <p style={{ margin: "0" }}>{comment.contents}</p>
+              <CommentsContents>{comment.contents}</CommentsContents>
               <CommentTime>{comment.date}</CommentTime>
             </CommentsContainer>
           ))}

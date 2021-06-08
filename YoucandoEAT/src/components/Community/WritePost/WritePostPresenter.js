@@ -46,6 +46,7 @@ const InputContent = styled.textarea`
   height: 100%;
   font-size: 1rem;
   font-family: "NanumSquare";
+  resize: none;
 
   &:focus {
     outline: none;
