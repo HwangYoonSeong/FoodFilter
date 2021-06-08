@@ -50,15 +50,7 @@ function App() {
       {searchMode || captureMode ? null : <NavBar />}
       <Container>
         <Route exact path="/" component={Main} />
-        {/* <Route exact path="/selectIngredients" component={SelectIngredients} /> */}
-        <Route
-          exact
-          path="/selectIngredients"
-          render={(props) => {
-            if (uid) return <SelectIngredients {...props} />;
-            else return <Main {...props} />;
-          }}
-        />
+        <Route exact path="/selectIngredients" component={SelectIngredients} />
         <Route exact path="/capture" component={Capture} />
         <Route exact path="/logic" component={Logic} />
         <Route exact path="/community" component={Community} />

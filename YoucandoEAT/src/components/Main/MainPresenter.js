@@ -73,7 +73,7 @@ const BtnName = styled.p`
   color: #2b8a3e;
 `;
 
-function MainPresenter({ onChange }) {
+function MainPresenter({ onChange, uid }) {
   const LinkStyle = {
     color: "white",
     textDecorationLine: "none",
@@ -112,12 +112,21 @@ function MainPresenter({ onChange }) {
         </CaptureBtn>
 
         <LinkBtnContainer>
-          <Link to="/selectIngredients" style={LinkStyle} >
-            <LinkBtn>
-              <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
-              <BtnName>Select Ingredients</BtnName>
-            </LinkBtn>
-          </Link>
+          {uid ? (
+            <Link to="/selectIngredients" style={LinkStyle}>
+              <LinkBtn>
+                <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
+                <BtnName>Select Ingredients</BtnName>
+              </LinkBtn>
+            </Link>
+          ) : (
+            <div>
+              <LinkBtn>
+                <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
+                <BtnName>Select Ingredients</BtnName>
+              </LinkBtn>
+            </div>
+          )}
 
           <Link to="/community" style={LinkStyle}>
             <LinkBtn>
