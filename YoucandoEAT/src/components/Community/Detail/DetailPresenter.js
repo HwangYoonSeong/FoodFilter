@@ -166,6 +166,7 @@ function DetailPresenter({
   comments,
   modal,
   setModal,
+  uid,
 }) {
   return (
     <>
@@ -235,21 +236,23 @@ function DetailPresenter({
       ) : null}
 
       {/*COMMENT INPUT */}
-      <InputContainer>
-        <Input
-          rows="4"
-          type="text"
-          value={input}
-          placeholder="Please type in the comments."
-          onChange={onChangeInputs}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              clickEnter();
-              e.preventDefault();
-            }
-          }}
-        />
-      </InputContainer>
+      {uid ? (
+        <InputContainer>
+          <Input
+            rows="4"
+            type="text"
+            value={input}
+            placeholder="Please type in the comments."
+            onChange={onChangeInputs}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                clickEnter();
+                e.preventDefault();
+              }
+            }}
+          />
+        </InputContainer>
+      ) : null}
     </>
   );
 }

@@ -70,6 +70,7 @@ function DetailContainer() {
         comments={comments}
         modal={modal}
         setModal={setModal}
+        uid={uid}
       />
     </>
   );
