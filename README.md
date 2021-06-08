@@ -4,3 +4,4 @@
 * react
 * OCR
 * react-cropper
+* redux
