@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import bgImage from "../../assets/background.jpg";
 import { FiCamera } from "react-icons/fi";
@@ -73,7 +73,101 @@ const BtnName = styled.p`
   color: #2b8a3e;
 `;
 
-function MainPresenter({ onChange, uid }) {
+const fadeIn = keyframes`
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+`;
+
+const DarkBackground = styled.div`
+  ${(props) =>
+    props.modal
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
+
+  position:fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${fadeIn};
+  animation-fill-mode: forwards;
+`;
+
+const slideUp = keyframes`
+  from{
+    transform: translate(-50%, 0%);
+  }
+  to{
+    transform: translate(-50%, -50%);
+  }
+`;
+
+const ModalBox = styled.div`
+  ${(props) =>
+    props.modal
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `};
+
+  position: fixed;
+  width: 325px;
+  height: 175px;
+  background: white;
+  border-radius: 0.5rem;
+  z-index: 10;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${slideUp};
+  animation-fill-mode: forwards;
+`;
+
+const ModalBody = styled.div`
+  border-bottom: 1px dashed black;
+  height: 70%;
+`;
+
+const ModalContents = styled.div`
+  padding: 1rem;
+  font-size: 18px;
+`;
+
+const ModalFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 30%;
+`;
+
+const ModalBtn = styled.button`
+  outline: none;
+  border: none;
+  background: #2b8a3e;
+  color: white;
+  margin-right: 1rem;
+  font-size: 20px;
+  border-radius: 0.25rem;
+`;
+
+function MainPresenter({ onChange, uid, modal, setModal }) {
   const LinkStyle = {
     color: "white",
     textDecorationLine: "none",
@@ -81,6 +175,16 @@ function MainPresenter({ onChange, uid }) {
   };
   return (
     <>
+      <DarkBackground modal={modal} />
+      <ModalBox modal={modal}>
+        <ModalBody>
+          <ModalContents>You can use it after logging in</ModalContents>
+        </ModalBody>
+        <ModalFooter>
+          <ModalBtn onClick={() => setModal(false)}>Ok</ModalBtn>
+        </ModalFooter>
+      </ModalBox>
+
       <Container>
         <BackgroundContainer>
           <TextContainer>Enjoy the food that suits you</TextContainer>
@@ -121,7 +225,7 @@ function MainPresenter({ onChange, uid }) {
             </Link>
           ) : (
             <div>
-              <LinkBtn>
+              <LinkBtn onClick={() => setModal(true)}>
                 <BsCardChecklist size="3rem" style={{ color: "#2b8a3e" }} />
                 <BtnName>Select Ingredients</BtnName>
               </LinkBtn>

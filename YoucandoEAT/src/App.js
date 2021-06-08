@@ -41,7 +41,6 @@ const Container = styled.div`
 
 function App() {
   const searchMode = useSelector((state) => state.searchMode);
-  const uid = useSelector((state) => state.uid);
   const captureMode = useSelector((state) => state.captureMode);
 
   return (
