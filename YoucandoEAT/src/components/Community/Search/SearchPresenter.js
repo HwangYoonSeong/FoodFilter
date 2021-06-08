@@ -19,7 +19,7 @@ const ClearBtn = styled.button`
 
   border: none;
   outline: none;
-  background: #e9ecef;
+  background: white;
 
   border-radius: 8px;
 
@@ -29,6 +29,7 @@ const ClearBtn = styled.button`
 `;
 
 const SearchBar = styled.div`
+  background: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -39,7 +40,7 @@ const SearchBar = styled.div`
 
 const Input = styled.input`
   border: none;
-  background: #e9ecef;
+  background: white;
   margin: 0.5rem;
   padding: 0.5rem;
   width: 100%;
@@ -68,7 +69,7 @@ const CloseBtn = styled.button`
   margin: 5px 0 5px 0.5rem;
   border: none;
   outline: none;
-  background: #e9ecef;
+  background: white;
 
   border-radius: 8px;
 
@@ -90,7 +91,6 @@ const Post = styled.li`
       : null}
 `;
 
-
 const Title = styled.h1`
   font-size: 17px;
 `;
@@ -110,8 +110,7 @@ const ThumbNail = styled.img`
   border-radius: 0.5rem;
 `;
 
-
-function SearchPresenter ({
+function SearchPresenter({
   closeSearch,
   input,
   searchPosts,
@@ -119,13 +118,11 @@ function SearchPresenter ({
   clearInput,
   onChange,
 }) {
-
   const LinkStyle = {
     color: "black",
     textDecorationLine: "none",
     WebkitTapHighlightColor: "rgba(0,0,0,0)",
   };
-
 
   return (
     <>
@@ -151,25 +148,28 @@ function SearchPresenter ({
         ) : null}
       </SearchBar>
 
-      {searchPosts.length ? (searchPosts.map((post, index) => (
-        <Link
-          key={index}
-          to={`community/detail/${post.pid}`}
-          style={LinkStyle}
-        >
-          <Post index={index}>
-            <div>
-              <Title>{post.title}</Title>
-              <Content>{post.content}</Content>
-              <SmallFont>
-                {post.date} | {post.writer}
-              </SmallFont>
-            </div>
-            {post.postImg ? (<ThumbNail src={`${ipObj.ip}/${post.postImg}`} />) : null}
-
-          </Post>
-        </Link>
-      ))) : (
+      {searchPosts.length ? (
+        searchPosts.map((post, index) => (
+          <Link
+            key={index}
+            to={`community/detail/${post.pid}`}
+            style={LinkStyle}
+          >
+            <Post index={index}>
+              <div>
+                <Title>{post.title}</Title>
+                <Content>{post.content}</Content>
+                <SmallFont>
+                  {post.date} | {post.writer}
+                </SmallFont>
+              </div>
+              {post.postImg ? (
+                <ThumbNail src={`${ipObj.ip}/${post.postImg}`} />
+              ) : null}
+            </Post>
+          </Link>
+        ))
+      ) : (
         <ErrorBackground>
           <RiErrorWarningLine style={{ color: "#adb5bd" }} size="4rem" />
           <p style={{ color: "#adb5bd" }}>No search results.</p>
