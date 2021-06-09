@@ -91,11 +91,21 @@ const Post = styled.li`
       : null}
 `;
 
+const TextContainer = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
+
 const Title = styled.h1`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 17px;
 `;
 
 const Content = styled.p`
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 0.8rem;
 `;
 
@@ -110,7 +120,7 @@ const ThumbNail = styled.img`
   border-radius: 0.5rem;
 `;
 
-function SearchPresenter({
+function SearchPresenter ({
   closeSearch,
   input,
   searchPosts,
@@ -156,13 +166,13 @@ function SearchPresenter({
             style={LinkStyle}
           >
             <Post index={index}>
-              <div>
+              <TextContainer>
                 <Title>{post.title}</Title>
                 <Content>{post.content}</Content>
                 <SmallFont>
                   {post.date} | {post.writer}
                 </SmallFont>
-              </div>
+              </TextContainer>
               {post.postImg ? (
                 <ThumbNail src={`${ipObj.ip}/${post.postImg}`} />
               ) : null}
