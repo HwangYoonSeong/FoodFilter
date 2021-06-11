@@ -19,12 +19,13 @@ function CommunityContainer() {
 
   const fetchPost = () => {
     axios
-      .get(`${ipObj.ip}/postList`)
+      .get(`${ipObj.ip}/postList?page=${pageCount}`)
       .then((response) => {
+        console.log(response);
         // setPosts(
         //   posts.concat(posts.concat(response.data.results.slice(0).reverse()))
         // );
-        setPosts(response.data.results.slice(0).reverse());
+        // setPosts(response.data.results.slice(0).reverse());
       })
       .catch((err) => {
         console.error(err.response);
@@ -47,20 +48,24 @@ function CommunityContainer() {
     }
   }, [pageCount]);
 
+  // 최초의 데이터 요청
   useEffect(() => {
     fetchPost();
-    return () => {
-      dispatch(setSearchMode(false));
-    };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", infiniteScroll, true);
     return () => window.removeEventListener("scroll", infiniteScroll, true);
   }, [infiniteScroll]);
 
+  // pageCount변수가 증가할 경우(스크롤이 바닥)
+  // 서버로 요청
+  // 컴포넌트 언마운트 시 검색 모드 비활성화
   useEffect(() => {
     fetchPost();
+    return () => {
+      dispatch(setSearchMode(false));
+    };
   }, [pageCount]);
 
   return (

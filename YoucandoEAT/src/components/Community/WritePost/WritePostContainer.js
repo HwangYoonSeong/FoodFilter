@@ -41,7 +41,6 @@ function WritePostContainer({ history }) {
   );
 
   const onClick = useCallback(() => {
-    console.log(inputs.content);
     if (inputs.title === "" || inputs.content === "") {
       setModal(true);
       return;
@@ -59,14 +58,7 @@ function WritePostContainer({ history }) {
         },
       })
       .then((response) => {
-        console.log(
-          "url:",
-          "POST /postInput",
-          "\nstatus:",
-          response.status,
-          "\nstatusText:",
-          response.statusText
-        );
+        console.log(response);
         history.goBack();
       })
       .catch((err) => {
