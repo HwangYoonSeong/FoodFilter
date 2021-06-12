@@ -50,10 +50,12 @@ function LogicContainer ({ location }) {
             toTranslate.push(el.ingredient);
           })
           axios //임시 서버 사용 >> 변경 필요
-            .get(`http://192.168.232.41:3001/translate/${toTranslate.join(',')}`)
+            .get(`${ipObj.ip}/translate?text=${toTranslate.join(',')}`)
             .then((response) => {
               console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
+
               var translated = response.data.message.result.translatedText.split(', ');
+              console.log(translated);
               translated.slice(1).forEach((el, i) => {
                 results[i].translated = el;
               })
