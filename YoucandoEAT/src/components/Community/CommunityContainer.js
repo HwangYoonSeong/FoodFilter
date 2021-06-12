@@ -29,10 +29,7 @@ function CommunityContainer() {
     );
     let clientHeight = document.documentElement.clientHeight;
 
-    alert(`not in ${Math.floor(scrollTop)}, ${clientHeight}, ${scrollHeight}`);
-
-    if (Math.floor(scrollTop) + clientHeight === scrollHeight) {
-      alert(`in ${scrollTop}, ${clientHeight}, ${scrollHeight}`);
+    if (Math.round(scrollTop) + clientHeight === scrollHeight) {
       const tempCount = pageCount + 1;
       setPageCount(tempCount);
     }
