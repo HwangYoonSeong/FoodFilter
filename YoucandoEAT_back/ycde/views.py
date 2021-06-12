@@ -6,6 +6,8 @@ from django.utils.decorators import method_decorator
 from django.core.files.storage import default_storage
 from django.conf import settings
 import json, os
+import sys
+import urllib.request
 
 # Create your views here.
 @csrf_exempt
@@ -83,7 +85,12 @@ def get_postlist(request):
             res['postImg'] = str(p.postImg)
             reslist.append(res)
 
-        return JsonResponse({'results':reslist})
+        page = int(request.GET['page'])
+        reslist.reverse()
+        startidx = page * 20
+        endidx = (page + 1) * 20
+
+        return JsonResponse({'results':reslist[startidx:endidx]})
 
 @csrf_exempt
 def get_post(request):
@@ -154,19 +161,19 @@ def post_filterBit(request):
 @csrf_exempt
 def get_postSearch(request):
     if request.method == "GET":
-        post = Post.objects.filter(title__icontains=request.GET["input"])
+        post = list(Post.objects.filter(title__icontains=request.GET["input"]).values())
         reslist = []
 
         for idx, p in enumerate(post):
             res = {}
-            res['pid'] = str(p.id)
-            res['title'] = str(p.title)
-            res['content'] = str(p.contents)
-            date = str(post['date']).split(':')[:-1]
+            res['pid'] = str(p['id'])
+            res['title'] = str(p['title'])
+            res['content'] = str(p['contents'])
+            date = str(p['date']).split(':')[:-1]
             date.insert(-1, ':')
             res['date'] = ''.join(date)
-            res['writer'] = str(p.writer)
-            res['postImg'] = str(p.postImg)
+            res['writer'] = str(p['writer'])
+            res['postImg'] = str(p['postImg'])
             reslist.append(res)
 
         return JsonResponse({'results':reslist})
@@ -180,7 +187,7 @@ alergy = {
     "복숭아":["복숭아"],
     "토마토":["토마토"],
     "돼지고기":["돼지"],
-    "난류":["난류", "계란", "알"],
+    "난류":["난류", "계란", "알", "달걀"],
     "우유":["우유", "버터", "요구르트", "요거트", "치즈"],
     "닭고기":["닭"],
     "쇠고기":["쇠고기", "소고기"],
@@ -213,7 +220,7 @@ def get_foodSearch(request):
                 bit = food['ingredientBit'] & 0
 
             else: # food not exist
-                pass
+                return JsonResponse({'results' : res[:-1]})
 
         for indetail in idlist: 
             resdict = {}
@@ -224,10 +231,32 @@ def get_foodSearch(request):
                 if match == 0:
                     continue
                 else:
-                    for ingred in a:
-                        if (ingred in indetail):
+                    for ingred in alergy[a]:
+                        if ingred in indetail:
                             resdict['danger'] = True
                             break
             res.append(resdict)
+        
+        print(res[:-1])
 
         return JsonResponse({'results' : res[:-1]})
+
+def get_translate(request):
+    client_id = "omCYkh439Kfoa56Tpjjm" # 개발자센터에서 발급받은 Client ID 값
+    client_secret = "TIXxlALgvd" # 개발자센터에서 발급받은 Client Secret 값
+    encText = request.GET['text']
+    data = "source=ko&target=en&text=" + encText
+    url = "https://openapi.naver.com/v1/papago/n2mt"
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id",client_id)
+    request.add_header("X-Naver-Client-Secret",client_secret)
+    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+    rescode = response.getcode()
+    if(rescode==200):
+        response_body = response.read()
+        res = response_body.decode('utf-8')
+        res = json.loads(res)
+        return JsonResponse(res)
+
+    else:
+        return JsonResponse({})
