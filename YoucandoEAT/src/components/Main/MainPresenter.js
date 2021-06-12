@@ -97,6 +97,7 @@ const DarkBackground = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
   background: rgba(0, 0, 0, 0.8);
 
   animation-duration: 0.25s;

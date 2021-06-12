@@ -28,9 +28,13 @@ function CommunityContainer() {
       document.body.scrollTop
     );
     let clientHeight = document.documentElement.clientHeight;
-    if (scrollTop + clientHeight === scrollHeight) {
-      let tCount = pageCount + 1;
-      setPageCount(tCount);
+
+    alert(`not in ${Math.floor(scrollTop)}, ${clientHeight}, ${scrollHeight}`);
+
+    if (Math.floor(scrollTop) + clientHeight === scrollHeight) {
+      alert(`in ${scrollTop}, ${clientHeight}, ${scrollHeight}`);
+      const tempCount = pageCount + 1;
+      setPageCount(tempCount);
     }
   }, [pageCount]);
 
@@ -56,9 +60,7 @@ function CommunityContainer() {
 
   // 컴포넌트 언마운트 시 검색 모드 비활성화
   useEffect(() => {
-    return () => {
-      dispatch(setSearchMode(false));
-    };
+    return () => dispatch(setSearchMode(false));
   }, [dispatch]);
 
   return (
