@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path('userInput', views.post_user, name='post_user'),
     path('postInput', views.post_post, name='post_post'),
     path('commentInput', views.post_comment, name='post_comment'),
@@ -31,4 +30,5 @@ urlpatterns = [
     path('filterBit', views.post_filterBit, name='post_filterBit'),
     path('foodSearch', views.get_foodSearch, name='get_foodSearch'),
     path('postSearch', views.get_postSearch, name='get_postSearch'),
+    path('translate', views.get_translate, name='get_translate'),
 ]
