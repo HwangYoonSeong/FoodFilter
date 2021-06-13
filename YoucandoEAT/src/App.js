@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar/NavBarContainer";
 import Main from "./components/Main/MainContainer";
 import Capture from "./components/Capture/CaptureContainer";
 import Logic from "./components/Logic/LogicContainer";
+import Translate from "./components/Logic/Translate/TranslateContainer";
 import Community from "./components/Community/CommunityContainer";
 import SelectIngredients from "./components/SelectIngredients/SIContainer";
 import WritePost from "./components/Community/WritePost/WritePostContainer";
@@ -23,11 +24,11 @@ const GlobalStyle = createGlobalStyle`
     user-select: none;
 
     ${(props) =>
-      props.captureMode
-        ? css`
+    props.captureMode
+      ? css`
             background: black;
           `
-        : css`
+      : css`
             background: #e9ecef;
           `}
 
@@ -39,7 +40,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function App() {
+function App () {
   const searchMode = useSelector((state) => state.searchMode);
   const captureMode = useSelector((state) => state.captureMode);
 
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/selectIngredients" component={SelectIngredients} />
         <Route exact path="/capture" component={Capture} />
         <Route exact path="/logic" component={Logic} />
+        <Route exact path="/logic/translate" component={Translate} />
         <Route exact path="/community" component={Community} />
         <Route exact path="/community/write" component={WritePost} />
         <Route exact path="/community/detail/:pid" component={Detail} />

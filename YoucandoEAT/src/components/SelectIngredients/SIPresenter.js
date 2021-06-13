@@ -69,12 +69,13 @@ const Btn = styled.button`
   height: 70px;
   border: none;
   font-family: "NanumSquare";
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
   &:active {
     filter: brightness(85%);
   }
 `;
 
-function SIPresenter({ ingrdList, save, onToggle }) {
+function SIPresenter ({ ingrdList, save, onToggle }) {
   return (
     <>
       <Header>

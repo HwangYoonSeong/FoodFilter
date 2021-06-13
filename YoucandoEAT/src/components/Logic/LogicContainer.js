@@ -10,7 +10,7 @@ function LogicContainer ({ location }) {
   const croppedImage = location.state.croppedImage;
 
   const [result, setResult] = useState(null);
-  const [searchedIngrd, setSrchdIngrd] = useState(null);
+  const [searchedIngrd, setSrchdIngrd] = useState([]);
   const [translatedMenu, setTranslatedMenu] = useState(null);
 
   const kakaoOCR = useCallback(() => {
@@ -49,8 +49,8 @@ function LogicContainer ({ location }) {
           results.forEach(el => {
             toTranslate.push(el.ingredient);
           })
-          axios //임시 서버 사용 >> 변경 필요
-            .get(`${ipObj.ip}/translate?text=${toTranslate.join(',')}`)
+          axios
+            .get(`${ipObj.ip}/translateFood?text=${toTranslate.join(',')}`)
             .then((response) => {
               console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
 
