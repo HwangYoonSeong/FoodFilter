@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
+import { BiCommentDetail } from "react-icons/bi";
 
 import ipObj from "../../../key";
 const ContentsContainer = styled.div`
@@ -52,7 +53,6 @@ const CommentTime = styled.p`
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 115px;
 `;
 
 const Input = styled.textarea`
@@ -72,6 +72,10 @@ const Input = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const EnterBtn = styled.button`
+  border: none;
 `;
 
 const fadeIn = keyframes`
@@ -263,6 +267,10 @@ function DetailPresenter({
               }
             }}
           />
+
+          <EnterBtn>
+            <BiCommentDetail size="24px" />
+          </EnterBtn>
         </InputContainer>
       ) : null}
     </>
