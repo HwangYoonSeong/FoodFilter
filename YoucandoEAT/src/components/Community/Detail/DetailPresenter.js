@@ -75,7 +75,11 @@ const Input = styled.textarea`
 `;
 
 const EnterBtn = styled.button`
+  position: fixed;
   border: none;
+  background: white;
+  /* bottom: 4.5%;
+  right: 3%; */
 `;
 
 const fadeIn = keyframes`
