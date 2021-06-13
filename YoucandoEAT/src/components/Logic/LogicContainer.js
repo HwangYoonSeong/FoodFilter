@@ -49,8 +49,8 @@ function LogicContainer ({ location }) {
           results.forEach(el => {
             toTranslate.push(el.ingredient);
           })
-          axios //임시 서버 사용 >> 변경 필요
-            .get(`${ipObj.ip}/translate?text=${toTranslate.join(',')}`)
+          axios
+            .get(`${ipObj.ip}/translateK2E?text=${toTranslate.join(',')}`)
             .then((response) => {
               console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
 

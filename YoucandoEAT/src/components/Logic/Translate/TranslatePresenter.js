@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 
 
 const Container = styled.div`
@@ -39,7 +39,7 @@ const TransBtn = styled.button`
 const KorContainer = styled.div`
 `;
 
-const InputContent = styled.textarea`
+const Input = styled.textarea`
   background: #fff;
   margin-bottom:20px;
   border: 1px solid #2f9e44;
@@ -53,7 +53,7 @@ const InputContent = styled.textarea`
   }
 `;
 
-const OutputContent = styled.textarea`
+const Output = styled.textarea`
   background: #fff;
   width: 310px;
   padding:10px;
@@ -67,7 +67,7 @@ const OutputContent = styled.textarea`
 
 
 
-function TranslatePresenter ({ inputs, onChangeInputs }) {
+function TranslatePresenter ({ inputs, output, clickEnter, onChangeInputs }) {
     return (
         <Container>
             <EngContainer>
@@ -76,23 +76,29 @@ function TranslatePresenter ({ inputs, onChangeInputs }) {
                     <TransBtn>Translate</TransBtn>
                 </EngHeader>
 
-                <InputContent
+                <Input
                     name="content"
                     value={inputs}
                     onChange={onChangeInputs}
                     rows="15"
                     placeholder="Please enter what you want to translate."
-                ></InputContent>
+                    onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                            clickEnter();
+                            e.preventDefault();
+                        }
+                    }}
+                ></Input>
             </EngContainer>
 
             <KorContainer>
                 <Title>Korean</Title>
-                <OutputContent
+                <Output
                     name="content"
-                    value={inputs}
+                    value={output}
                     onChange={onChangeInputs}
                     rows="15"
-                ></OutputContent>
+                ></Output>
             </KorContainer>
         </Container>
     );

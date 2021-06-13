@@ -5,18 +5,39 @@ import ipObj from "../../../key";
 
 function TranslateContainer ({ history }) {
     const [inputs, setInputs] = useState("");
+    const [outputs, setOutputs] = useState("");
+
     const onChangeInputs = useCallback(
         (e) => {
-            console.log(e.target.value);
             setInputs(e.target.value)
         },
-        [inputs]
+        []
     );
+
+    const clickEnter = () => {
+        console.log(inputs);
+        if (inputs === "") return;
+
+        axios
+            .get(`${ipObj.ip}/translateE2K?text=${inputs}`)
+            .then((response) => {
+                console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
+                var translated = response.data.message.result.translatedText;
+                setOutputs(translated);
+            })
+            .catch((err) => {
+                console.error(err.response);
+            });
+    };
+
     return (
         <>
-            <TranslatePresenter inputs={inputs} onChangeInputs={onChangeInputs} />
+            <TranslatePresenter
+                inputs={inputs}
+                output={outputs}
+                onChangeInputs={onChangeInputs}
+                clickEnter={clickEnter} />
         </>
     );
 }
-
 export default React.memo(TranslateContainer);
