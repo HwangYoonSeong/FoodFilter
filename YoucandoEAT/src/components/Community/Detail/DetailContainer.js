@@ -26,7 +26,10 @@ function DetailContainer() {
   }, [pid]);
 
   const clickEnter = () => {
-    if (input === "") return;
+    if (input === "") {
+      setModal(true);
+      return;
+    }
     setInput("");
 
     axios
