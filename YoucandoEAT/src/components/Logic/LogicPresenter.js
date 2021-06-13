@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { MdGTranslate } from "react-icons/md";
 const Container = styled.div`
@@ -57,7 +58,7 @@ const TranslateBtn = styled.button`
   }
 `;
 
-function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }) {
+function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result, openTranslate }) {
   return (
     <>
       <Container>
@@ -97,10 +98,11 @@ function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }
           </Exception>)}
         </IngredientsContainer>
       </Container>
-
-      <TranslateBtn >
-        <MdGTranslate color="white" size="30" />
-      </TranslateBtn>
+      <Link to="/Logic/translate" >
+        <TranslateBtn onClick={openTranslate} >
+          <MdGTranslate color="white" size="30" />
+        </TranslateBtn>
+      </Link>
     </>
   );
 }
