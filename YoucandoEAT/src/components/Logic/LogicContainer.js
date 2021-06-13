@@ -10,7 +10,7 @@ function LogicContainer ({ location }) {
   const croppedImage = location.state.croppedImage;
 
   const [result, setResult] = useState(null);
-  const [searchedIngrd, setSrchdIngrd] = useState(null);
+  const [searchedIngrd, setSrchdIngrd] = useState([]);
   const [translatedMenu, setTranslatedMenu] = useState(null);
 
   const kakaoOCR = useCallback(() => {
