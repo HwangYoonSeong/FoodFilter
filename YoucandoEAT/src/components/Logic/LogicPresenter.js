@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { RiErrorWarningLine } from "react-icons/ri";
+import { MdGTranslate } from "react-icons/md";
 const Container = styled.div`
   text-align: center;
   margin-top: 60px;
@@ -38,6 +39,24 @@ const ExcptTxt = styled.p`
   fontSize: 17px;
   color: gray;
 `;
+
+
+const TranslateBtn = styled.button`
+  position: fixed;
+  outline: none;
+  border: none;
+  background: #2b8a3e;
+  color: black;
+  border-radius: 50%;
+  bottom: 2%;
+  right: 2%;
+  padding: 0.7rem;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
+  &:active {
+    filter: brightness(85%);
+  }
+`;
+
 function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }) {
   return (
     <>
@@ -57,7 +76,6 @@ function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }
           </Exception>)
 
         }
-
 
         <Title>Translated</Title>
         {translatedMenu ? (<p style={{ fontSize: "24px" }}>{translatedMenu}</p>)
@@ -79,6 +97,10 @@ function LogicPresenter ({ translatedMenu, searchedIngrd, croppedImage, result }
           </Exception>)}
         </IngredientsContainer>
       </Container>
+
+      <TranslateBtn >
+        <MdGTranslate color="white" size="30" />
+      </TranslateBtn>
     </>
   );
 }
