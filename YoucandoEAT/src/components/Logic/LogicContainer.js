@@ -50,7 +50,7 @@ function LogicContainer ({ location }) {
             toTranslate.push(el.ingredient);
           })
           axios
-            .get(`${ipObj.ip}/translateK2E?text=${toTranslate.join(',')}`)
+            .get(`${ipObj.ip}/translateFood?text=${toTranslate.join(',')}`)
             .then((response) => {
               console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
 

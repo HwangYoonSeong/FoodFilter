@@ -21,21 +21,6 @@ const EngHeader = styled.div`
 
 const Title = styled.h2`
 `
-const TransBtn = styled.button`
-    color: white;
-    text-weight:bold;
-    font-size:15px;
-    background: #2b8a3e;
-    border-radius: 10%;
-    padding: 10px;
-    width: 80px;
-    height: 35px;
-    border: none;
-    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.3);
-    &:active {
-    filter: brightness(85%);
-    }
-`
 const KorContainer = styled.div`
 `;
 
@@ -73,7 +58,6 @@ function TranslatePresenter ({ inputs, output, clickEnter, onChangeInputs }) {
             <EngContainer>
                 <EngHeader>
                     <Title>English</Title>
-                    <TransBtn>Translate</TransBtn>
                 </EngHeader>
 
                 <Input

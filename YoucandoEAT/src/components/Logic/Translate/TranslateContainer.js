@@ -3,7 +3,7 @@ import TranslatePresenter from "./TranslatePresenter";
 import axios from "axios";
 import ipObj from "../../../key";
 
-function TranslateContainer ({ history }) {
+function TranslateContainer () {
     const [inputs, setInputs] = useState("");
     const [outputs, setOutputs] = useState("");
 
@@ -15,11 +15,10 @@ function TranslateContainer ({ history }) {
     );
 
     const clickEnter = () => {
-        console.log(inputs);
         if (inputs === "") return;
 
         axios
-            .get(`${ipObj.ip}/translateE2K?text=${inputs}`)
+            .get(`${ipObj.ip}/translate?text=${inputs}`)
             .then((response) => {
                 console.log("url:", "GET /translate", "\nstatus:", response.status, "\nstatusText:", response.statusText);
                 var translated = response.data.message.result.translatedText;
