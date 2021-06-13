@@ -31,4 +31,5 @@ urlpatterns = [
     path('foodSearch', views.get_foodSearch, name='get_foodSearch'),
     path('postSearch', views.get_postSearch, name='get_postSearch'),
     path('translate', views.get_translate, name='get_translate'),
+    path('translateFood', views.get_translateFood, name='get_translateFood'),
 ]
