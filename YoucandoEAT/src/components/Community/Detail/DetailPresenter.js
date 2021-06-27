@@ -50,24 +50,21 @@ const CommentTime = styled.p`
   color: #adb5bd;
 `;
 
-const InputContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const Input = styled.textarea`
   background: white;
   position: fixed;
   bottom: 1%;
+  left: 10%;
+  transform: translateX(-10%);
   border: none;
   padding: 0.7rem;
   font-size: 1rem;
   font-family: "NanumSquare";
-  width: 90%;
+  width: 75%;
   resize: none;
-
   overflow: visible;
-  border-radius: 0.7rem;
+  border-top-left-radius: 0.7rem;
+  border-bottom-left-radius: 0.7rem;
 
   &:focus {
     outline: none;
@@ -77,7 +74,7 @@ const Input = styled.textarea`
 const EnterBtn = styled.button`
   position: fixed;
   border: none;
-  background: white;
+  background: tomato;
   /* bottom: 4.5%;
   right: 3%; */
 `;
@@ -257,7 +254,7 @@ function DetailPresenter({
 
       {/*COMMENT INPUT */}
       {uid ? (
-        <InputContainer>
+        <>
           <Input
             rows="4"
             type="text"
@@ -275,7 +272,7 @@ function DetailPresenter({
           <EnterBtn>
             <BiCommentDetail size="24px" />
           </EnterBtn>
-        </InputContainer>
+        </>
       ) : null}
     </>
   );

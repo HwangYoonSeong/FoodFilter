@@ -12,7 +12,7 @@ function CommunityContainer() {
   const dispatch = useDispatch();
 
   const [posts, setPosts] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
 
   const openSearch = useCallback(() => {
     dispatch(setSearchMode(true));
