@@ -25,7 +25,7 @@ function DetailContainer() {
       });
   }, [pid]);
 
-  const clickEnter = () => {
+  const registComment = () => {
     if (input === "") {
       setModal(true);
       return;
@@ -68,7 +68,7 @@ function DetailContainer() {
       <DetailPresenter
         post={post}
         onChangeInputs={onChangeInputs}
-        clickEnter={clickEnter}
+        registComment={registComment}
         input={input}
         comments={comments}
         modal={modal}

@@ -181,7 +181,7 @@ const ModalBtn = styled.button`
 function DetailPresenter({
   post,
   onChangeInputs,
-  clickEnter,
+  registComment,
   input,
   comments,
   modal,
@@ -266,14 +266,8 @@ function DetailPresenter({
               value={input}
               placeholder="Please type in the comments."
               onChange={onChangeInputs}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  clickEnter();
-                  e.preventDefault();
-                }
-              }}
             />
-            <EnterBtn>
+            <EnterBtn onClick={registComment}>
               <BiCommentDetail size="24px" />
             </EnterBtn>
           </InputContainer>
