@@ -52,11 +52,11 @@ const CommentTime = styled.p`
 
 const InputContainer = styled.div`
   display: flex;
-
+  width: 95%;
   position: fixed;
-  bottom: 1%;
   left: 50%;
   transform: translateX(-50%);
+  bottom: 1%;
 `;
 
 const Input = styled.textarea`
@@ -64,6 +64,7 @@ const Input = styled.textarea`
   border: none;
   padding: 0.7rem;
   font-size: 1rem;
+  width: 100%;
   font-family: "NanumSquare";
   resize: none;
   overflow: visible;
