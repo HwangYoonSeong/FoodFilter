@@ -50,17 +50,21 @@ const CommentTime = styled.p`
   color: #adb5bd;
 `;
 
-const Input = styled.textarea`
-  background: white;
+const InputContainer = styled.div`
+  display: flex;
+
   position: fixed;
   bottom: 1%;
-  left: 10%;
-  transform: translateX(-10%);
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const Input = styled.textarea`
+  background: white;
   border: none;
   padding: 0.7rem;
   font-size: 1rem;
   font-family: "NanumSquare";
-  width: 75%;
   resize: none;
   overflow: visible;
   border-top-left-radius: 0.7rem;
@@ -72,11 +76,10 @@ const Input = styled.textarea`
 `;
 
 const EnterBtn = styled.button`
-  position: fixed;
   border: none;
-  background: tomato;
-  /* bottom: 4.5%;
-  right: 3%; */
+  background: white;
+  border-top-right-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
 `;
 
 const fadeIn = keyframes`
@@ -255,23 +258,24 @@ function DetailPresenter({
       {/*COMMENT INPUT */}
       {uid ? (
         <>
-          <Input
-            rows="4"
-            type="text"
-            value={input}
-            placeholder="Please type in the comments."
-            onChange={onChangeInputs}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                clickEnter();
-                e.preventDefault();
-              }
-            }}
-          />
-
-          <EnterBtn>
-            <BiCommentDetail size="24px" />
-          </EnterBtn>
+          <InputContainer>
+            <Input
+              rows="4"
+              type="text"
+              value={input}
+              placeholder="Please type in the comments."
+              onChange={onChangeInputs}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  clickEnter();
+                  e.preventDefault();
+                }
+              }}
+            />
+            <EnterBtn>
+              <BiCommentDetail size="24px" />
+            </EnterBtn>
+          </InputContainer>
         </>
       ) : null}
     </>
