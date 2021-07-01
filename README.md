@@ -5,3 +5,5 @@
 * OCR
 * react-cropper
 * redux
+
+* crawling
